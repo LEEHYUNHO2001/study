@@ -5,7 +5,7 @@ const TodoListTemplate = ({ form, children }) => {
     return (
         <main className="todo-list-template">
             <div className="todo-list-title">
-                Do To List
+                To Do List
             </div>
             <section className="form-wrapper">
                 {form}
