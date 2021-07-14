@@ -4,12 +4,30 @@
   align-items: center;
   padding: var(--horizontal-space);
   padding-top: 40px;
+  margin-bottom: 15px;
   opacity: 90%;
 }
+.screen-header__choice {
+  display: flex;
+}
 .screen-header__title {
-  font-size: 32px;
+  margin-right: 15px;
+  font-size: 20px;
   font-weight: 600;
 }
 .screen-header__icon span {
   margin-left: 25px;
+}
+.screen-header__subtitle {
+  color: rgba(0, 0, 0, 0.5);
+}
+.search-point {
+  right: 15px;
+  top: 30px;
+}
+.chats-point {
+  left: 78px;
+}
+.openchats-point {
+  left: 200px;
 }
