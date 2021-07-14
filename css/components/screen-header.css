@@ -19,7 +19,7 @@
   margin-left: 25px;
 }
 .screen-header__subtitle {
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--main-color);
 }
 .search-point {
   right: 15px;
