@@ -8,12 +8,15 @@
 @import "components/user-component.css";
 @import "components/badge.css";
 @import "components/icon-row.css";
+@import "components/alt-screen-header.css";
 
 /* Screen */
 @import "screen/welcome-login.css";
 @import "screen/friends.css";
 @import "screen/find.css";
 @import "screen/more.css";
+@import "screen/settings.css";
+@import "screen/chat.css";
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

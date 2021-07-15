@@ -5,6 +5,8 @@
   width: 100%;
   justify-content: center;
   padding: 5px 3px;
+  z-index: 2;
+  background-color: white;
 }
 .status-bar__colunm {
   width: 33%;
