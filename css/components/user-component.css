@@ -45,3 +45,21 @@
   display: block;
   margin-bottom: 10px;
 }
+.user-component__text {
+  position: relative;
+}
+.user-component__text span {
+  display: block;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  right: -25px;
+  bottom: -1px;
+  border: 2px solid red;
+  border-radius: 100%;
+  padding-left: 6px;
+  box-sizing: border-box;
+  color: red;
+}
