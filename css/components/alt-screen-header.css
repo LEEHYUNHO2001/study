@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   padding-top: 35px;
+  z-index: 1;
 }
 .alt-header__title {
   font-size: 30px;
