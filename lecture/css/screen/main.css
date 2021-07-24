@@ -1,7 +1,14 @@
+.main {
+  background-color: rgb(243, 194, 194);
+}
 .icon-row {
   display: flex;
   flex-wrap: wrap;
   background-color: lightgoldenrodyellow;
+}
+.icon-row a {
+  text-decoration: none;
+  color: black;
 }
 .icon-row__icon {
   display: flex;
