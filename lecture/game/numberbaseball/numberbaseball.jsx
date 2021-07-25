@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState, memo} from 'react';
 import Try from './try';
 
 //겹치지 않는 숫자 4개 뽑기
@@ -12,11 +12,12 @@ function getNumbers(){
     return array;
 }
 
-const NumberBaseball = () => {
+const NumberBaseball = memo(() => {
     const [result, setResult] = useState('');
     const [value, setValue] = useState('');
     const [answer, setAnswer] = useState(getNumbers());
     const [tries, setTries] = useState([]);
+    const inputRef = useRef(null);
 
     const onSubmitForm = (e) => {
         e.preventDefault();
@@ -52,6 +53,7 @@ const NumberBaseball = () => {
                 setValue('');
             }
         }
+        inputRef.current.focus();
     };
     
     const onChangeInput = (e) => {
@@ -62,7 +64,7 @@ const NumberBaseball = () => {
         <>
             <h1>{result}</h1>
             <form onSubmit={onSubmitForm}>
-                <input maxLength={4} onChange={onChangeInput} value={value} />
+                <input  ref={inputRef} maxLength={4} onChange={onChangeInput} value={value} />
                 <button>입력</button>
             </form>
             <div>시도 : {tries.length}</div>
@@ -75,6 +77,6 @@ const NumberBaseball = () => {
             </ul>
         </>
     );
-};
+});
 
 export default NumberBaseball;
