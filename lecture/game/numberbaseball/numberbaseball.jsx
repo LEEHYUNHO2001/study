@@ -42,7 +42,7 @@ class NumberBaseball extends Component{
     
             if(this.state.tries.length >= 9){
                 this.setState({
-                    result: `10번 넘게 틀려서 실패!! 답은 ${answer.join(',')} 였습니다!!`,
+                    result: `10번 넘게 틀려서 실패!! 답은 ${this.state.answer.join(',')} 였습니다!!`,
                 })
                 alert('게임을 다시 시작합니다!!');
                 this.setState({
@@ -67,7 +67,7 @@ class NumberBaseball extends Component{
     };
     
     onChangeInput = (e) => {
-        this.setState({value:this.state.value});
+        this.setState({value:e.target.value});
     };
 
     render(){
@@ -75,13 +75,14 @@ class NumberBaseball extends Component{
             <>
                 <h1>{this.state.result}</h1>
                 <form onSubmit={this.onSubmitForm}>
-                    <input maxLength={4} value={this.state.value} onChange={this.onChangeInput}/>
+                    <input maxLength={4} onChange={this.onChangeInput} value={this.state.value} />
+                    <button>입력</button>
                 </form>
                 <div>시도 : {this.state.tries.length}</div>
                 <ul>
                     {this.state.tries.map((v, i) => {
                         return (
-                            <Try key={`${i + 1}차 시도 : `} tryInfo={v} />
+                            <Try key={`${i + 1} 차 시도 : `} tryInfo={v} />
                         );
                     })}
                 </ul>

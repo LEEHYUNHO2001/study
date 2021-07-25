@@ -4,7 +4,7 @@ const ReactDom = require('react-dom');
 
 const WordRelay = require('./game/wordrelay');
 const GuGuDan = require('./game/gugudan');
-const NumberBaseball = require('./game/numberbaseball/numberbaseball');
+const NumberBaseball = require('./game/numberbaseball/numberbaseball').default;
 
 if(document.querySelector('.gugudan-root')){
     ReactDom.render(<div><GuGuDan /></div>, document.querySelector('.gugudan-root'));
