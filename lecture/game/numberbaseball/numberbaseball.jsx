@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import Try from './try';
 
 //겹치지 않는 숫자 4개 뽑기
@@ -12,83 +12,69 @@ function getNumbers(){
     return array;
 }
 
+const NumberBaseball = () => {
+    const [result, setResult] = useState('');
+    const [value, setValue] = useState('');
+    const [answer, setAnswer] = useState(getNumbers());
+    const [tries, setTries] = useState([]);
 
-class NumberBaseball extends Component{
-    state = {
-        result: '',
-        value: '',
-        answer: getNumbers(),
-        tries: [],
-    };
-    
-    onSubmitForm = (e) => {
+    const onSubmitForm = (e) => {
         e.preventDefault();
-        if(this.state.value === this.state.answer.join('')){
-            this.setState({
-                result: '홈런!!',
-                tries: [...this.state.tries, {try : this.state.value, result:'홈런!!'}]
-    
-            })
+        if(value === answer.join('')){
+            setResult('홈런!!');
+            setTries((prevTries) => { return [...prevTries, {try : value, result:'홈런!!'}]});
+
             alert('게임을 다시 시작합니다!!');
-            this.setState({
-                value: '',
-                tries: [],
-                answer: getNumbers(),
-            })
+            setValue('');
+            setTries([]);
+            setAnswer(getNumbers());
         } else{
-            const answerArray = this.state.value.split('').map((v) => parseInt(v));
+            const answerArray = value.split('').map((v) => parseInt(v));
             let strike = 0;
             let ball = 0;
     
-            if(this.state.tries.length >= 9){
-                this.setState({
-                    result: `10번 넘게 틀려서 실패!! 답은 ${this.state.answer.join(',')} 였습니다!!`,
-                })
+            if(tries.length >= 9){
+                setResult(`10번 넘게 틀려서 실패!! 답은 ${answer.join(',')} 였습니다!!`);
+
                 alert('게임을 다시 시작합니다!!');
-                this.setState({
-                    value: '',
-                    tries: [],
-                    answer: getNumbers(),
-                })
+                setValue('');
+                setTries([]);
+                setAnswer(getNumbers());
             } else{
                 for(let i = 0; i < 4; i++){
-                    if(answerArray[i] === this.state.answer[i]){
+                    if(answerArray[i] === answer[i]){
                         strike += 1;
-                    } else if(this.state.answer.includes(answerArray[i])){
+                    } else if(answer.includes(answerArray[i])){
                         ball += 1;
                     }
                 }
-                this.setState({
-                    tries: [...this.state.tries, {try: this.state.value, result: `${strike} 스트라이크 ${ball} 볼`}],
-                    value: '',
-                })
+                setTries((prevTries) => { return [...prevTries, {try: value, result: `${strike} 스트라이크 ${ball} 볼`}]});
+                setValue('');
             }
         }
     };
     
-    onChangeInput = (e) => {
-        this.setState({value:e.target.value});
+    const onChangeInput = (e) => {
+        setValue(e.target.value);
     };
 
-    render(){
-        return (
-            <>
-                <h1>{this.state.result}</h1>
-                <form onSubmit={this.onSubmitForm}>
-                    <input maxLength={4} onChange={this.onChangeInput} value={this.state.value} />
-                    <button>입력</button>
-                </form>
-                <div>시도 : {this.state.tries.length}</div>
-                <ul>
-                    {this.state.tries.map((v, i) => {
-                        return (
-                            <Try key={`${i + 1} 차 시도 : `} tryInfo={v} />
-                        );
-                    })}
-                </ul>
-            </>
-        );
-    }
-}
+    return (
+        <>
+            <h1>{result}</h1>
+            <form onSubmit={onSubmitForm}>
+                <input maxLength={4} onChange={onChangeInput} value={value} />
+                <button>입력</button>
+            </form>
+            <div>시도 : {tries.length}</div>
+            <ul>
+                {tries.map((v, i) => {
+                    return (
+                        <Try key={`${i + 1} 차 시도 : `} tryInfo={v} />
+                    );
+                })}
+            </ul>
+        </>
+    );
+};
 
 export default NumberBaseball;
