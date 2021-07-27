@@ -6,6 +6,7 @@ const GuGuDan = require('./game/gugudan');
 const NumberBaseball = require('./game/numberbaseball/numberbaseball').default;
 const ResponseCheck = require('./game/responsecheck').default;
 const RSP = require('./game/rsp').default;
+const Lotto = require('./game/lotto/lotto').default;
 
 
 if(document.querySelector('.gugudan-root')){
@@ -22,4 +23,7 @@ if(document.querySelector('.responsecheck-root')){
 }
 if(document.querySelector('.rsp-root')){
     ReactDom.render(<div><RSP /></div>, document.querySelector('.rsp-root'));
+}
+if(document.querySelector('.lotto-root')){
+    ReactDom.render(<div><Lotto /></div>, document.querySelector('.lotto-root'));
 }

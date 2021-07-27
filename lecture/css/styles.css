@@ -7,6 +7,7 @@
 @import "screen/main.css";
 @import "screen/responsecheck-light.css";
 @import "screen/rsp.css";
+@import "screen/ball.css";
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
