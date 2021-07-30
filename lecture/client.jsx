@@ -8,6 +8,7 @@ const ResponseCheck = require('./game/responsecheck').default;
 const RSP = require('./game/rsp').default;
 const Lotto = require('./game/lotto/lotto').default;
 const TicTacToe = require('./game/tictactoe/tictactoe').default;
+const MineSearch = require('./game/minesearch/minesearch').default;
 
 
 if(document.querySelector('.gugudan-root')){
@@ -30,4 +31,7 @@ if(document.querySelector('.lotto-root')){
 }
 if(document.querySelector('.tictactoe-root')){
     ReactDom.render(<div><TicTacToe /></div>, document.querySelector('.tictactoe-root'));
+}
+if(document.querySelector('.minesearch-root')){
+    ReactDom.render(<div><MineSearch /></div>, document.querySelector('.minesearch-root'));
 }
