@@ -9,6 +9,8 @@ export const initialState = {
         Images: [{
             src:'https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/XGP7CUGLG5HFNO3WB25C6D6VY4.jpg',
         }, {
+            src:'https://nodebird.com/favicon.ico'
+        }, {
             src:'https://cdn.cms-twdigitalassets.com/content/dam/blog-twitter/official/ko_kr/products/2019/topics/CB-14444_TopicsCOMMS_7_20191107.png.img.fullhd.medium.png'
         }],
         Comments:[{
