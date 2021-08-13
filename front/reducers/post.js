@@ -9,19 +9,26 @@ export const initialState = {
         },
         content: 'first comment #해시태그 #익스프레스',
         Images: [{
+            id: shortId.generate(),
             src:'https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/XGP7CUGLG5HFNO3WB25C6D6VY4.jpg',
         }, {
+            id: shortId.generate(),
             src:'https://nodebird.com/favicon.ico'
         }, {
+            id: shortId.generate(),
             src:'https://cdn.cms-twdigitalassets.com/content/dam/blog-twitter/official/ko_kr/products/2019/topics/CB-14444_TopicsCOMMS_7_20191107.png.img.fullhd.medium.png'
         }],
         Comments:[{
+            id: shortId.generate(),
             User: {
+                id: shortId.generate(),
                 nickname: 'hoho',
             },
             content: '개정판?',
         }, {
+            id: shortId.generate(),
             User: {
+                id: shortId.generate(),
                 nickname: 'yyzz',
             },
             content: '사고싶다',
@@ -31,6 +38,9 @@ export const initialState = {
     addPostLoading: false,
     addPostDone: false,
     addPostError: null,
+    removePostLoading: false,
+    removePostDone: false,
+    removePostError: null,
     addCommentLoading: false,
     addCommentDone: false,
     addCommentError: null,
@@ -39,6 +49,10 @@ export const initialState = {
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
+
+export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST';
+export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS';
+export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE';
 
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
@@ -56,8 +70,8 @@ export const addComment = (data) => ({
 });
 
 const dummyPost = (data) => ({
-    id: shortId.generate(),
-    content: data,
+    id: data.id,
+    content: data.content,
     User: {
         id: 1,
         nickname: '이현호',
@@ -96,6 +110,26 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 addPostLoading: false,
                 addPostError: action.error,
+            };
+        case REMOVE_POST_REQUEST:
+            return {
+                ...state,
+                removePostLoading: true,
+                removePostDone: false,
+                removePostError: null,
+            };
+        case REMOVE_POST_SUCCESS:
+            return {
+                ...state,
+                mainPosts: state.mainPosts.filter((v) => v.id !== action.data),
+                removePostDone: true,
+                removePostLoading: false,
+            };
+        case REMOVE_POST_FAILURE:
+            return{
+                ...state,
+                removePostLoading: false,
+                removePostError: action.error,
             };
         case ADD_COMMENT_REQUEST:
             return {
