@@ -1,3 +1,5 @@
+import shortId from 'shortid';
+
 export const initialState = {
     mainPosts: [{
         id: 1,
@@ -29,6 +31,9 @@ export const initialState = {
     addPostLoading: false,
     addPostDone: false,
     addPostError: null,
+    addCommentLoading: false,
+    addCommentDone: false,
+    addCommentError: null,
 }
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
@@ -50,16 +55,25 @@ export const addComment = (data) => ({
     data,
 });
 
-const dummyPost = {
-    id: 2,
-    content: '더미데이터',
+const dummyPost = (data) => ({
+    id: shortId.generate(),
+    content: data,
     User: {
         id: 1,
-        nickname: '제로초',
+        nickname: '이현호',
     },
     Images: [],
     Comments: [],
-};
+});
+
+const dummyComment = (data) => ({
+    id: shortId.generate(),
+    content: data,
+    User: {
+        id: 1,
+        nickname: '이현호',
+    },
+});
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
@@ -69,11 +83,11 @@ const reducer = (state = initialState, action) => {
                 addPostLoading: true,
                 addPostDone: false,
                 addPostError: null,
-            }
+            };
         case ADD_POST_SUCCESS:
             return {
                 ...state,
-                mainPosts:[dummyPost, ...state.mainPosts],
+                mainPosts:[dummyPost(action.data), ...state.mainPosts],
                 addPostDone: true,
                 addPostLoading: false,
             };
@@ -82,30 +96,44 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 addPostLoading: false,
                 addPostError: action.error,
-            }
+            };
         case ADD_COMMENT_REQUEST:
             return {
                 ...state,
                 addCommentLoading: true,
                 addCommentDone: false,
                 addCommentError: null,
-            }
-        case ADD_COMMENT_SUCCESS:
+            };
+        case ADD_COMMENT_SUCCESS:{
+            //mainPosts에서 id가 action.data.postId와 같은 인덱스 찾기
+            const postIndex = state.mainPosts.findIndex((v) => v.id === action.data.postId);
+            //mainPosts[postIndex]가 변경될 포스트이므로 얕은복사
+            const post = {...state.mainPosts[postIndex]};
+            //Comments 얕은복사하면서 댓글 넣어주기
+            post.Comments = [dummyComment(action.data.content), ...post.Comments];
+            //Comments가 얕은복사되어 새로운 객체가 생겼으니 mainPosts도 새로운 객체로 만듬
+            const mainPosts = [...state.mainPosts];
+            //원래포스트 있던 자리에 post 넣어줌
+            mainPosts[postIndex] = post;
+
             return {
                 ...state,
+                //메인포스트 변경된값 추가
+                mainPosts,
                 addCommentDone: true,
                 addCommentLoading: false,
             };
+        }
         case ADD_COMMENT_FAILURE:
             return{
                 ...state,
                 addCommentLoading: false,
                 addCommentError: action.error,
-            }
+            };
         default:
             return state;
-    }
+    };
 
-}
+};
 
 export default reducer;
