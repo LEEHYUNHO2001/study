@@ -1,4 +1,5 @@
 import shortId from 'shortid';
+import produce from 'immer';
 
 export const initialState = {
     mainPosts: [{
@@ -89,85 +90,66 @@ const dummyComment = (data) => ({
     },
 });
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) =>     produce(state, (draft) => {
     switch(action.type){
         case ADD_POST_REQUEST:
-            return {
-                ...state,
-                addPostLoading: true,
-                addPostDone: false,
-                addPostError: null,
-            };
+            draft.addPostLoading = true;
+            draft.addPostDone = false;
+            draft.addPostError = null;
+            break;
+            
         case ADD_POST_SUCCESS:
-            return {
-                ...state,
-                mainPosts:[dummyPost(action.data), ...state.mainPosts],
-                addPostDone: true,
-                addPostLoading: false,
-            };
+            draft.mainPosts.unshift(dummyPost(action.data));
+            draft.addPostDone = true;
+            draft.addPostLoading = false;
+            break;
+
         case ADD_POST_FAILURE:
-            return{
-                ...state,
-                addPostLoading: false,
-                addPostError: action.error,
-            };
+            draft.addPostLoading = false;
+            draft.addPostError = action.error;
+            break;
+
         case REMOVE_POST_REQUEST:
-            return {
-                ...state,
-                removePostLoading: true,
-                removePostDone: false,
-                removePostError: null,
-            };
+            draft.removePostLoading = true;
+            draft.removePostDone = false;
+            draft.removePostError = null;
+            break;
+
         case REMOVE_POST_SUCCESS:
-            return {
-                ...state,
-                mainPosts: state.mainPosts.filter((v) => v.id !== action.data),
-                removePostDone: true,
-                removePostLoading: false,
-            };
+            draft.mainPosts = draft.mainPosts.filter((v) => v.id !== action.data);
+            draft.removePostDone = true;
+            draft.removePostLoading = false;
+            break;
+
         case REMOVE_POST_FAILURE:
-            return{
-                ...state,
-                removePostLoading: false,
-                removePostError: action.error,
-            };
+            draft.removePostLoading = false;
+            draft.removePostError = action.error;
+            break;
+
         case ADD_COMMENT_REQUEST:
-            return {
-                ...state,
-                addCommentLoading: true,
-                addCommentDone: false,
-                addCommentError: null,
-            };
-        case ADD_COMMENT_SUCCESS:{
-            //mainPosts에서 id가 action.data.postId와 같은 인덱스 찾기
-            const postIndex = state.mainPosts.findIndex((v) => v.id === action.data.postId);
-            //mainPosts[postIndex]가 변경될 포스트이므로 얕은복사
-            const post = {...state.mainPosts[postIndex]};
-            //Comments 얕은복사하면서 댓글 넣어주기
-            post.Comments = [dummyComment(action.data.content), ...post.Comments];
-            //Comments가 얕은복사되어 새로운 객체가 생겼으니 mainPosts도 새로운 객체로 만듬
-            const mainPosts = [...state.mainPosts];
-            //원래포스트 있던 자리에 post 넣어줌
-            mainPosts[postIndex] = post;
+            draft.addCommentLoading = true;
+            draft.addCommentDone = false;
+            draft.addCommentError = null;
+            break;
 
-            return {
-                ...state,
-                //메인포스트 변경된값 추가
-                mainPosts,
-                addCommentDone: true,
-                addCommentLoading: false,
-            };
+        case ADD_COMMENT_SUCCESS:{  
+            //조건을 만족하는 게시글 index 찾기
+            const post = draft.mainPosts.find((v) => v.id === action.data.postId);
+            //게시글에 새 댓글 넣어줌
+            post.Comments.unshift(dummyComment(action.data.content));
+            draft.addCommentLoading = false;
+            draft.addCommentDone = true;
+            break;
         }
-        case ADD_COMMENT_FAILURE:
-            return{
-                ...state,
-                addCommentLoading: false,
-                addCommentError: action.error,
-            };
-        default:
-            return state;
-    };
 
-};
+        case ADD_COMMENT_FAILURE:
+            draft.addCommentLoading = false;
+            draft.addCommentError = action.error;
+            break;
+
+        default:
+            break;
+    };
+});
 
 export default reducer;
