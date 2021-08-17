@@ -1,41 +1,14 @@
 import shortId from 'shortid';
 import produce from 'immer';
+import faker from 'faker';
 
 export const initialState = {
-    mainPosts: [{
-        id: 1,
-        User: {
-            id: 1,
-            nickname: '이현호'
-        },
-        content: 'first comment #해시태그 #익스프레스',
-        Images: [{
-            id: shortId.generate(),
-            src:'https://cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/XGP7CUGLG5HFNO3WB25C6D6VY4.jpg',
-        }, {
-            id: shortId.generate(),
-            src:'https://nodebird.com/favicon.ico'
-        }, {
-            id: shortId.generate(),
-            src:'https://cdn.cms-twdigitalassets.com/content/dam/blog-twitter/official/ko_kr/products/2019/topics/CB-14444_TopicsCOMMS_7_20191107.png.img.fullhd.medium.png'
-        }],
-        Comments:[{
-            id: shortId.generate(),
-            User: {
-                id: shortId.generate(),
-                nickname: 'hoho',
-            },
-            content: '개정판?',
-        }, {
-            id: shortId.generate(),
-            User: {
-                id: shortId.generate(),
-                nickname: 'yyzz',
-            },
-            content: '사고싶다',
-        }]
-    }],
+    mainPosts: [],
     imagePaths: [],
+    hasMorePost: true,
+    loadPostsLoading: false,
+    loadPostsDone: false,
+    loadPostsError: null,
     addPostLoading: false,
     addPostDone: false,
     addPostError: null,
@@ -45,7 +18,32 @@ export const initialState = {
     addCommentLoading: false,
     addCommentDone: false,
     addCommentError: null,
-}
+};
+
+export const generateDummyPost = (number) => Array(number).fill().map(() => ({
+    id: shortId.generate(),
+    User: {
+        id: shortId.generate(),
+        nickname: faker.name.findName(),
+    },
+    content: faker.lorem.paragraph(),
+    Images: [
+        {
+            src: faker.image.image(),
+        }
+    ],
+    Comments: [{
+        User: {
+            id: shortId.generate(),
+            nickname: faker.name.findName(),
+        },
+        content: faker.lorem.sentence(),
+    }],
+}));
+
+export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
+export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
+export const LOAD_POSTS_FAILURE = 'LOAD_POSTS_FAILURE';
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
@@ -92,6 +90,26 @@ const dummyComment = (data) => ({
 
 const reducer = (state = initialState, action) =>     produce(state, (draft) => {
     switch(action.type){
+        case LOAD_POSTS_REQUEST:
+            draft.loadPostsLoading = true;
+            draft.loadPostsDone = false;
+            draft.loadPostsError = null;
+            break;
+            
+        case LOAD_POSTS_SUCCESS:
+            //action.data에 더미데이터 10개 들어있을것임. 기존데이터랑 합쳐서 보여줌
+            draft.mainPosts = action.data.concat(draft.mainPosts);
+            draft.loadPostsDone = true;
+            draft.loadPostsLoading = false;
+            //50개까지만 더 불러오기
+            draft.hasMorePost = draft.mainPosts.length < 50;
+            break;
+
+        case LOAD_POSTS_FAILURE:
+            draft.loadPostsLoading = false;
+            draft.loadPostsError = action.error;
+            break;
+
         case ADD_POST_REQUEST:
             draft.addPostLoading = true;
             draft.addPostDone = false;
