@@ -1,18 +1,28 @@
 import produce from "immer";
 
 export const initialState = {
+    followLoading: false,  //로그인 시도중(true면 로딩창)
+    followDone: false,
+    followError: null,
+    unfollowLoading: false,  //로그인 시도중(true면 로딩창)
+    unfollowDone: false,
+    unfollowError: null,
+
     logInLoading: false,  //로그인 시도중(true면 로딩창)
     logInDone: false,
     logInError: null,
     logOutLoding: false, //로그아웃 시도중(true면 로딩창)
     logOutDone: false,
     logOutError: null,
+
     signUpLoding: false, //회원가입 시도중(true면 로딩창)
     signUpDone: false,
     signUpFailure: null,
+
     changeNicknameLoding: false, //닉네임 변경 시도중(true면 로딩창)
     changeNicknameDone: false,
     changeNicknameFailure: null,
+
     me: null,
     signUpData: {},
     loginData: {},
@@ -70,19 +80,47 @@ export const logoutRequestAction = () => {
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
     switch(action.type){
+        case FOLLOW_REQUEST:
+            draft.followLoading = true;
+            draft.followError = null;
+            draft.followDone = false;
+            break;
+        case FOLLOW_SUCCESS:
+            draft.followLoading = false;
+            draft.followDone = true;
+            draft.me.Followings.push({id:action.data});
+            break;
+        case FOLLOW_FAILURE:
+            draft.followLoading = false;
+            draft.followError = action.error;
+            break;
+
+        case UNFOLLOW_REQUEST:
+            draft.unfollowLoading = true;
+            draft.unfollowError = null;
+            draft.unfollowDone = false;
+            break;
+        case UNFOLLOW_SUCCESS:
+            draft.unfollowLoading = false;
+            draft.unfollowDone = true;
+            draft.me.Followings = draft.me.Followings.filter((v) => v.id !== action.data);
+            break;
+        case UNFOLLOW_FAILURE:
+            draft.unfollowLoading = false;
+            draft.unfollowError = action.error;
+            break;
+
         case LOG_IN_REQUEST:
             draft.logInLoading = true;
             //me: null, //로딩창에서 데이터 없애고 보여줌
             draft.logInError = null;
             draft.logInDone = false;
             break;
-
         case LOG_IN_SUCCESS:
             draft.logInLoading = false;
             draft.logInDone = true;
             draft.me = dummyUser(action.data);
             break;
-
         case LOG_IN_FAILURE:
             draft.logInLoading = false;
             draft.logInError = action.error;
@@ -93,13 +131,11 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             draft.logOutDone = false;
             draft.logOutError = null;
             break;
-
         case LOG_OUT_SUCCESS:
             draft.logOutLoding = false;
             draft.logOutDone = true;
             draft.me = null;
             break;
-
         case LOG_OUT_FAILURE:
             draft.logOutLoding = false;
             draft.logOutError = action.error;
@@ -110,13 +146,11 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             draft.signUpDone = false;
             draft.signUpError = null;
             break;
-
         case SIGN_UP_SUCCESS:
             draft.signUpLoding = false;
             draft.signUpDone = true;
             draft.me = null;
             break;
-
         case SIGN_UP_FAILURE:
             draft.signUpLoding = false;
             draft.signUpError = action.error;
@@ -127,13 +161,11 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             draft.changeNicknameDone = false;
             draft.changeNicknameError = null;
             break;
-
         case CHANGE_NICKNAME_SUCCESS:
             draft.changeNicknameLoding = false;
             draft.changeNicknameDone = true;
             draft.me = null;
             break;
-
         case CHANGE_NICKNAME_FAILURE:
             draft.changeNicknameLoding = false;
             draft.changeNicknameError = action.error;
@@ -142,7 +174,6 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
         case ADD_POST_TO_ME:
             draft.me.Posts.unshift({id:action.data});
             break;
-
         case REMOVE_POST_OF_ME:
             draft.me.Posts.filter((v) => v.id !== action.data);
             break;
