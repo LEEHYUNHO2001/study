@@ -93,18 +93,16 @@ function* logOut() {
     }
 }
 
-function signUpAPI(){
-    return axios.post('/api/signUp');
+function signUpAPI(data){
+    return axios.post('http://localhost:3065/user', data);
 }
 
-function* signUp() {
+function* signUp(action) {
     try{
-        //서버를 구현하기 전까지 delay로 비동기적인 효과 주자.
-        yield delay(1000);
-        //const result = yield call(signUpAPI);
+        const result = yield call(signUpAPI, action.data);
+        console.log(result);
         yield put({
             type: SIGN_UP_SUCCESS,
-            //data: result.data,
         });
     } catch(err){
         yield put({
