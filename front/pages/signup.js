@@ -16,11 +16,19 @@ const ErrorMessage = styled.div`
 
 const Signup = () => {
     const dispatch = useDispatch();
-    const {signUpLoading, signUpDone, signUpError} = useSelector((state) => state.user);
+    const {signUpLoading, signUpDone, signUpError, me} = useSelector((state) => state.user);
+
+    //접근제어(로그인하면 회원가입페이지 못들어감)
+    useEffect(() => {
+        //로그아웃하는 경우
+        if(me && me.id){
+            Router.replace('/');
+        }
+    },[me && me.id]);
 
     useEffect(() => {
         if(signUpDone){
-            Router.push('/');
+            Router.replace('/');
         }
     }, [signUpDone]);
 
