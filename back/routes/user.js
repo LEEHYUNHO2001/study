@@ -4,11 +4,12 @@ const passport = require('passport');
 
 const {User, Post} = require('../models');
 const db = require('../models');
+const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
 
 //server error, 성공한경우 유저정보, reason(client error)
-router.post('/login', (req, res, next) => {
+router.post('/login', isNotLoggedIn, (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
         if(err){
             console.log(err);
@@ -43,7 +44,7 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', isNotLoggedIn, async (req, res, next) => {
     //email에서 req.body.email와 같은거 찾기
     const exUser = await User.findOne({
         where: {
@@ -67,10 +68,18 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.post('/logout', (req, res) => {
+router.post('/logout', isLoggedIn, (req, res) => {
     req.logout();
     req.session.destroy();
     res.send('ok');
 })
+/*
+router.get('/kakao', passport.authenticate('kakao'));
+router.get('/kakao/callback', passport.authenticate('kakao', {
+    failureRedirect: '/'
+}), (req, res) => {
+    res.redirect('/');
+});
+*/
 
 module.exports = router;

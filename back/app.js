@@ -2,13 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
 const dotenv = require('dotenv');
 
 const postRouter = require('./routes/post');
 const userRouter = require('./routes/user');
 const db = require('./models');
 const passportConfig = require('./passport');
-const passport = require('passport');
+
 
 dotenv.config();
 const app = express();
@@ -51,6 +52,10 @@ app.get('/posts', (req, res) => {
 
 app.use('/post', postRouter);
 app.use('/user', userRouter);
+
+app.use((err, req, res, next) => {
+    //직접 에러처리 미들웨어 넣기
+})
 
 app.listen(3065, () => {
     console.log("서버 실행중");

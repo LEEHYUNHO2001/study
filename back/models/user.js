@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         //id는 기본적으로 mysql에 들어있다.
         email: {
             type: DataTypes.STRING(30),
-            allowNull: false, //필수
+            allowNull: false,
             unique: true, //고유한 값
         },
         nickname: {
@@ -14,6 +14,15 @@ module.exports = (sequelize, DataTypes) => {
         password: {
             type: DataTypes.STRING(100),
             allowNull: false, 
+        },
+        provider: {
+            type: DataTypes.STRING(10),
+            allowNull: false,
+            defaultValue: 'local',
+        },
+        snsId:{
+            type: DataTypes.STRING(30),
+            allowNull: true,
         },
     }, {
         charset: 'utf8',
