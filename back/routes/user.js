@@ -8,8 +8,40 @@ const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
 
-//server error, 성공한경우 유저정보, reason(client error)
+router.get('/', async (req, res, next) => {
+    try{
+        if(req.user){
+            const fullUserWithoutPassword = await User.findOne({
+                where: {id: req.user.id},
+                attributes:{
+                    exclude: ['password']
+                },
+                include:[{
+                    model: Post,
+                    attributes: ['id'],
+                }, {
+                    model: User,
+                    as: 'Followings',
+                    attributes: ['id'],
+                }, {
+                    model: User,
+                    as: 'Followers',
+                    attributes: ['id'],
+                }]
+            });
+            res.status(200).json(fullUserWithoutPassword);
+        } else {
+            res.status(200).json(null);
+        }
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
+
+
 router.post('/login', isNotLoggedIn, (req, res, next) => {
+    //server error, 성공한경우 유저정보, reason(client error)
     passport.authenticate('local', (err, user, info) => {
         if(err){
             console.log(err);
