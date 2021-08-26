@@ -22,9 +22,9 @@ db.sequelize.sync()
 passportConfig();
 
 app.use(cors({
-    //나중에는 실제 주소로 두면 된다.
-    origin: true,
-    credentials: false,
+    //처음에는 true, 나중에는 실제 주소로 두면 된다.
+    origin: 'http://localhost:3000',
+    credentials: true,
 }));
 //front에서 받아온 데이터를 req.body에서 사용하기위해 선언
 app.use(express.json());

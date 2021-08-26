@@ -68,26 +68,6 @@ export const addComment = (data) => ({
     data,
 });
 
-const dummyPost = (data) => ({
-    id: data.id,
-    content: data.content,
-    User: {
-        id: 1,
-        nickname: '이현호',
-    },
-    Images: [],
-    Comments: [],
-});
-
-const dummyComment = (data) => ({
-    id: shortId.generate(),
-    content: data,
-    User: {
-        id: 1,
-        nickname: '이현호',
-    },
-});
-
 const reducer = (state = initialState, action) =>     produce(state, (draft) => {
     switch(action.type){
         case LOAD_POSTS_REQUEST:
@@ -117,7 +97,7 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             break;
             
         case ADD_POST_SUCCESS:
-            draft.mainPosts.unshift(dummyPost(action.data));
+            draft.mainPosts.unshift(action.data);
             draft.addPostDone = true;
             draft.addPostLoading = false;
             break;
@@ -152,9 +132,9 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
 
         case ADD_COMMENT_SUCCESS:{  
             //조건을 만족하는 게시글 index 찾기
-            const post = draft.mainPosts.find((v) => v.id === action.data.postId);
+            const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
             //게시글에 새 댓글 넣어줌
-            post.Comments.unshift(dummyComment(action.data.content));
+            post.Comments.unshift(action.data);
             draft.addCommentLoading = false;
             draft.addCommentDone = true;
             break;
