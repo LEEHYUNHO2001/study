@@ -1,6 +1,4 @@
-import shortId from 'shortid';
 import produce from 'immer';
-import faker from 'faker';
 
 export const initialState = {
     mainPosts: [],
@@ -19,27 +17,6 @@ export const initialState = {
     addCommentDone: false,
     addCommentError: null,
 };
-
-export const generateDummyPost = (number) => Array(number).fill().map(() => ({
-    id: shortId.generate(),
-    User: {
-        id: shortId.generate(),
-        nickname: faker.name.findName(),
-    },
-    content: faker.lorem.paragraph(),
-    Images: [
-        {
-            src: faker.image.image(),
-        }
-    ],
-    Comments: [{
-        User: {
-            id: shortId.generate(),
-            nickname: faker.name.findName(),
-        },
-        content: faker.lorem.sentence(),
-    }],
-}));
 
 export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
 export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
@@ -77,7 +54,7 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             break;
             
         case LOAD_POSTS_SUCCESS:
-            //action.data에 더미데이터 10개 들어있을것임. 기존데이터랑 합쳐서 보여줌
+            //기존 게시글에  concat으로 action.data 추가.
             draft.mainPosts = action.data.concat(draft.mainPosts);
             draft.loadPostsDone = true;
             draft.loadPostsLoading = false;
