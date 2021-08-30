@@ -6,8 +6,53 @@ import {
     REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE,
     ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
     LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS, LOAD_POSTS_FAILURE,
+    LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE,
+    UNLIKE_POST_REQUEST ,UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE
 } from '../reducers/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user';
+
+
+
+function unlikePostAPI(data){
+    return axios.delete(`/post/${data}/like`);
+}
+
+function* unlikePost(action) {
+    try{
+        const result = yield call(unlikePostAPI, action.data);
+        yield put({
+            type: UNLIKE_POST_SUCCESS,
+            data: result.data,
+        });
+    } catch(err){
+        console.error(err);
+        yield put({
+            type: UNLIKE_POST_FAILURE,
+            error: err.response.data,
+        });
+    }
+}
+
+function likePostAPI(data){
+    //data가 주소에 들어가있기때문에 2번째 인자로 주지 않아도 된다.
+    return axios.patch(`/post/${data}/like`);
+}
+
+function* likePost(action) {
+    try{
+        const result = yield call(likePostAPI, action.data);
+        yield put({
+            type: LIKE_POST_SUCCESS,
+            data: result.data,
+        });
+    } catch(err){
+        console.error(err);
+        yield put({
+            type: LIKE_POST_FAILURE,
+            error: err.response.data,
+        });
+    }
+}
 
 function loadPostsAPI(data){
     return axios.get('/posts', data);
@@ -21,6 +66,7 @@ function* loadPosts(action) {
             data: result.data,
         });
     } catch(err){
+        console.error(err);
         yield put({
             type: LOAD_POSTS_FAILURE,
             error: err.response.data,
@@ -35,7 +81,6 @@ function addPostAPI(data){
 function* addPost(action) {
     try{
         const result = yield call(addPostAPI, action.data);
-        const id = shortId.generate();
         yield put({
             type: ADD_POST_SUCCESS,
             data: result.data,
@@ -45,6 +90,7 @@ function* addPost(action) {
             data: result.data.id,
         });
     } catch(err){
+        console.error(err);
         yield put({
             type: ADD_POST_FAILURE,
             error: err.response.data,
@@ -69,6 +115,7 @@ function* removePost(action) {
             data: action.data,
         });
     } catch(err){
+        console.error(err);
         yield put({
             type: REMOVE_POST_FAILURE,
             error: err.response.data,
@@ -96,6 +143,14 @@ function* addComment(action) {
     }
 }
 
+function* watchUnLikePost(){
+    yield takeLatest(UNLIKE_POST_REQUEST, unlikePost);
+}
+
+function* watchLikePost(){
+    yield takeLatest(LIKE_POST_REQUEST, likePost);
+}
+
 function* watchLoadPosts(){
     yield throttle(5000, LOAD_POSTS_REQUEST, loadPosts);
 }
@@ -114,6 +169,8 @@ function* watchAddComment(){
 
 export default function* postSaga(){
     yield all([
+        fork(watchUnLikePost),
+        fork(watchLikePost),
         fork(watchLoadPosts),
         fork(watchAddPost),
         fork(watchRemovePost),

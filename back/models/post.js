@@ -10,11 +10,11 @@ module.exports = (sequelize, DataTypes) => {
         collate: 'utf8mb4_general_ci',//한글 저장
     }); 
     Post.associate = (db) => {
-        db.Post.belongsTo(db.User);
-        db.Post.hasMany(db.Comment);
+        db.Post.belongsTo(db.User); //post.addUser, post.getUser, post.setUser
+        db.Post.hasMany(db.Comment); //post.addComments, post.getComments, post.setComments
         db.Post.belongsToMany(db.Hashtag, {through: 'PostHashtag'});
         db.Post.hasMany(db.Image);
-        db.Post.belongsToMany(db.User, {through: 'Like', as: 'Liked'});
+        db.Post.belongsToMany(db.User, {through: 'Like', as: 'Likers'}); //post.addLikers, post.removeLikers
         db.Post.belongsTo(db.Post, {as: 'Retweet'}); //PostId면 헷갈리니 RetweetId로 바꾸어버림
     };
     return Post;

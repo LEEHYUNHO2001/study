@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = (db) => {
         db.User.hasMany(db.Post);
         db.User.hasMany(db.Comment);
-        db.User.belongsToMany(db.Post, {through: 'Like', as: 'Likers'}); //사용자와 게시글의 좋아요 관계
+        db.User.belongsToMany(db.Post, {through: 'Like', as: 'Liked'}); //사용자와 게시글의 좋아요 관계
         db.User.belongsToMany(db.User, {through: 'Follow', as: 'Followers', foreignKey: 'FollowingId'});
         db.User.belongsToMany(db.User, {through: 'Follow', as: 'Followings', foreignKey: 'FollowerId'});
     };

@@ -4,6 +4,12 @@ export const initialState = {
     mainPosts: [],
     imagePaths: [],
     hasMorePost: true,
+    likePostLoading: false,
+    likePostDone: false,
+    likePostError: null,
+    unlikePostLoading: false,
+    unlikePostDone: false,
+    unlikePostError: null,
     loadPostsLoading: false,
     loadPostsDone: false,
     loadPostsError: null,
@@ -17,6 +23,14 @@ export const initialState = {
     addCommentDone: false,
     addCommentError: null,
 };
+
+export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST';
+export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS';
+export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE';
+
+export const UNLIKE_POST_REQUEST = 'UNLIKE_POST_REQUEST';
+export const UNLIKE_POST_SUCCESS = 'UNLIKE_POST_SUCCESS';
+export const UNLIKE_POST_FAILURE = 'UNLIKE_POST_FAILURE';
 
 export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
 export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
@@ -47,12 +61,45 @@ export const addComment = (data) => ({
 
 const reducer = (state = initialState, action) =>     produce(state, (draft) => {
     switch(action.type){
+        case LIKE_POST_REQUEST:
+            draft.likePostLoading = true;
+            draft.likePostDone = false;
+            draft.likePostError = null;
+            break; 
+        case LIKE_POST_SUCCESS: {
+            const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+            post.Likers.push({id: action.data.UserId});
+            draft.likePostDone = true;
+            draft.likePostLoading = false;
+            break;
+        }
+        case LIKE_POST_FAILURE:
+            draft.likePostLoading = false;
+            draft.likePostError = action.error;
+            break;
+        
+        case UNLIKE_POST_REQUEST:
+            draft.unlikePostLoading = true;
+            draft.unlikePostDone = false;
+            draft.unlikePostError = null;
+            break; 
+        case UNLIKE_POST_SUCCESS:{
+            const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
+            post.Likers = post.Likers.filter((v) => v.id !== action.data.UserId);
+            draft.unlikePostDone = true;
+            draft.unlikePostLoading = false;
+            break;
+        }
+        case UNLIKE_POST_FAILURE:
+            draft.unlikePostLoading = false;
+            draft.unlikePostError = action.error;
+            break;
+
         case LOAD_POSTS_REQUEST:
             draft.loadPostsLoading = true;
             draft.loadPostsDone = false;
             draft.loadPostsError = null;
-            break;
-            
+            break; 
         case LOAD_POSTS_SUCCESS:
             //기존 게시글에  concat으로 action.data 추가.
             draft.mainPosts = action.data.concat(draft.mainPosts);
@@ -61,7 +108,6 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             //50개까지만 더 불러오기
             draft.hasMorePost = draft.mainPosts.length < 50;
             break;
-
         case LOAD_POSTS_FAILURE:
             draft.loadPostsLoading = false;
             draft.loadPostsError = action.error;
@@ -71,14 +117,12 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             draft.addPostLoading = true;
             draft.addPostDone = false;
             draft.addPostError = null;
-            break;
-            
+            break;            
         case ADD_POST_SUCCESS:
             draft.mainPosts.unshift(action.data);
             draft.addPostDone = true;
             draft.addPostLoading = false;
             break;
-
         case ADD_POST_FAILURE:
             draft.addPostLoading = false;
             draft.addPostError = action.error;
@@ -89,13 +133,11 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             draft.removePostDone = false;
             draft.removePostError = null;
             break;
-
         case REMOVE_POST_SUCCESS:
             draft.mainPosts = draft.mainPosts.filter((v) => v.id !== action.data);
             draft.removePostDone = true;
             draft.removePostLoading = false;
             break;
-
         case REMOVE_POST_FAILURE:
             draft.removePostLoading = false;
             draft.removePostError = action.error;
@@ -106,7 +148,6 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             draft.addCommentDone = false;
             draft.addCommentError = null;
             break;
-
         case ADD_COMMENT_SUCCESS:{  
             //조건을 만족하는 게시글 index 찾기
             const post = draft.mainPosts.find((v) => v.id === action.data.PostId);
@@ -116,7 +157,6 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             draft.addCommentDone = true;
             break;
         }
-
         case ADD_COMMENT_FAILURE:
             draft.addCommentLoading = false;
             draft.addCommentError = action.error;
