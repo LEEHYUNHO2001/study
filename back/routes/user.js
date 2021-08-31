@@ -104,7 +104,7 @@ router.post('/logout', isLoggedIn, (req, res) => {
     req.logout();
     req.session.destroy();
     res.send('ok');
-})
+});
 /*
 router.get('/kakao', passport.authenticate('kakao'));
 router.get('/kakao/callback', passport.authenticate('kakao', {
@@ -113,5 +113,20 @@ router.get('/kakao/callback', passport.authenticate('kakao', {
     res.redirect('/');
 });
 */
+
+router.patch('/nickname', isLoggedIn, async(req, res, next) => {
+    try{
+        //내 id의 닉네임을 front에서 받은 닉네임으로 수정
+        await User.update({
+            nickname: req.body.nickname,
+        }, {
+            where: {id: req.user.id},
+        });
+        res.status(200).json({nickname: req.body.nickname});
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
 
 module.exports = router;
