@@ -5,6 +5,7 @@ const passport = require('passport');
 const {User, Post} = require('../models');
 const db = require('../models');
 const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
+const user = require('../models/user');
 
 const router = express.Router();
 
@@ -122,7 +123,73 @@ router.patch('/nickname', isLoggedIn, async(req, res, next) => {
         }, {
             where: {id: req.user.id},
         });
-        res.status(200).json({nickname: req.body.nickname});
+        res.status(200).json({nickname: parseInt(req.params.userId, 10)});
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
+
+router.patch('/:userId/follow', isLoggedIn, async(req, res, next) => {
+    try{
+        const user = await User.findOne({where: {id: req.params.userId}}); //front에서 action.data가 된다. UserId꺼내 쓰면됨.
+        if(!user){
+            res.status(403).send('존재하지 않는 사용자를 팔로우할 수 없습니다.');
+        }
+        await user.addFollowers(req.user.id);
+        res.status(200).json({UserId: parseInt(req.params.userId, 10)});
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
+
+router.delete('/:userId/follow', isLoggedIn, async(req, res, next) => {
+    try{
+        const user = await User.findOne({where: {id: req.params.userId}});
+        if(!user) res.status(403).send('존재하지 않는 사용자를 언팔로우할 수 없습니다.');
+        await user.removeFollowers(req.user.id);
+        res.status(200).json({UserId: parseInt(req.params.userId, 10)});
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
+
+router.delete('/follower/:userId', isLoggedIn, async(req, res, next) => {
+    try{
+        const user = await User.findOne({where: {id: req.params.userId}});
+        if(!user) res.status(403).send('존재하지 않는 사용자를 차단할 수 없습니다.');
+        await user.removeFollowings(req.user.id);
+        res.status(200).json({UserId: parseInt(req.params.userId, 10)});
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
+
+router.get('/followers', isLoggedIn, async(req, res, next) => {
+    try{
+        const user = await User.findOne({where: {id: req.user.id}});
+        if(!user){
+            res.status(403).send('존재하지 않는 사용자입니다.');
+        }
+        const followers = await user.getFollowers();
+        res.status(200).json(followers);
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
+
+router.get('/followings', isLoggedIn, async(req, res, next) => {
+    try{
+        const user = await User.findOne({where: {id: req.user.id}});
+        if(!user){
+            res.status(403).send('존재하지 않는 사용자입니다.');
+        }
+        const followings = await user.getFollowings();
+        res.status(200).json(followings);
     } catch(error){
         console.error(error);
         next(error);
