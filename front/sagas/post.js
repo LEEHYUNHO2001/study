@@ -7,11 +7,31 @@ import {
     ADD_COMMENT_REQUEST, ADD_COMMENT_SUCCESS, ADD_COMMENT_FAILURE,
     LOAD_POSTS_REQUEST, LOAD_POSTS_SUCCESS, LOAD_POSTS_FAILURE,
     LIKE_POST_REQUEST, LIKE_POST_SUCCESS, LIKE_POST_FAILURE,
-    UNLIKE_POST_REQUEST ,UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE
+    UNLIKE_POST_REQUEST ,UNLIKE_POST_SUCCESS, UNLIKE_POST_FAILURE, 
+    UPLOAD_IMAGES_REQUEST, UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_FAILURE
 } from '../reducers/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user';
 
 
+function uploadImagesAPI(data){
+    return axios.post('/post/images', data);
+}
+
+function* uploadImages(action) {
+    try{
+        const result = yield call(uploadImagesAPI, action.data);
+        yield put({
+            type: UPLOAD_IMAGES_SUCCESS,
+            data: result.data,
+        });
+    } catch(err){
+        console.error(err);
+        yield put({
+            type: UPLOAD_IMAGES_FAILURE,
+            error: err.response.data,
+        });
+    }
+}
 
 function unlikePostAPI(data){
     return axios.delete(`/post/${data}/like`);
@@ -74,8 +94,9 @@ function* loadPosts(action) {
     }
 }
 
+//form데이터는 바로 데이터로넣어주기
 function addPostAPI(data){
-    return axios.post('/post', {content: data});
+    return axios.post('/post', data);
 }
 
 function* addPost(action) {
@@ -142,6 +163,10 @@ function* addComment(action) {
     }
 }
 
+function* watchUploadImages(){
+    yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
+}
+
 function* watchUnLikePost(){
     yield takeLatest(UNLIKE_POST_REQUEST, unlikePost);
 }
@@ -168,6 +193,7 @@ function* watchAddComment(){
 
 export default function* postSaga(){
     yield all([
+        fork(watchUploadImages),
         fork(watchUnLikePost),
         fork(watchLikePost),
         fork(watchLoadPosts),

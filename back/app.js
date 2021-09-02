@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const path = require('path');
 
 const postRouter = require('./routes/post');
 const postsRouter = require('./routes/posts');
@@ -29,6 +30,10 @@ app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
 }));
+
+//현재 디렉터리와 uploads 의 경로를 합쳐준것을 express.static해줌
+// 슬래시 의미는 localhost:3065임
+app.use('/', express.static(path.join(__dirname, 'uploads')));
 //front에서 받아온 데이터를 req.body에서 사용하기위해 선언
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
