@@ -10,7 +10,13 @@ import { LOAD_MY_INFO_REQUEST } from '../reducers/user';
 const Home = () => {
     const dispatch = useDispatch();
     const {me} = useSelector((state) => state.user);
-    const {mainPosts, hasMorePost, loadPostsLoading} = useSelector((state) => state.post);
+    const {mainPosts, hasMorePost, loadPostsLoading, retweetError} = useSelector((state) => state.post);
+
+    useEffect(() => {
+        if(retweetError){
+            alert(retweetError);
+        }
+    }, [retweetError]);
 
     //main 페이지 불러올때 LOAD_MY_INFO_REQUEST, LOAD_POST_REQUEST해줌
     useEffect(() => {

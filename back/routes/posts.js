@@ -28,7 +28,20 @@ router.get('/', async(req,res, next) => {
                 model: User, //좋아요 누른사람
                 as: 'Likers',
                 attributes: ['id'],
-            },]
+            }, {
+                model: Post,
+                as: 'Retweet',
+                include:[{
+                    model: User,
+                    attributes: ['id', 'nickname'],
+                }, {
+                    model: User,
+                    as: 'Likers',
+                    attributes: ['id'],
+                }, {
+                    model: Image,
+                }],
+            }, ]
         });
         console.log(posts);
         res.status(200).json(posts);
