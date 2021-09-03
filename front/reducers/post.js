@@ -156,11 +156,11 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             break; 
         case LOAD_POSTS_SUCCESS:
             //기존 게시글에  concat으로 action.data 추가.
-            draft.mainPosts = action.data.concat(draft.mainPosts);
+            draft.mainPosts = draft.mainPosts.concat(action.data);
             draft.loadPostsDone = true;
             draft.loadPostsLoading = false;
-            //50개까지만 더 불러오기
-            draft.hasMorePost = draft.mainPosts.length < 50;
+            //23개의 게시물이 있을경우, 3개남았을때 hasMorePost = false
+            draft.hasMorePost = action.data.length === 10;
             break;
         case LOAD_POSTS_FAILURE:
             draft.loadPostsLoading = false;
