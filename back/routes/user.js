@@ -10,6 +10,7 @@ const user = require('../models/user');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
+    console.log(req.headers); //headers 에 쿠키들어있음
     try{
         if(req.user){
             const fullUserWithoutPassword = await User.findOne({

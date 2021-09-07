@@ -1,7 +1,11 @@
 import produce from "immer";
 
 export const initialState = {
-    loadUserLoading: false,  //유저정보 가져오기 시도중(true면 로딩창)
+    loadMyInfoLoading: false,  //나의 유저정보 가져오기 시도중(true면 로딩창)
+    loadMyInfoDone: false,
+    loadMyInfoError: null,
+
+    loadUserLoading: false,  //남의 유저정보 가져오기 시도중(true면 로딩창)
     loadUserDone: false,
     loadUserError: null,
 
@@ -39,13 +43,16 @@ export const initialState = {
     loadFollowersFailure: null,
 
     me: null,
-    signUpData: {},
-    loginData: {},
+    userInfo: null,
 }
 
 export const LOAD_MY_INFO_REQUEST = 'LOAD_MY_INFO_REQUEST';
 export const LOAD_MY_INFO_SUCCESS = 'LOAD_MY_INFO_SUCCESS';
 export const LOAD_MY_INFO_FAILURE = 'LOAD_MY_INFO_FAILURE';
+
+export const LOAD_USER_REQUEST = 'LOAD_USER_REQUEST';
+export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS';
+export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
 
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST';
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
@@ -131,16 +138,31 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             break;        
 
         case LOAD_MY_INFO_REQUEST:
+            draft.loadMyInfoLoading = true;
+            draft.loadMyInfoError = null;
+            draft.loadMyInfoDone = false;
+            break;
+        case LOAD_MY_INFO_SUCCESS:
+            draft.loadMyInfoLoading = false;
+            draft.loadMyInfoDone = true;
+            draft.me = action.data;
+            break;
+        case LOAD_MY_INFO_FAILURE:
+            draft.loadMyInfoLoading = false;
+            draft.loadMyInfoError = action.error;
+            break;
+
+        case LOAD_USER_REQUEST:
             draft.loadUserLoading = true;
             draft.loadUserError = null;
             draft.loadUserDone = false;
             break;
-        case LOAD_MY_INFO_SUCCESS:
+        case LOAD_USER_SUCCESS:
             draft.loadUserLoading = false;
             draft.loadUserDone = true;
-            draft.me = action.data;
+            draft.userInfo = action.data;
             break;
-        case LOAD_MY_INFO_FAILURE:
+        case LOAD_USER_FAILURE:
             draft.loadUserLoading = false;
             draft.loadUserError = action.error;
             break;
