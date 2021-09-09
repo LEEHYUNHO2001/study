@@ -1,11 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const { Op } = require('sequelize');
 
-const {User, Post} = require('../models');
-const db = require('../models');
+const {User, Post, Image, Comment} = require('../models');
 const {isLoggedIn, isNotLoggedIn} = require('./middlewares');
-const user = require('../models/user');
 
 const router = express.Router();
 
@@ -73,6 +72,54 @@ router.get('/:userId', async (req, res, next) => {
         } else {
             res.status(404).json('존재하지 않는 사용자입니다.');
         }
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
+
+//특정 user의 게시글
+router.get('/:userId/posts', async(req,res, next) => {
+    try{
+        const where = {UserId: req.params.userId};
+        if(parseInt(req.query.lastId, 10)){ //초기 로딩이 아닐때
+            where.id = {[Op.lt]: parseInt(req.query.lastId, 10)};
+        }
+        const posts = await Post.findAll({
+            where,
+            limit: 10,
+            order: [['createdAt', 'DESC']],
+            include: [{
+                model: User,
+                attributes: ['id', 'nickname'],
+            },{
+                model: Image,
+            }, {
+                model: Comment,
+                include: [{
+                    model: User,
+                    attributes: ['id', 'nickname'],
+                }],
+            }, {
+                model: User, //좋아요 누른사람
+                as: 'Likers',
+                attributes: ['id'],
+            }, {
+                model: Post,
+                as: 'Retweet',
+                include:[{
+                    model: User,
+                    attributes: ['id', 'nickname'],
+                }, {
+                    model: User,
+                    as: 'Likers',
+                    attributes: ['id'],
+                }, {
+                    model: Image,
+                }],
+            }, ]
+        });
+        res.status(200).json(posts);
     } catch(error){
         console.error(error);
         next(error);
@@ -233,5 +280,7 @@ router.get('/followings', isLoggedIn, async(req, res, next) => {
         next(error);
     }
 });
+
+
 
 module.exports = router;

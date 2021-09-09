@@ -54,6 +54,14 @@ export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
 export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
 export const LOAD_POSTS_FAILURE = 'LOAD_POSTS_FAILURE';
 
+export const LOAD_HASHTAG_POSTS_REQUEST = 'LOAD_HASHTAG_POSTS_REQUEST';
+export const LOAD_HASHTAG_POSTS_SUCCESS = 'LOAD_HASHTAG_POSTS_SUCCESS';
+export const LOAD_HASHTAG_POSTS_FAILURE = 'LOAD_HASHTAG_POSTS_FAILURE';
+
+export const LOAD_USER_POSTS_REQUEST = 'LOAD_USER_POSTS_REQUEST';
+export const LOAD_USER_POSTS_SUCCESS = 'LOAD_USER_POSTS_SUCCESS';
+export const LOAD_USER_POSTS_FAILURE = 'LOAD_USER_POSTS_FAILURE';
+
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE';
@@ -172,11 +180,16 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             draft.loadPostError = action.error;
             break;
 
+        //한페이지에서 액션들이 같이 사용되지않을때는 상태가 공유되어도된다.(state줄이기, 재사용)
+        case LOAD_USER_POSTS_REQUEST:
+        case LOAD_HASHTAG_POSTS_REQUEST:
         case LOAD_POSTS_REQUEST:
             draft.loadPostsLoading = true;
             draft.loadPostsDone = false;
             draft.loadPostsError = null;
             break; 
+        case LOAD_USER_POSTS_SUCCESS:
+        case LOAD_HASHTAG_POSTS_SUCCESS:
         case LOAD_POSTS_SUCCESS:
             //기존 게시글에  concat으로 action.data 추가.
             draft.mainPosts = draft.mainPosts.concat(action.data);
@@ -185,6 +198,8 @@ const reducer = (state = initialState, action) =>     produce(state, (draft) => 
             //23개의 게시물이 있을경우, 3개남았을때 hasMorePost = false
             draft.hasMorePost = action.data.length === 10;
             break;
+        case LOAD_USER_POSTS_FAILURE:
+        case LOAD_HASHTAG_POSTS_FAILURE:
         case LOAD_POSTS_FAILURE:
             draft.loadPostsLoading = false;
             draft.loadPostsError = action.error;
