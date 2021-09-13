@@ -40,44 +40,6 @@ router.get('/', async (req, res, next) => {
     }
 });
 
-router.get('/:userId', async (req, res, next) => {
-    try{
-        const fullUserWithoutPassword = await User.findOne({
-            where: {id: req.params.userId},
-            attributes:{
-                exclude: ['password']
-            },
-            include:[{
-                model: Post,
-                attributes: ['id'],
-            }, {
-                model: User,
-                as: 'Followings',
-                attributes: ['id'],
-            }, {
-                model: User,
-                as: 'Followers',
-                attributes: ['id'],
-            }]
-        });
-        
-        if(fullUserWithoutPassword){
-            //sequelize에서 보내준 정보 json데이터로 변환
-            const data = fullUserWithoutPassword.toJSON();
-            //about.js에서 사용. 개인정보 침해 예방
-            data.Posts = data.Posts.length;
-            data.Followers = data.Followers.length;
-            data.Followings = data.Followings.length;
-            res.status(200).json(data);
-        } else {
-            res.status(404).json('존재하지 않는 사용자입니다.');
-        }
-    } catch(error){
-        console.error(error);
-        next(error);
-    }
-});
-
 //특정 user의 게시글
 router.get('/:userId/posts', async(req,res, next) => {
     try{
@@ -259,7 +221,9 @@ router.get('/followers', isLoggedIn, async(req, res, next) => {
         if(!user){
             res.status(403).send('존재하지 않는 사용자입니다.');
         }
-        const followers = await user.getFollowers();
+        const followers = await user.getFollowers({
+            limit: parseInt(req.query.limit, 10),
+        });
         res.status(200).json(followers);
     } catch(error){
         console.error(error);
@@ -273,7 +237,9 @@ router.get('/followings', isLoggedIn, async(req, res, next) => {
         if(!user){
             res.status(403).send('존재하지 않는 사용자입니다.');
         }
-        const followings = await user.getFollowings();
+        const followings = await user.getFollowings({
+            limit: parseInt(req.query.limit, 10),
+        });
         res.status(200).json(followings);
     } catch(error){
         console.error(error);
@@ -281,6 +247,42 @@ router.get('/followings', isLoggedIn, async(req, res, next) => {
     }
 });
 
-
+router.get('/:userId', async (req, res, next) => {
+    try{
+        const fullUserWithoutPassword = await User.findOne({
+            where: {id: req.params.userId},
+            attributes:{
+                exclude: ['password']
+            },
+            include:[{
+                model: Post,
+                attributes: ['id'],
+            }, {
+                model: User,
+                as: 'Followings',
+                attributes: ['id'],
+            }, {
+                model: User,
+                as: 'Followers',
+                attributes: ['id'],
+            }]
+        });
+        
+        if(fullUserWithoutPassword){
+            //sequelize에서 보내준 정보 json데이터로 변환
+            const data = fullUserWithoutPassword.toJSON();
+            //about.js에서 사용. 개인정보 침해 예방
+            data.Posts = data.Posts.length;
+            data.Followers = data.Followers.length;
+            data.Followings = data.Followings.length;
+            res.status(200).json(data);
+        } else {
+            res.status(404).json('존재하지 않는 사용자입니다.');
+        }
+    } catch(error){
+        console.error(error);
+        next(error);
+    }
+});
 
 module.exports = router;

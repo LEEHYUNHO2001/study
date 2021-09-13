@@ -35,13 +35,6 @@ export const initialState = {
     removeFollowerDone: false,
     removeFollowerFailure: null,
 
-    loadFolloweringsLoding: false,
-    loadFolloweringsDone: false,
-    loadFolloweringsFailure: null,
-    loadFollowersLoding: false,
-    loadFollowersDone: false,
-    loadFollowersFailure: null,
-
     me: null,
     userInfo: null,
 }
@@ -82,14 +75,6 @@ export const UNFOLLOW_REQUEST = 'UNFOLLOW_REQUEST';
 export const UNFOLLOW_SUCCESS = 'UNFOLLOW_SUCCESS';
 export const UNFOLLOW_FAILURE = 'UNFOLLOW_FAILURE';
 
-export const LOAD_FOLLOWINGS_REQUEST = 'LOAD_FOLLOWINGS_REQUEST';
-export const LOAD_FOLLOWINGS_SUCCESS = 'LOAD_FOLLOWINGS_SUCCESS';
-export const LOAD_FOLLOWINGS_FAILURE = 'LOAD_FOLLOWINGS_FAILURE';
-
-export const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST';
-export const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS';
-export const LOAD_FOLLOWERS_FAILURE = 'LOAD_FOLLOWERS_FAILURE';
-
 export const ADD_POST_TO_ME = 'ADD_POST_TO_ME';
 export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME';
 
@@ -107,36 +92,7 @@ export const logoutRequestAction = () => {
 };
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
-    switch(action.type){
-        case LOAD_FOLLOWINGS_REQUEST:
-            draft.loadFollowingsLoading = true;
-            draft.loadFollowingsError = null;
-            draft.loadFollowingsDone = false;
-            break;
-        case LOAD_FOLLOWINGS_SUCCESS:
-            draft.loadFollowingsLoading = false;
-            draft.loadFollowingsDone = true;
-            draft.me.Followings = action.data;
-            break;
-        case LOAD_FOLLOWINGS_FAILURE:
-            draft.loadFollowingsLoading = false;
-            draft.loadFollowingsError = action.error;
-            break;
-        case LOAD_FOLLOWERS_REQUEST:
-            draft.loadFollowersLoading = true;
-            draft.loadFollowersError = null;
-            draft.loadFollowersDone = false;
-            break;
-        case LOAD_FOLLOWERS_SUCCESS:
-            draft.loadFollowersLoading = false;
-            draft.loadFollowersDone = true;
-            draft.me.Followers = action.data;
-            break;
-        case LOAD_FOLLOWERS_FAILURE:
-            draft.loadFollowersLoading = false;
-            draft.loadFollowersError = action.error;
-            break;        
-
+    switch(action.type){    
         case LOAD_MY_INFO_REQUEST:
             draft.loadMyInfoLoading = true;
             draft.loadMyInfoError = null;
