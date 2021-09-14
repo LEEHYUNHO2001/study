@@ -2,8 +2,14 @@ import React, { useCallback } from 'react';
 import {Card, Avatar, Button} from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
+import styled from 'styled-components';
 
 import {logoutRequestAction} from '../reducers/user';
+
+const CardWrapper = styled(Card)`
+    position: fixed;
+    margin-left: 20px;
+`;
 
 const UserProfile = () => {
     const dispatch = useDispatch();
@@ -13,7 +19,7 @@ const UserProfile = () => {
     }, []);
 
     return(
-        <Card 
+        <CardWrapper 
         actions = {[
             <div key="twit">
                 <Link href={`/user/${me.id}`}>
@@ -38,7 +44,7 @@ const UserProfile = () => {
                 </Link>
            )} title={me.nickname} /> 
            <Button onClick={onLogout} loading={logOutLoading} >로그아웃</Button>
-        </Card>
+        </CardWrapper>
     );
 
 }
