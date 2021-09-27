@@ -7,8 +7,11 @@ import styled from 'styled-components';
 import {logoutRequestAction} from '../reducers/user';
 
 const CardWrapper = styled(Card)`
-    position: fixed;
-    margin-left: 20px;
+    @media screen and (min-width: 768px) {
+        position: fixed;
+        width:20%;
+        left: 20px;
+}
 `;
 
 const UserProfile = () => {
