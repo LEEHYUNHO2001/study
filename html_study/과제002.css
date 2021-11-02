@@ -1,0 +1,65 @@
+.header {
+  display: flex;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  justify-content: space-between;
+  background-color: rgb(19, 27, 52);
+  padding: 30px 30px;
+  color: white;
+}
+
+.status_bar_company {
+  display: flex;
+  align-items: center;
+}
+
+.status_bar_company_icon {
+  margin: 0px 20px;
+}
+
+.status_bar_company_comment {
+  font-weight: 600;
+}
+
+.status_bar {
+  display: flex;
+  align-items: center;
+}
+
+.status_bar_item {
+  font-weight: bold;
+  font-size: 25px;
+  margin-right: 100px;
+}
+
+.login_register {
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+}
+
+.first_s {
+  display: flex;
+  flex-direction: column;
+  padding-top: 350px;
+  box-sizing: content-box;
+  background-color: rgb(19, 27, 52);
+  color: white;
+  width: 100%;
+  height: 40vw;
+}
+
+h1,
+.h1_span,
+.more {
+  margin-left: 300px;
+}
+
+footer {
+  background-color: rgb(19, 27, 52);
+}
+
+ul {
+  list-style: none;
+}
