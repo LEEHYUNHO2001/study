@@ -14,4 +14,6 @@ HTML/CSS를 이용한 간단한 이력서 틀 만들기
 ## html
 ![about_us](https://user-images.githubusercontent.com/78518132/139754327-37083402-7321-4a7c-9392-b9059ec47960.jpg)
 
-위니브 홈페이지 클론
+- 위니브 홈페이지 클론
+- HTML semantic tag
+- CSS selector
