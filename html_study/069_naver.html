@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naver Login Box</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+
+        .login_box{
+            width: 350px;
+            height: 150px;
+            background-color: #F7F9FA;
+            border: 1px solid grey;
+            margin: 20px 20px;
+        }
+        .login_box_span{
+            margin: 15px 20px 20px 20px;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+        .login_btn{
+            margin: 10px 20px;
+            width: 300px;
+            height: 50px;
+            background-color: #19CE60;
+            border-radius: 2%;
+            position: relative;
+        }
+        .login_btn_img{
+            padding-top: 18px;
+            padding-left: 75px;
+            width: 70px;
+            height: 15px;
+        }
+        .login_btn_span{
+            position: absolute;
+            left: 160px;
+            top: 17px;
+            color: white;
+            font-weight: bold;
+        }
+        .ipr{
+            margin-top: 20px;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .icon{
+            width: 12px;
+            height: 15px;
+        }
+        .ipr_a, .dot{
+            color: rgba(0, 0, 0, 0.4);
+        }
+        .ipr_id_a{
+            margin-left: 10px;
+        }
+        .user_icon{
+            margin-left: 25px;
+        }
+        .ipr_register_a{
+            margin-left: 10px;
+            
+        }
+    </style>
+</head>
+<body>
+    <section class="login_box">
+        <h1 class="login_box_span">
+            <span>네이버를 더 안전하고 편리하게 이용하세요</span>
+        </h1>
+        <a href="#">
+            <div class="login_btn">
+                <img class="login_btn_img" src="./img/title.png" alt="NAVER" />
+                <span class="login_btn_span">로그인</span>
+            </div>
+        </a>
+        <article class="ipr">
+                <img class="lock_icon icon" src="./img/lock.png" alt="">
+                <a href="#" class="ipr_a ipr_id_a">아이디</a>
+                <span class="dot">ㆍ</span>
+                <a href="#" class="ipr_a ipr_password_a">비밀번호 찾기</a>
+                <img class="user_icon icon" src="./img/user.png" alt="">
+                <a href="#" class="ipr_a ipr_register_a">회원가입</a>
+        </article>
+    </section>
+</body>
+</html>
