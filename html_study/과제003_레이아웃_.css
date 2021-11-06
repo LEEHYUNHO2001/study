@@ -1,0 +1,122 @@
+* {
+  font-family: "Nanum Pen Script", cursive;
+}
+
+/* header */
+
+.jungle_cinema {
+  width: 1050px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 2%;
+  margin: 25px auto;
+  background-color: rgba(240, 248, 255, 0.836);
+}
+
+.jungle_h1 {
+  width: 560px;
+  height: 90px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  text-align: center;
+  line-height: 90px;
+  margin-left: 200px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.jungle_menu {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.jungle_menu > a {
+  font-size: 22px;
+  margin-right: 30px;
+}
+
+.menu_current {
+  font-weight: bold;
+}
+
+.menu_intended,
+.menu_boxoffice {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* movie section */
+
+.movie_section {
+  width: 995px;
+  height: 870px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 2%;
+  margin: 0px 25px 25px 25px;
+}
+
+.movie_art {
+  display: inline-block;
+  width: 210px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4%;
+  margin: 25px 0px 25px 25px;
+}
+
+.movie_fig {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie_poster {
+  width: 156px;
+  height: 218px;
+  border-radius: 5%;
+  margin: 25px 0px 25px 20px;
+}
+
+.movie_name {
+  font-size: 20px;
+  font-weight: bold;
+  margin: -15px 0px 0px 25px;
+}
+
+.information {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+}
+
+.genre_star {
+  display: flex;
+  flex-direction: row;
+}
+
+.genre,
+.star,
+.release,
+.actor {
+  margin: 0px 5px 0px 25px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.atc_btn {
+  font-size: 0;
+}
+
+.reservation,
+.trailer {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 27px 10px 26.2px;
+  border-top: 2px solid rgba(0, 0, 0, 0.3);
+  font-size: 18px;
+}
+
+.reservation {
+  border-right: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.play_icon {
+  width: 10px;
+  height: 10px;
+}
