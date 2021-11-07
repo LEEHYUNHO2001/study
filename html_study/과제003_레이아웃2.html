@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="과제003_레이아웃_.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <title>정글 시네마 영화 목록</title>
+</head>
+
+<body>
+    <section class="jungle_cinema">
+        <header class="jungle_header">
+            <h1 class="jungle_h1">정글 시네마 영화 목록</h1>
+            <nav class="jungle_menu">
+                <a href="./과제003_레이아웃_.html" class="menu_intended">현재상영영화</a>
+                <a href="#" class="menu_current">개봉예정영화</a>
+                <a href="#" class="menu_boxoffice">박스오피스</a>
+            </nav>
+        </header>
+
+        <section class="movie_section">
+
+            <article class="movie_art">
+                <figure class="movie_fig">
+                    <img src="./img/react-man.jpg" 
+                    alt="위니브월드_poster" class="movie_poster">
+                    <figcaption class="movie_name">React Man</figcaption>
+                </figure>
+
+                <div class="information">
+                    <div class="genre_star">
+                        <div class="genre_div">
+                            <span class="genre">개요</span>
+                            <span class="genre_name">액션</span>
+                        </div>
+                        <div class="star_div">
+                            <span class="star">평점</span>
+                            <img src="./img/별점/별점이미지.png" alt="star" class="star_img">
+                            <span class="star_num">9.99</span>
+                        </div>
+                    </div>
+                    <div class="release_div">
+                        <span class="release">개봉</span>
+                        <span class="release_num">2022.10.27</span>
+                    </div>
+                    <div class="actor_div">
+                        <span class="actor">출연</span>
+                        <span class="actor_name">이현호</span>
+                    </div>
+                    <div class="atc_btn">                       
+                        <a href="#" class="reservation">예매하기</a>
+                        <a href="#" class="trailer">
+                            <img src="./img/영화목록페이지/아이콘_재생.png" alt="play" class="play_icon">
+                            예고편</a>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </section>
+</body>
+</html>

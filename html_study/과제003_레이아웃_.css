@@ -58,13 +58,14 @@
   display: inline-block;
   width: 210px;
   border: 2px solid rgba(0, 0, 0, 0.3);
-  border-radius: 4%;
-  margin: 25px 0px 25px 25px;
+  border-radius: 15px;
+  margin: 25px 0px 5px 25px;
 }
 
 .movie_fig {
   display: flex;
   flex-direction: column;
+  margin-left: 6px;
 }
 
 .movie_poster {
@@ -76,8 +77,13 @@
 
 .movie_name {
   font-size: 20px;
+  width: 136px;
   font-weight: bold;
   margin: -15px 0px 0px 25px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .information {
@@ -100,16 +106,20 @@
 }
 
 .atc_btn {
-  font-size: 0;
+  font-size: 18px;
+  margin-bottom: 15px;
 }
 
 .reservation,
 .trailer {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 27px 10px 26.2px;
-  border-top: 2px solid rgba(0, 0, 0, 0.3);
-  font-size: 18px;
+  padding: 15px 25px;
+}
+
+.reservation {
+}
+
+.trailer {
+  margin-top: 200px;
 }
 
 .reservation {
@@ -119,4 +129,12 @@
 .play_icon {
   width: 10px;
   height: 10px;
+}
+
+.atc_btn::before {
+  content: "";
+  display: block;
+  width: 100%;
+  margin: 20px 0px 15px 0px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
 }
