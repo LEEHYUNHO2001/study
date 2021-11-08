@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <title>그 밖의 flex-item 에 사용하는 속성들</title>
+    <style>
+        ul{
+            display: flex;
+            height: 100vh;
+            /* align-items: flex-end; */
+        }
+        li{
+            width: 50px;
+            height: 50px;
+            background-color: crimson;
+            border: 1px solid black;
+        }
+        .fir{
+            order: 5;
+        }
+        .sec{
+            order: 4;
+        }
+        .th{
+            order: 3;
+        }
+        .fou{
+            order: 2;
+        }
+        .fif{
+            order: 1;
+            /* align-self: flex-start; */
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li class="fir">1</li>
+        <li class="sec">2</li>
+        <li class="th">3</li>
+        <li class="fou">4</li>
+        <li class="fif">5</li>
+    </ul>
+</body>
+</html>
