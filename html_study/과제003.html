@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jungle Cinema</title>
     <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="./과제003.css">
+    <link rel="stylesheet" href="과제003.css">
 </head>
 <body>
     <h1 class="sr-only">정글 시네마</h1>
@@ -24,26 +24,34 @@
         </header>
         <section>
             <h3 class="sr-only">현재 상영 영화 목록</h3>
-            <ul>
+            <ul class="list-movieInfo">
                 <li>
                     <article>
                         <h4 class="sr-only">영화 상세 정보</h4>
-                        <a href="#none">
-                            <img src="img/영화목록페이지/포스터_위니브월드.png" alt="위니브 월드 상세 정보 페이지로 이동합니다.">
+                        <a href="#none" class="link-movie">
+                            <img src="src/images/movie_weniv.png" alt="위니브 월드 상세 정보 페이지로 이동합니다.">
                         </a>
-                        <strong>위니브 월드 : 새로운 시대</strong>
-                        <dl>
-                            <dt>개요</dt>
-                            <dd>판타지</dd>
-                            <dt>평점</dt>
-                            <dd>9.05</dd>
-                            <dt>개봉</dt>
-                            <dd>2021.9.30</dd>
-                            <dt>출연</dt>
-                            <dd>라이캣, 소울곰, 개리씨, 자바독, 파이, 썬, 빙키, 뮤라</dd>
+                        <strong class="tit-movie sl-ellipsis">위니브 월드 : 새로운 시대</strong>
+                        <dl class="list-info">
+                            <div>
+                                <dt>개요</dt>
+                                <dd>판타지</dd>
+                            </div>
+                            <div class="item-star">
+                                <dt>평점</dt>
+                                <dd>9.05</dd>
+                            </div>
+                            <div>
+                                <dt>개봉</dt>
+                                <dd>2021.9.30</dd>
+                            </div>
+                            <div>
+                                <dt>출연</dt>
+                                <dd class="multi-ellipsis">라이캣, 소울곰, 개리씨, 자바독, 파이, 썬, 빙키, 뮤라</dd>
+                            </div>
                         </dl>
-                        <a href="#none">예매하기</a>
-                        <a href="#none">예고편</a>
+                        <a href="#none" class="link-reserv">예매하기</a>
+                        <a href="#none" class="link-teaser">예고편</a>
                     </article>
                 </li>
                 <li>...생략...</li>
