@@ -1,0 +1,99 @@
+body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  background-color: #5b2386;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+
+.sr-only {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 92px 0 64px 0;
+}
+.img__title {
+  width: 267px;
+  height: 53px;
+  z-index: 3;
+  margin-bottom: 96.51px;
+}
+.fav__title {
+  width: 125px;
+  height: 126px;
+  position: absolute;
+  top: 60px;
+  color: antiquewhite;
+}
+
+.scd-title {
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 22px;
+  font-weight: bold;
+  color: #f5df4d;
+  margin-bottom: 62px;
+}
+.div__sec-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.article__th-title,
+.article__th-title div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.article__th-title span {
+  margin-bottom: 24px;
+}
+.article__th-title {
+  margin-bottom: 62px;
+}
+.img__th-title {
+  position: absolute;
+}
+.strong {
+  font-weight: bold;
+}
+
+.article__input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.div__input-f {
+  margin-bottom: 17px;
+}
+.div__input-t {
+  margin-bottom: 19px;
+}
+.div__input-th {
+  margin-bottom: 117px;
+}
+
+.div__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btn {
+  width: 241px;
+  height: 68px;
+  font-family: "Nanum Pen Script", cursive;
+  color: #5b2386;
+  font-weight: bold;
+}

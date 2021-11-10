@@ -15,9 +15,16 @@
         }
 
         .scene {
+            position: relative;
+            color: white;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 50px;
             width: 200px;
-            height: 260px;
-            perspective: 400px;
+            height: 50px;
+            border-radius: 15px;
+            transition: all 2s;
         }
 
         .card {
@@ -40,7 +47,7 @@
         }
 
         .item_back {
-            background: blue;
+            background: black;
             transform: rotateY( 0 );
         }
 
@@ -52,13 +59,30 @@
             transform: rotateY(540deg) scale(1.5);
         }
 
+        .item_front::before{
+            content: 'Hello World';
+            position: absolute;
+            color:white;
+            background-color: tomato;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-100%);
+            transition: all .5s;
+        }
+
+        .scene:active .item_front:active::before{
+            transform: translateY(0);
+        }
+
     </style>
 </head>
 <body>
     <div class="scene">
         <div class="card">
-          <img src="img/카드.jpg" class="item item_front">
-          <img src="img/뒷면.jpg" class="item item_back">
+          <div class="item item_front"></div>
+          <div class="item item_back"></div>
         </div>
       </div>
 </body>
