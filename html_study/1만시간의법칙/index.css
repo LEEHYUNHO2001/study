@@ -7,6 +7,7 @@ body {
   color: white;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
 }
 
 .sr-only {
@@ -58,7 +59,7 @@ header {
   align-items: center;
 }
 .article__th-title span {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 .article__th-title {
   margin-bottom: 62px;
@@ -75,6 +76,12 @@ header {
   flex-direction: column;
   align-items: center;
 }
+input {
+  width: 156px;
+  height: 37px;
+  border-radius: 7px;
+  text-align: center;
+}
 .div__input-f {
   margin-bottom: 17px;
 }
@@ -82,18 +89,81 @@ header {
   margin-bottom: 19px;
 }
 .div__input-th {
-  margin-bottom: 117px;
+  margin-bottom: 49px;
 }
 
 .div__btn {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 64px;
 }
 .btn {
   width: 241px;
   height: 68px;
+  background-color: #fcee21;
   font-family: "Nanum Pen Script", cursive;
   color: #5b2386;
   font-weight: bold;
+  border-radius: 13px;
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.answer-f {
+  margin-bottom: 20px;
+}
+.output {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.div__last-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.go,
+.share {
+  font-family: "Nanum Pen Script", cursive;
+  border-radius: 56px;
+  font-size: 14px;
+  color: #5b2386;
+  font-weight: bold;
+}
+.go {
+  width: 186px;
+  height: 40px;
+  background-color: #fcee21;
+}
+.share {
+  width: 92px;
+  height: 40px;
+  background-color: white;
+  margin-left: 13px;
+}
+
+.sectiion__main {
+  margin-bottom: 87px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 9px;
+  margin-bottom: 30px;
+}
+.img__footer {
+  width: 91px;
+  height: 18px;
+  margin-bottom: 17px;
+}
+footer > span {
+  opacity: 0.5;
+  margin-bottom: 10px;
 }
