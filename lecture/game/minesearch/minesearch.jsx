@@ -270,7 +270,7 @@ const MineSearch = () => {
     return (
         <TableContext.Provider value={value}>
           <Form />
-          <div>{timer}</div>
+          <div>현재 {timer}초 경과</div>
           <Table />
           <div>{result}</div>
         </TableContext.Provider>
