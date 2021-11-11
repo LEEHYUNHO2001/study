@@ -1,15 +1,13 @@
 # 8가지 미니게임
-
 - [Development environment](#development-environment)
-- [Function](#function)
 - [React Game](#react-game)
+- [Function](#function)
 - [More..](#more)
 
 </br>
 </br>
 
 ## Development environment
-
 - Visual Stdio Code
 - Node.js
 - HTML / CSS
@@ -21,11 +19,16 @@
 </br>
 </br>
 
-<img src="https://user-images.githubusercontent.com/78518132/141230678-668f17bc-35ec-4a70-9813-945434b88272.gif">
+## React Game
+
+<img src="https://user-images.githubusercontent.com/78518132/141231495-5e78c8be-c023-4e27-a1f9-c09a623f4f7a.gif" />
+
+</br>
+</br>
 
 ## Function
 
-### React Life-Cycle vs useEffect
+### React Life-Cycle  vs  useEffect
 
 </br>
 
@@ -38,6 +41,7 @@
 **conponentDidUpdate** : 리랜더링 후 실행
 
 </br>
+
 
 constructor → render → ref → componentDidMount
 
@@ -60,10 +64,9 @@ constructor → render → ref → componentDidMount
         }
     }, [imgCoord]); // -> 2번째 인자 componentDidUpdate 역할.
 ```
-
 배열에 넣은 값들이 바뀔 때 useEffect가 실행됨
 
-useEffect를 여러번 사용할 수 있다.
+useEffect를 여러번 사용할 수 있다. 
 
 class의 경우 componentDidMount나 componentDidUpdate는 모든 state를 조건문으로 분기처리한다.
 
@@ -77,9 +80,9 @@ class의 경우 componentDidMount나 componentDidUpdate는 모든 state를 조�
 **useReducer(비동기임)을 사용하면 redux(동기임)와 비슷한 효과를 볼 수 있다. → useState를 줄임**
 
 1. const [a, setA] 형식으로 선언하던 것을 initialState 과 같이 선언함
-2. 이벤트가 발생할 곳에 액션을 만들어서 디스패치 해줌
+2. 이벤트가 발생할 곳에 액션을 만들어서 디스패치 해줌 
 
-   → dispatch({type: 'SET_SINNER', winner: 'O'})
+    → dispatch({type: 'SET_SINNER', winner: 'O'}) 
 
 3. state를 어떻게 바꿀지는 reducer에서 switch문으로 setState를 진행하면됨 → state를 직접 바꾸지 않고 ...state으로 얕은복사한 다음 바뀌는 부분만 winner: action.winner으로 바꾸어줌
 
@@ -140,23 +143,6 @@ this.interval = setInterval(() => {
 </br>
 </br>
 
-## React Game
-
-<img width="300" height="300" alt="home" src="https://user-images.githubusercontent.com/78518132/127663600-802bda05-20d0-41be-847e-ac0d8316d3a8.png"> <img width="300" height="300" alt="gugudan" src="https://user-images.githubusercontent.com/78518132/127664131-36e1ec03-defb-498c-a643-404ad7cdf68b.png"> <img width="300" height="300" alt="word" src="https://user-images.githubusercontent.com/78518132/127666778-c5711400-0fc8-4f8b-81c0-f13a67d26fd9.png">
-
-</br>
-</br>
-
-<img width="300" height="300" alt="numberbaseball" src="https://user-images.githubusercontent.com/78518132/127664318-f149afa4-e3c8-4e4f-aab2-e7f2b8f16370.png"> <img width="300" height="300" alt="res" src="https://user-images.githubusercontent.com/78518132/127665235-11e91900-2a4d-4504-9a25-df030721900f.png"> <img width="300" height="300" alt="rsp" src="https://user-images.githubusercontent.com/78518132/127665454-54bdd2a6-1554-4c6d-9770-857c55fbad28.png">
-
-</br>
-</br>
-
-<img width="300" height="300" alt="lotto" src="https://user-images.githubusercontent.com/78518132/127665555-f7b8df26-acf4-4582-9e79-d7f6fab5abac.png"> <img width="300" height="300" alt="ttt" src="https://user-images.githubusercontent.com/78518132/127666158-292eefb4-3332-460c-808a-baae1b9bdb31.png"> <img width="374" height="300" alt="mine" src="https://user-images.githubusercontent.com/78518132/127666443-f19897c0-e9a4-4855-8e3c-02b83985f161.png">
-
-</br>
-</br>
-
 ## More..
 
 ### import VS require
@@ -165,7 +151,7 @@ const React = require('react'); 를 import React form react; 으로 바꿀 수 �
 
 module.exports = GuGuDan; 를 export default GuGuDan; 으로 바꿈
 
-→ default는 한 파일에서 한번만 사용 가능 → 불러올 때 import GuGuDan
+→  default는 한 파일에서 한번만 사용 가능 → 불러올 때 import GuGuDan
 
 (엄밀하게 말하면 module.exports와 export default는 다름.. )
 
@@ -208,26 +194,28 @@ devTool로 보면서 랜더링 될 필요 없는곳이 계속 랜더링 되고�
 ### React if
 
 ```react
-{this.state.result.length === 0 ? null
- : <div>평균 시간 : {this.state.result.reduce((a, c) => a + c)
+{this.state.result.length === 0 ? null 
+ : <div>평균 시간 : {this.state.result.reduce((a, c) => a + c) 
 / this.state.result.length}ms</div>}
 ```
 
 리액트 render 에서 if문 대신 삼항연산자 사용하자.
+
 
 </br>
 </br>
 
 ### Hooks tip
 
-조건문안에, 반복문 안에 Hooks를 넣지 말자.
+조건문안에, 반복문 안에 Hooks를 넣지 말자. 
 
-ex) if(조건) {const[bonus, setBonus] = useState(null);} → 금지
+ex) if(조건) {const[bonus, setBonus] = useState(null);}  →  금지
 
 useEffect 안에 useState 넣으면 안된다. (setResult같은거 말고 useState())
 
 </br>
 </br>
+
 
 </br>
 [참고](https://www.inflearn.com/course/web-game-react)
