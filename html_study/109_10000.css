@@ -1,0 +1,182 @@
+@font-face {
+  font-family: "GmarketSansBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff2")
+      format("woff2"),
+    url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.woff")
+      format("woff"),
+    url("https://fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Regular.otf")
+      format("opentype");
+}
+img {
+  display: block;
+  width: 100%;
+}
+
+#app {
+  font-family: GmarketSansMedium;
+  background-color: #5b2386;
+  text-align: center;
+  color: white;
+  padding-bottom: 70px;
+}
+.sr-only {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  top: auto;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+.tit-law {
+  /* margin-collapsing을 inline-block로 해결 */
+  display: inline-block;
+  margin-top: 194px;
+  position: relative;
+}
+.tit-law::after {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 225px;
+  height: 225px;
+  top: 50%;
+  left: 50%;
+  margin: -112px 0px 0px -112px;
+  background-image: url("img/1만/title_bg.png");
+  background-size: 225px 225px;
+}
+.tit-law .img-tit {
+  position: relative;
+  z-index: 10;
+}
+
+.img-txt {
+  max-width: 486px;
+  margin: 0 auto;
+  margin: 125px auto 78px;
+}
+
+.txt-desc {
+  position: relative;
+  width: 475px;
+  margin: 0 auto 102px;
+  font-size: 18px;
+  line-height: 24px;
+}
+.txt-desc .tit-desc {
+  font-size: 24px;
+  font-weight: bold;
+}
+.txt-desc::before,
+.txt-desc::after {
+  display: block;
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  width: 37px;
+  height: 32px;
+}
+.txt-desc::before {
+  left: 0;
+  background-image: url("img/1만/txt-left.png");
+}
+.txt-desc::after {
+  right: 0;
+  background-image: url("img/1만/txt-right.png");
+}
+
+.cont-inp,
+.cont-result {
+  font-size: 24px;
+  line-height: 24px;
+}
+.cont-inp .txt-wannabe {
+  margin-bottom: 27px;
+}
+.cont-inp .txt-time {
+  margin-bottom: 115px;
+}
+.cont-inp .txt-wannabe input,
+.cont-inp .txt-time input {
+  width: 228px;
+  height: 57px;
+  border: none;
+  border-radius: 7px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.cont-inp .btn-exc,
+.btn-go,
+.btn-share {
+  padding: 21px 49px;
+  margin-bottom: 147px;
+  font-family: GmarketSansBold;
+  background-color: #fcee21;
+  color: #5b2386;
+  font-size: 24px;
+  border-radius: 56px;
+  border: none;
+  cursor: pointer;
+}
+.cont-inp .btn-exc::after {
+  display: block;
+  content: "";
+  width: 64px;
+  height: 72px;
+  margin-right: 200px;
+  background-image: url("img/1만/hand.png");
+}
+.cont-result .txt-wannabe,
+.cont-result .txt-time {
+  line-height: 72px;
+}
+.cont-result .txt-wannabe strong,
+.cont-result .txt-time strong {
+  font-size: 72px;
+  font-weight: bold;
+  vertical-align: top;
+}
+.cont-result .txt-wannabe {
+  margin-bottom: 17px;
+}
+.cont-result .txt-time {
+  margin-bottom: 127px;
+}
+
+.btn-share {
+  background-color: white;
+  margin-left: 18px;
+}
+
+.cont-footer {
+  font: 12px;
+  line-height: 17px;
+  font-family: Noto Sans KR;
+}
+.cont-footer .img-footer {
+  width: 125px;
+  height: 25px;
+  margin: 0 auto 20px;
+}

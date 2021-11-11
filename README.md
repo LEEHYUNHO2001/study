@@ -7,6 +7,7 @@
   - [JungleCinema](#junglecinema)
   - [Roulette](#roulette)
   - [PerspectiveCard](#perspectivecard)
+  - [MediaQueries](mediaqueries)
 
 <br>
 
@@ -77,7 +78,7 @@ HTML/CSS를 이용한 간단한 이력서 틀 만들기
 
 ## Roulette
 
-![룰랫](https://user-images.githubusercontent.com/78518132/140845200-bbd54753-d87a-4356-b825-6462de15e339.jpg)
+<img src="https://user-images.githubusercontent.com/78518132/141241101-84db1be4-7fde-45af-ad32-ae3348961a1c.gif" />
 
 저녁메뉴 고민을 덜어줄 룰렛
 
@@ -90,7 +91,7 @@ HTML/CSS를 이용한 간단한 이력서 틀 만들기
 
 ## PerspectiveCard
 
-![뒷면](https://user-images.githubusercontent.com/78518132/141024538-39c6264e-4ecd-47e3-9b16-557a73b3b9ae.jpg)![카드](https://user-images.githubusercontent.com/78518132/141024556-0c69d4e1-417e-412a-90f7-9349cbba1d2d.jpg)
+<img src="https://images.velog.io/images/leehyunho2001/post/b907c96f-49c6-40cd-9890-4a93ed0b19fa/%EC%B9%B4%EB%93%9C.gif" />
 
 카드의 뒷면과 앞면 (이미지 이용)
 
@@ -99,3 +100,5 @@ HTML/CSS를 이용한 간단한 이력서 틀 만들기
 - relative, absolute
 
 [Velog](https://velog.io/@leehyunho2001/CSS-animation-perspective)
+
+## MediaQueries

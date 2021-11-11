@@ -15,7 +15,7 @@
     <header>
         <h1 class="sr-only">1만 시간의 법칙</h1>
         <img class="img__title" src="./img/title.png" alt="1만 시간의 법칙">
-        <img class="fav__title" src="./img/favicon.ico" alt="clock-icon">
+        <img class="fav__title" src="./img/favicon.ico" alt="">
     </header> 
 
     <section class="sectiion__main">
@@ -37,19 +37,19 @@
             <h4 class="sr-only">프로그래밍 5시간 입력</h4>
             <div class="div__input-f">
                 <span class="span__input">나는</span>
-                <input type="text" placeholder="예)프로그래밍">
+                <input type="text" aria-label="" placeholder="예)프로그래밍">
                 <span class="span__input">전문가가 될 것이다.</span>
             </div>
             <div class="div__input-t">
                 <span class="span__input">그래서 앞으로 매일 하루에</span>
             </div>
             <div class="div__input-th">
-                <input type="text" placeholder="예)5">
+                <input type="number" min="1" max="24" aria-label="" placeholder="예)5">
                 <span class="span__input">시간씩 훈련할 것이다.</span>
             </div>
         </article>
         <div class="div__btn">
-            <button class="btn">나는 며칠 동안 훈련을 해야 1만 시간이 될까?</button>
+            <button class="btn" type="submit">나는 며칠 동안 훈련을 해야 1만 시간이 될까?</button>
         </div>
         <div class="answer">
             <div class="answer-f">
@@ -64,8 +64,8 @@
             </div>
         </div>
         <div class="div__last-btn">
-            <button class="go">훈련하러 가기 GO!GO!</button>
-            <button class="share">공유하기</button>
+            <button class="go" type="submit">훈련하러 가기 GO!GO!</button>
+            <button class="share" type="submit">공유하기</button>
         </div>
     </section>
     <footer>

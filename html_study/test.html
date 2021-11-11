@@ -1,5 +1,94 @@
 <!DOCTYPE html>
 <html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>button</title>
+    <style>
+        .btn {
+            border: 4px solid palevioletred;
+            border-radius: 50%;
+            padding: 20px 52px;
+            background: none;
+            color: palevioletred;
+            font-size: 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all .5s;
+            margin-left: 80px;
+            width: 200px;
+            height: 200px;
+        }
+
+        @keyframes wave {
+            from {
+                transform: rotate(0deg); 
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .inside {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: turquoise;
+            opacity: 0.4;
+            border-radius: 45%;
+            top: 0;
+            left: -100px;
+            margin-top: 200px;
+            transform: translateY(0);
+            transition-duration: 5s;
+            transition-timing-function: ease;
+        }
+
+        .btn:hover .inside {
+            margin-top: 80px;
+            animation: wave 8s;
+        }
+
+        .inside2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: violet;
+            opacity: 0.4;
+            border-radius: 45%;
+            top: 0;
+            left: 0px;
+            margin-top: 200px;
+            transform: translateY(0);
+            transition-duration: 5s;
+            transition-property: margin-top;
+            transition-timing-function: ease;
+        }
+
+        .btn:hover .inside2 {
+            margin-top: 80px;
+            animation: wave 10s;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="wrap">
+        <button class="btn">Click Me!
+            <div class="inside"></div>
+            <div class="inside2"></div>
+        </button>
+</div>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,4 +141,4 @@
 <body>
     <div class="main">Click Me!</div>
 </body>
-</html>
+</html> -->
