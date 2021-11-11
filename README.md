@@ -23,6 +23,23 @@
 
 <img src="https://user-images.githubusercontent.com/78518132/141231495-5e78c8be-c023-4e27-a1f9-c09a623f4f7a.gif" />
 
+
+</br>
+
+<img src="https://user-images.githubusercontent.com/78518132/141297028-a31b7377-211a-4fd0-ab4b-43e703f9bf3a.gif" />
+
+</br>
+
+<img src="https://user-images.githubusercontent.com/78518132/141297086-3ef4f2ad-ab22-4d07-8971-9652170db204.gif" />
+
+</br>
+
+<img src="https://user-images.githubusercontent.com/78518132/141297269-d0f8eeee-7545-4db9-a633-45c187bfa7fb.gif" />
+
+</br>
+
+<img src="https://user-images.githubusercontent.com/78518132/141297309-c6889428-cbfa-4b41-8c9c-e9bcccc9a27a.gif" />
+
 </br>
 </br>
 
