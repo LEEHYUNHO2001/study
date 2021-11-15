@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex-3</title>
+    <style>
+        .container-color{
+            background-color: burlywood;
+            border: 3px solid black;
+            border-radius: 10px;
+            /* flex는 보통 height안쓴다.. */
+            height: 300px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .item-color{
+            background-color: cadetblue;
+            border: 3px solid black;
+            border-radius: 10px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .container1{
+            display: flex;
+            flex-direction: row;
+            /* flex-direction: column; */
+        }
+
+        .item{
+            flex-grow: 1;
+        }
+        .item:nth-child(2){
+            /* 전체를 1로 두면, 현재 5/8의 크기를 가짐 */
+            /* margin, padding 등의 것들도 고려하면 딱 떨어지지는 않음 */
+            flex-grow: 5;
+        }
+    </style>
+</head>
+<body>
+    flex-grow
+    <div class="container-color container1">
+        <div class="item-color item">1</div>
+        <div class="item-color item">5</div>
+        <div class="item-color item">1</div>
+        <div class="item-color item">1</div>
+    </div>
+</body>
+</html>
