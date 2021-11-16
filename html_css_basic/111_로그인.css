@@ -1,5 +1,15 @@
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
+.sr-only {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  top: auto;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
 .login-secton {
   font-family: Spoqa Han Sans Neo;
   text-align: center;

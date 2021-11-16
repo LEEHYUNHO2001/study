@@ -12,14 +12,14 @@
     <section class="login-secton">
         <header class="tit-header">
             <h1 class="tit-h1">로그인 또는 회원가입</h1>
-            <a href="#" class="close" aria-label="x"></a>
+            <a href="#" class="close" aria-label="로그인 페이지 닫기"></a>
         </header>
-        <form action="" class="login-form">
+        <form class="login-form">
             <h2 class="tit-h2">위니브에서 여러분의 궁금중을 해결하세요!:)</h2>
             <input type="text" class="id-input" required name="zz" placeholder="아이디">
             <input type="password" class="password-input" required placeholder="비밀번호">
             <label class="login-session-label">
-                <input class="check-input" type="checkbox" name="color" value="blue">로그인 상태 유지
+                <input class="check-input" type="checkbox">로그인 상태 유지
             </label>
             <button type="submit" class="login-btn">로그인</button>
             <div class="search-div">
@@ -29,10 +29,11 @@
             <span class="or-span">또는</span>
         </form>
         <article class="other-login-article">
-            <a href="#" class="google">구글 계정으로 로그인</a>
-            <a href="#" class="facebook">페이스북 계정으로 로그인</a>
-            <a href="#" class="naver">네이버 계정으로 로그인</a>
-            <a href="#" class="kakao">카카오톡 계정으로 로그인</a>
+            <h3 class="sr-only">다른 플랫폼 계정으로 로그인</h3>
+            <a href="#" class="google" aria-label="구글 계정으로 로그인">구글 계정으로 로그인</a>
+            <a href="#" class="facebook" aria-label="페이스북 계정으로 로그인">페이스북 계정으로 로그인</a>
+            <a href="#" class="naver" aria-label="네이버 계정으로 로그인">네이버 계정으로 로그인</a>
+            <a href="#" class="kakao" aria-label="카카오톡 계정으로 로그인">카카오톡 계정으로 로그인</a>
         </article>
     </section>
 </body>
