@@ -94,3 +94,9 @@
 .result p {
   width: 50%;
 }
+
+/* share */
+
+.addthis_inline_share_toolbox {
+  margin-top: 50px;
+}
