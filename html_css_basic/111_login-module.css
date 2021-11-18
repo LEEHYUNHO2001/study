@@ -88,8 +88,8 @@
 
 .link-sns-login.icon-facebook::before {
   /* background-image:url("../images-login/icon_facebook.png");
-    background-repeat:no-repeat;
-    background-position: center; */
+  background-repeat:no-repeat;
+  background-position: center; */
   background: url("../images-login/icon_facebook.png") center no-repeat;
 }
 .link-sns-login.icon-kakao {
