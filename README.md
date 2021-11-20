@@ -1,7 +1,7 @@
 # 8가지 미니게임
 - [Development environment](#development-environment)
 - [React Game](#react-game)
-- [Function](#function)
+- [Study](#study)
 - [More..](#more)
 
 </br>
@@ -40,10 +40,8 @@
 
 <img src="https://user-images.githubusercontent.com/78518132/141297309-c6889428-cbfa-4b41-8c9c-e9bcccc9a27a.gif" />
 
-</br>
-</br>
 
-## Function
+## Study
 
 ### React Life-Cycle  vs  useEffect
 
@@ -235,4 +233,5 @@ useEffect 안에 useState 넣으면 안된다. (setResult같은거 말고 useSta
 
 
 </br>
+
 [참고](https://www.inflearn.com/course/web-game-react)
