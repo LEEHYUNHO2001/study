@@ -1,0 +1,21 @@
+/* 여러 줄 주석은 볼 수 있다. */
+//한 줄 주석은 볼 수 없다. css로 변환이 되면 없어진다.
+
+ul {
+  list-style: none;
+  li {
+    color: red;
+  }
+}
+.one {
+  color: red;
+  .two {
+    color: green;
+    .three {
+      font-size: 20px;
+    }
+    .four {
+      font-size: 30px;
+    }
+  }
+}
