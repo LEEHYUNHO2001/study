@@ -1,3 +1,7 @@
+body {
+  background-color: royalblue;
+}
+
 .sr-only {
   position: absolute;
   clip: rect(0 0 0 0);
@@ -19,6 +23,8 @@
   background-color: #fff;
   font-size: 12px;
   cursor: pointer;
+  box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
+
   background-image: url("img/triangle_down.png");
   background-repeat: no-repeat;
   background-position-x: 90%;
@@ -31,6 +37,7 @@
   width: 200px;
   border: 1px solid #c4c4c4;
   box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.15);
+  background-color: white;
   border-radius: 10px;
 }
 .btn-select.on + .list-member {
@@ -46,7 +53,6 @@
 .list-member li {
   box-sizing: border-box;
   padding: 5px;
-  width: 200px;
   height: 40px;
 }
 .list-member li button {
