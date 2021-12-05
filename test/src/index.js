@@ -1,70 +1,54 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App'
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-function formatDate(date) {
-  return date.toLocaleDateString();
-}
-
-const comment = {
-  date: new Date(),
-  text: 'I hope you enjoy learning React!',
-  author: {
-    name: 'Hello Kitty',
-    avatarUrl: 'https://placekitten.com/g/64/64',
-  },
-};
-
-class Avatar extends React.Component{
-  render(){
-    return(
-      <img
-      className="Avatar"
-      src={this.props.user.avatarUrl}
-      alt={this.props.user.name}
-    />
-    )
+class Clock extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {date: new Date()};
   }
-}
 
-class UswerInfo extends React.Component{
-  render(){
-    return(
-      <div className="UserInfo">
-        <Avatar user={this.props.user} />
-        <div className="UserInfo-name">
-          {this.props.user.name}
-        </div>
-    </div>
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
     );
   }
-}
 
-class Comment extends React.Component{
-  render(){
-    return(
-      <div className="Comment">
-        <UswerInfo user={this.props.author}/>
-        <div className="Comment-text">{this.props.text}</div>
-        <div className="Comment-date">
-          {formatDate(this.props.date)}
-        </div>
-    </div>
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  // shouldComponentUpdate(nextProps, nextState){
+  //   if(this.state.date !== nextState.date){
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
     );
   }
 }
 
 ReactDOM.render(
-  <React.StrictMode>
-    {/* <App /> */}
-    <Comment
-    date={comment.date}
-    text={comment.text}
-    author={comment.author}
-  />
-  </React.StrictMode>,
+  <>
+    <h1>Hello, world!</h1>
+    <Clock />
+  </>
+  ,
   document.getElementById('root')
 );
 
