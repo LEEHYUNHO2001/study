@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style></style>
+</head>
+<body>
+    <button onclick="renderTable(data)">데이터 호출!</button>
+    <button onclick="ageSort(data)">데이터 호출!</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>index</th>
+                <th>picture</th>
+                <th>age</th>
+                <th>eyeColor</th>
+                <th>name</th>
+                <th>gender</th>
+                <th>company</th>
+                <th>email</th>
+                <th>phone</th>
+                <th>address</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script src="data.js"></script>
+    <script>
+        function ageSort(data){
+            data.sort((a, b) => {
+                if(a.age > b.age){
+                    return 1;
+                } 
+                if(a.age < b.age){
+                    return -1
+                }
+                return 0;
+            })
+            renderTable(data);
+        }
+
+        function renderTable(data){
+            let tbodyData = [];
+            for (const iterator of data) {
+                // console.log(iterator)
+                tbodyData.push(`
+                    <tr>
+                        <th>${iterator.index}</th>
+                        <th>${iterator.picture}</th>
+                        <th>${iterator.age}</th>
+                        <th>${iterator.eyeColor}</th>
+                        <th>${iterator.name}</th>
+                        <th>${iterator.gender}</th>
+                        <th>${iterator.company}</th>
+                        <th>${iterator.email}</th>
+                        <th>${iterator.phone}</th>
+                        <th>${iterator.address}</th>
+                    </tr>
+                `)
+            }
+            // console.log(tbodyData);
+            document.querySelector('.table > tbody').
+            innerHTML = tbodyData.join('');
+        }
+    </script>
+</body>
+</html>
