@@ -12,7 +12,7 @@
 : [페어 프로그래밍](https://kihoonkim.github.io/2018/01/01/Agile/pair-programming/)
 
 ## 동료
-: [박정훈]()
+: [박정훈](https://github.com/Jetty2020)
 
 ## 발생한 이슈
 : 
