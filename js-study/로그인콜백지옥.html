@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style></style>
+</head>
+<body>
+    <script>
+        const userdb = [
+                {
+                    "id": "hyunho",
+                    "pw" : "1234",
+                    "index": 0,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 30,
+                    "eyeColor": "green",
+                    "name": "Larsen Wise",
+                    "gender": "male",
+                    "company": "JASPER",
+                    "email": "larsenwise@jasper.com",
+                    "phone": "+1 (850) 569-3890",
+                    "address": "723 Bristol Street, Rivers, Texas, 5912"
+                },
+                {
+                    "_id": "61b05ef4ac58b050fa10b35a",
+                    "index": 1,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 33,
+                    "eyeColor": "green",
+                    "name": "Judith Jarvis",
+                    "gender": "female",
+                    "company": "INFOTRIPS",
+                    "email": "judithjarvis@infotrips.com",
+                    "phone": "+1 (809) 417-3084",
+                    "address": "756 Nautilus Avenue, Coinjock, Alabama, 3128"
+                },
+                {
+                    "_id": "61b05ef4bc36cbcda069e251",
+                    "index": 2,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 39,
+                    "eyeColor": "blue",
+                    "name": "Fischer Nolan",
+                    "gender": "male",
+                    "company": "COMDOM",
+                    "email": "fischernolan@comdom.com",
+                    "phone": "+1 (981) 438-3329",
+                    "address": "305 Cove Lane, Hiko, Oregon, 2530"
+                },
+                {
+                    "_id": "61b05ef441e92f2bbd79f2f9",
+                    "index": 3,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 22,
+                    "eyeColor": "brown",
+                    "name": "Contreras Leblanc",
+                    "gender": "male",
+                    "company": "COMFIRM",
+                    "email": "contrerasleblanc@comfirm.com",
+                    "phone": "+1 (859) 571-3365",
+                    "address": "577 Fleet Street, Dargan, Delaware, 5692"
+                },
+                {
+                    "_id": "61b05ef4f60cb7c8a0a8117b",
+                    "index": 4,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 26,
+                    "eyeColor": "blue",
+                    "name": "Mayer Paul",
+                    "gender": "male",
+                    "company": "EXTRO",
+                    "email": "mayerpaul@extro.com",
+                    "phone": "+1 (921) 415-3038",
+                    "address": "398 Kane Street, Sheatown, Alaska, 3311"
+                },
+                {
+                    "_id": "61b05ef4ffd76f2b7a4519e6",
+                    "index": 5,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 40,
+                    "eyeColor": "brown",
+                    "name": "Imelda Cash",
+                    "gender": "female",
+                    "company": "GRUPOLI",
+                    "email": "imeldacash@grupoli.com",
+                    "phone": "+1 (999) 496-3617",
+                    "address": "571 Mill Road, Finzel, Missouri, 2374"
+                },
+                {
+                    "_id": "61b05ef4bec44931ec830d44",
+                    "index": 6,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 37,
+                    "eyeColor": "green",
+                    "name": "Webb Porter",
+                    "gender": "male",
+                    "company": "ISOTRACK",
+                    "email": "webbporter@isotrack.com",
+                    "phone": "+1 (999) 586-2554",
+                    "address": "361 Gold Street, Twilight, Georgia, 5298"
+                },
+                {
+                    "_id": "61b05ef4bcaa78015f40f300",
+                    "index": 7,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 31,
+                    "eyeColor": "green",
+                    "name": "Carlene Bradley",
+                    "gender": "female",
+                    "company": "DARWINIUM",
+                    "email": "carlenebradley@darwinium.com",
+                    "phone": "+1 (949) 405-2879",
+                    "address": "573 Kay Court, Clinton, Hawaii, 3451"
+                },
+                {
+                    "_id": "61b05ef47f965985d59cacfa",
+                    "index": 8,
+                    "picture": "http://placehold.it/32x32",
+                    "age": 25,
+                    "eyeColor": "green",
+                    "name": "Mable Bradshaw",
+                    "gender": "female",
+                    "company": "FLUMBO",
+                    "email": "mablebradshaw@flumbo.com",
+                    "phone": "+1 (981) 460-3534",
+                    "address": "220 Bulwer Place, Lisco, California, 7293"
+                }
+                ];
+            //콜백지옥
+            class GetUserData {
+                login(아이디, 비밀번호, 성공, 실패) {
+                    const data = userdb.find(user => user.id === 아이디 && user.pw === 비밀번호);
+                    if (data){
+                        성공(아이디);
+                    } else {
+                        실패(new Error('로그인 실패!'));
+                    }
+                }
+            getUserDataSet(이용자, 성공, 실패) {
+                const data = userdb.find(user => user.id === 이용자);
+                if (data) {
+                    성공({
+                        id : data.id,
+                        picture : data.picture,
+                        name : data.name,
+                        company : data.company,
+                        email : data.email,
+                        grade : data.grade
+                    });
+                } else {
+                    실패(new Error('데이터 베이스 로드 실패!'));
+                }
+            }
+        }
+
+        const userData = new GetUserData();
+        const id = 'hyunho';
+        const pw = '1234';
+        userData.login(
+            id, 
+            pw, 
+            (userID) => {
+                userData.getUserDataSet(
+                    userID, 
+                    (userBasicInfo) => {
+                        // grade에 따른 콜백을 하나 더 넣어줄 수 있습니다.
+                        console.log(userBasicInfo);
+                    }, 
+                    (실패)=>{
+                        console.log(실패);
+                    }
+                )
+            },
+            (실패) => {
+                console.log(실패)
+            }
+        );
+    </script>
+</body>
+</html>
