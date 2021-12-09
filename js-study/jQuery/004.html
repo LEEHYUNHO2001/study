@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <style></style>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<h1 class="title">TITLE</h1>
+
+<div id="div1">나는 삭제된다.</div>
+<div class="one blue">hello world</div>
+<div class="two blue">hello world</div>
+<p class="blue">hello world</p>
+
+<div class="three">3번째 div</div>
+<div class="three blue">3번째 div</div>
+
+    <script>
+        $("#div1").remove();
+        $(".one").addClass("add");
+        $(".one, .two, p").removeClass('blue');
+    </script>
+</body>
+</html>
