@@ -1,55 +1,39 @@
-import React, {PureComponent} from 'react';
-import ReactDOM from 'react-dom';
-import App from './App'
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import React, { PureComponent } from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
 
-class Clock extends React.Component {
-  constructor(props){
+class Toggle extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = {date: new Date()};
+    this.state = { isToggleOn: true };
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-
-  // shouldComponentUpdate(nextProps, nextState){
-  //   if(this.state.date !== nextState.date){
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  tick() {
-    this.setState({
-      date: new Date()
-    });
+  handleClick() {
+    this.setState((prevState) => ({
+      isToggleOn: !prevState.isToggleOn,
+    }));
   }
 
   render() {
     return (
-      <div>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? "ON" : "OFF"}
+      </button>
     );
   }
 }
 
 ReactDOM.render(
   <>
-    <h1>Hello, world!</h1>
-    <Clock />
-  </>
-  ,
-  document.getElementById('root')
+    <div id="root"></div>
+    <Toggle />
+  </>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
