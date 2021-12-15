@@ -220,7 +220,6 @@ class LinkedList {
     this.head = init;
     this.tail = init;
 
-    this.현재노드 = undefined;
     this.dataCnt = 0;
   }
 
@@ -238,13 +237,41 @@ class LinkedList {
   }
 
   toString() {
-    const output = [];
     let curNode = this.head;
-    while (curNode) {
-      output.push(curNode.data);
+    curNode = curNode.next;
+
+    let s = "";
+    for (let i = 0; i < this.dataCnt; i++) {
+      s += `${curNode.data},`;
       curNode = curNode.next;
     }
-    return `[${output.join(" -> ")}]`;
+    return s.slice(0, -1);
+  }
+
+  get fullData() {
+    let curNode = this.head;
+    curNode = curNode.next;
+
+    let s = "";
+    for (let i = 0; i < this.dataCnt; i++) {
+      s += `${curNode.data}, `;
+      curNode = curNode.next;
+    }
+    return JSON.parse(`[${s.slice(0, -2)}]`);
+  }
+
+  insert(index, data) {
+    let curNode = this.head;
+    curNode = curNode.next;
+    for (let i = 0; i < index - 1; i++) {
+      curNode = curNode.next;
+    }
+    let newNode = new Node(data);
+    // 순회돌다 멈춘 노드가 가리키고 있던 화살표를 새로운 노드가 복사
+    newNode.next = curNode.next;
+    // 순회돌다 멈춘 노드를 새로운 노드를 가리키게함. 연결 완료.
+    curNode.next = newNode;
+    this.dataCnt += 1;
   }
 }
 
@@ -259,7 +286,155 @@ l.length();
 console.log(l.head.next.next.next.next.data); //10
 
 // 3. 정렬
+//3.1 선택정렬
+let arr = [31, 42, 7, 312, 557, 74, 34, 865];
+let sortArr = [];
+let arrLen = arr.length;
+
+for (let i = 0; i < arrLen; i++) {
+  let minValue = Math.min(...arr);
+  sortArr.push(minValue);
+  arr.splice(arr.indexOf(minValue), 1);
+}
+console.log(sortArr);
+//3.1 선택정렬 메소드 최소화
+function selectionSort(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let min_index = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[min_index] > arr[j]) {
+        min_index = j;
+      }
+    }
+    // 자리바꿈
+    let temp = arr[min_index];
+    arr[min_index] = arr[i];
+    arr[i] = temp;
+  }
+  return arr;
+}
+
+const arr = [199, 22, 33, 12, 32, 64, 72, 222, 233];
+console.log(selectionSort(arr));
+//3.2삽입정렬(자기가 들어갈 위치를 찾아감) O(n**2)
+let arr = [199, 22, 33, 12, 32, 64, 72, 222, 233];
+let sortArr = [];
+let arrLen = arr.length;
+
+function 삽입값이들어갈인덱스(sortArr, insertValue) {
+  for (const i in sortArr) {
+    if (insertValue < sortArr[i]) {
+      return i;
+    }
+  }
+  return sortArr.length;
+}
+
+for (let i = 0; i < arrLen; i++) {
+  let insertValue = arr.shift();
+  let index = 삽입값이들어갈인덱스(sortArr, insertValue);
+  sortArr.splice(index, 0, insertValue);
+  console.log(
+    `index : ${index} insertValue : ${insertValue} sortArr : ${sortArr}`
+  );
+}
+//3.2삽입정렬 더 좋은 코드
+function insertIndex(sorted_arr, value) {
+  //삽입될 위치를 찾는 함수
+  for (let i in sorted_arr) {
+    if (value < sorted_arr[i]) {
+      return i;
+    }
+  }
+  return sorted_arr.length;
+}
+
+function insertSort(arr) {
+  let sorted_arr = [];
+
+  while (arr.length != 0) {
+    let value = arr.shift();
+    //삽입될 위치를 반환함
+    let index = insertIndex(sorted_arr, value);
+    //삽입될 위치에 값을 반환
+    sorted_arr.splice(index, 0, value);
+  }
+  return sorted_arr;
+}
+const arr = [199, 22, 33, 12, 32, 64, 72, 222, 233];
+console.log(insertSort(arr));
+//3.3 병합정렬 (Worst와 Best 모두 O(nlogn)) 매우 빠름
+let 입력값 = [5, 10, 66, 77, 54, 32, 11, 15];
+
+function 병합정렬(입력배열) {
+  let 입력배열의길이 = 입력배열.length;
+  let 결과값 = [];
+
+  if (입력배열의길이 <= 1) {
+    return 입력배열;
+  }
+
+  let 중간값 = parseInt(입력배열의길이 / 2);
+  let 그룹하나 = 병합정렬(입력배열.slice(0, 중간값));
+  let 그룹둘 = 병합정렬(입력배열.slice(중간값));
+
+  while (그룹하나.length != 0 && 그룹둘.length != 0) {
+    if (그룹하나[0] < 그룹둘[0]) {
+      결과값.push(그룹하나.shift());
+    } else {
+      결과값.push(그룹둘.shift());
+    }
+  }
+
+  while (그룹하나.length != 0) {
+    결과값.push(그룹하나.shift());
+  }
+
+  while (그룹둘.length != 0) {
+    결과값.push(그룹둘.shift());
+  }
+
+  return 결과값;
+}
+
+console.log(병합정렬(입력값));
+//3.3 병합정렬 더 좋은 코드
+
+//3.4 퀵정렬(best - O(nlog2n), worst - O(n**2))
+// 피봇값(pivot)을 기준으로 정렬(피봇값은 처음값, 중간값, 마지막 값)
+// 실무에서는 worst일 경우를 피하기 위해 피봇을 랜덤하게 주는 경우나, 피봇을 2개 사용하는 경우도 있음.
+let 입력값 = [66, 77, 54, 32, 10, 5, 11, 15];
+function 퀵정렬(입력배열) {
+  let 입력배열의길이 = 입력배열.length;
+
+  if (입력배열의길이 <= 1) {
+    return 입력배열;
+  }
+
+  const 피벗값 = [입력배열.shift()]; //기준점
+  const 그룹하나 = [];
+  const 그룹둘 = [];
+
+  for (let i in 입력배열) {
+    if (입력배열[i] < 피벗값) {
+      그룹하나.push(입력배열[i]);
+    } else {
+      그룹둘.push(입력배열[i]);
+    }
+  }
+
+  console.log(
+    `그룹하나 : ${그룹하나}\n그룹둘 : ${그룹둘}\n피벗값 : ${피벗값}\n`
+  );
+
+  return 퀵정렬(그룹하나).concat(피벗값, 퀵정렬(그룹둘));
+}
+
+console.log(퀵정렬(입력값));
+//3.4 퀵정렬 다른 코드
+
 // 4. 페이지 교체 알고리즘
+
 // 5. 트리와 그래프
 // 6. 트리의 순회
 
