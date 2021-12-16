@@ -519,7 +519,7 @@ console.log(quickSort(arr));
 // 아래 보이는 구조를 그 밑에서 구현할 것이다.
 /*     5
      3   8
-    1 4  6 7*/
+    1 4  6 9*/
 const tree = {
   root: {
     value: 5,
@@ -556,6 +556,7 @@ console.log(tree.root.left.value); //3
 
 // object로 linked list와 tree를 만들 수 있는데 굳이 class로 만드는 이유?
 // 1. 구조적인 확장 가능성  2. OOP철학에 맞음
+//https://tech.kakao.com/2019/10/02/kakao-blind-recruitment-2020-round1/ 카카오문제
 class Node {
   constructor(data) {
     this.data = data;
@@ -606,6 +607,43 @@ class Tree {
     }
 
     this.데이터수 += 1;
+  }
+
+  //[5, 8, 9, 6, 3, 4, 1]
+  // right부분 올리면 [5, 3, 1, 4, 8, 6, 9]가 나타남.
+  DFS() {
+    //깊이우선탐색, Stack 이용
+    let 결과값 = [];
+    let 스택 = [this.root];
+
+    while (스택.length !== 0) {
+      let current = 스택.pop();
+      if (current.left) {
+        스택.push(current.left);
+      }
+      if (current.right) {
+        스택.push(current.right);
+      }
+      결과값.push(current.data);
+    }
+    return 결과값;
+  }
+  BFS() {
+    //너비우선탐색, Queue 이용
+    let 결과값 = [];
+    let 스택 = [this.root];
+
+    while (스택.length !== 0) {
+      let current = 스택.shift();
+      if (current.left) {
+        스택.push(current.left);
+      }
+      if (current.right) {
+        스택.push(current.right);
+      }
+      결과값.push(current.data);
+    }
+    return 결과값;
   }
 }
 
@@ -747,7 +785,186 @@ function solution(n, arr1, arr2) {
 console.log(solution(n, arr1, arr2));
 
 ////
+// 다트게임
+// 문자열 파싱
+//step1
+const dartResult = "1S2D3T";
+let answer = [];
+let result = 0;
+let temp = 0; // 임시점수
 
+for (let i = 0; i < dartResult.length; i++) {
+  // console.log(dartResult[i]);
+  if (dartResult[i] >= 0 && dartResult[i] <= 9) {
+    temp = parseInt(dartResult[i]);
+  } else if (dartResult[i] == "S") {
+    answer.push(parseInt(temp));
+  } else if (dartResult[i] == "D") {
+    // answer.push(Math.pow(temp, 2));
+    answer.push(parseInt(temp) ** 2);
+  } else if (dartResult[i] == "T") {
+    // answer.push(Math.pow(temp, 3));
+    answer.push(parseInt(temp) ** 3);
+  }
+}
+
+console.log(answer);
+
+//step2
+const dartResult = "1D2S#10S";
+let answer = [];
+let result = 0;
+let temp = 0; // 임시점수
+
+for (let i = 0; i < dartResult.length; i++) {
+  // console.log(dartResult[i]);
+  if (dartResult[i] >= 0 && dartResult[i] <= 9) {
+    if (dartResult[i] == 1 && dartResult[i + 1] == 0) {
+      temp = 10;
+      i++;
+    } else {
+      temp = parseInt(dartResult[i]);
+    }
+  } else if (dartResult[i] == "S") {
+    answer.push(temp);
+  } else if (dartResult[i] == "D") {
+    // answer.push(Math.pow(temp, 2));
+    answer.push(temp ** 2);
+  } else if (dartResult[i] == "T") {
+    // answer.push(Math.pow(temp, 3));
+    answer.push(temp ** 3);
+  } else if (dartResult[i] == "*") {
+    answer[answer.length - 1] *= 2;
+    answer[answer.length - 2] *= 2;
+  } else if (dartResult[i] == "#") {
+    answer[answer.length - 1] *= -1;
+  }
+}
+for (let i = 0; i < answer.length; i++) {
+  result += answer[i];
+}
+
+console.log(answer);
+
+// step3
+function solution(dartResult) {
+  let answer = [];
+  let result = 0;
+  let temp = 0; // 임시점수
+
+  for (let i = 0; i < dartResult.length; i++) {
+    // console.log(dartResult[i]);
+    if (dartResult[i] >= 0 && dartResult[i] <= 9) {
+      if (dartResult[i] == 1 && dartResult[i + 1] == 0) {
+        temp = 10;
+        i++;
+      } else {
+        temp = parseInt(dartResult[i]);
+      }
+    } else if (dartResult[i] == "S") {
+      answer.push(temp);
+    } else if (dartResult[i] == "D") {
+      // answer.push(Math.pow(temp, 2));
+      answer.push(temp ** 2);
+    } else if (dartResult[i] == "T") {
+      // answer.push(Math.pow(temp, 3));
+      answer.push(temp ** 3);
+    } else if (dartResult[i] == "*") {
+      answer[answer.length - 1] *= 2;
+      answer[answer.length - 2] *= 2;
+    } else if (dartResult[i] == "#") {
+      answer[answer.length - 1] *= -1;
+    }
+  }
+  for (let i = 0; i < answer.length; i++) {
+    result += answer[i];
+  }
+  return result;
+}
+// https://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
+// 캐시문제
+// 키워드 : LRU 알고리즘, 페이지 교체 알고리즘
+// 3	["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "Jeju", "Pangyo", "Seoul", "NewYork", "LA"]	50
+// 3	["Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul", "Jeju", "Pangyo", "Seoul"]	21
+// 2	["Jeju", "Pangyo", "Seoul", "NewYork", "LA", "SanFrancisco", "Seoul", "Rome", "Paris", "Jeju", "NewYork", "Rome"]	60
+
+testcase = [
+  [
+    3,
+    [
+      "Jeju",
+      "Pangyo",
+      "Seoul",
+      "NewYork",
+      "LA",
+      "Jeju",
+      "Pangyo",
+      "Seoul",
+      "NewYork",
+      "LA",
+    ],
+  ],
+  [
+    3,
+    [
+      "Jeju",
+      "Pangyo",
+      "Seoul",
+      "Jeju",
+      "Pangyo",
+      "Seoul",
+      "Jeju",
+      "Pangyo",
+      "Seoul",
+    ],
+  ],
+  [
+    2,
+    [
+      "Jeju",
+      "Pangyo",
+      "Seoul",
+      "NewYork",
+      "LA",
+      "SanFrancisco",
+      "Seoul",
+      "Rome",
+      "Paris",
+      "Jeju",
+      "NewYork",
+      "Rome",
+    ],
+  ],
+];
+
+for (const [cacheSize, cities] of testcase) {
+  console.log(solution(cacheSize, cities));
+}
+
+// 50, 21, 60
+
+function solution(cacheSize, cities) {
+  let time = 0;
+  let cache = [];
+  for (let i = 0; i < cities.length; i++) {
+    let city = cities[i].toLowerCase();
+    let index = cache.indexOf(city);
+    if (index !== -1) {
+      // hit
+      cache.splice(index, 1);
+      cache.push(city);
+      time += 1;
+    } else {
+      // miss
+      time += 5;
+      cache.push(city);
+      if (cacheSize < cache.length) {
+        cache.shift();
+      }
+    }
+  }
+  return time;
+}
 // 2. 19년도
 // 3. 20년도
 // 4. 21년도
