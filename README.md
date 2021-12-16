@@ -18,6 +18,17 @@
 
 : [박정훈](https://github.com/Jetty2020)
 
-## 발생한 이슈
+## 배운점
 
-:
+- Class 이름의 일관성
+
+- Select 박스를 설계할 경우 button과 ul 태그를 1:1 로 대응되는 형제요소로 만들어주는것이 좋다.
+  ( 1번 Select 박스가 선택된 상태에서 2번 Select 박스를 선택하면 1번 Select 박스의 요소가 사라져야한다. )
+
+![select12](https://user-images.githubusercontent.com/78518132/146345296-93eedcfa-6b47-4f8f-8af3-8b66769df15c.jpg)
+
+![select-list](https://user-images.githubusercontent.com/78518132/146345451-3db0b940-3eef-4d50-a749-792248102c83.gif)
+
+## 더 나아가
+
+Select 박스를 선택한 상태에서 빈 공간을 누르면 요소가 사라지도록 설계해보자.
