@@ -399,7 +399,42 @@ function 병합정렬(입력배열) {
 
 console.log(병합정렬(입력값));
 //3.3 병합정렬 더 좋은 코드
+function mergeSort(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
 
+  const mid = Math.floor(arr.length / 2);
+  const left = arr.slice(0, mid);
+  const right = arr.slice(mid);
+
+  return merge(mergeSort(left), mergeSort(right));
+}
+
+function merge(left, right) {
+  let result = [];
+
+  while (left.length && right.length) {
+    if (left[0] < right[0]) {
+      result.push(left.shift());
+    } else {
+      result.push(right.shift());
+    }
+  }
+
+  while (left.length) {
+    result.push(left.shift());
+  }
+
+  while (right.length) {
+    result.push(right.shift());
+  }
+
+  return result;
+}
+
+const arr = [199, 22, 33, 12, 32, 64, 72, 222, 233];
+console.log(mergeSort(arr));
 //3.4 퀵정렬(best - O(nlog2n), worst - O(n**2))
 // 피봇값(pivot)을 기준으로 정렬(피봇값은 처음값, 중간값, 마지막 값)
 // 실무에서는 worst일 경우를 피하기 위해 피봇을 랜덤하게 주는 경우나, 피봇을 2개 사용하는 경우도 있음.
@@ -432,14 +467,287 @@ function 퀵정렬(입력배열) {
 
 console.log(퀵정렬(입력값));
 //3.4 퀵정렬 다른 코드
+function quickSort(arr) {
+  if (arr.length <= 1) {
+    return arr;
+  }
 
+  const pivot = arr[0]; //기준점
+  const left = [];
+  const right = [];
+
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] < pivot) {
+      left.push(arr[i]);
+    } else {
+      right.push(arr[i]);
+    }
+  }
+  return quickSort(left).concat(pivot, quickSort(right));
+}
+
+const arr = [199, 22, 33, 12, 32, 64, 72, 222, 233];
+console.log(quickSort(arr));
 // 4. 페이지 교체 알고리즘
+//FIFO 는 히트시 맨뒤로 가진 않음
+/* LRU 알고리즘 개념 hit - 1  miss - 5
+[“Jeju”, “Pangyo”, “Seoul”, “NewYork”, “LA”, “Seoul”, “LA”]
+[“Jeju”] 1회차
 
+[“Jeju”, “Pangyo”, “Seoul”, “NewYork”, “LA”, “Seoul”, “LA”]
+[“Jeju”, “Pangyo”] 2회차
+
+[“Jeju”, “Pangyo”, “Seoul”, “NewYork”, “LA”, “Seoul”, “LA”]
+[“Jeju”, “Pangyo”, “Seoul”] 3회차
+
+[“Jeju”, “Pangyo”, “Seoul”, “NewYork”, “LA”, “Seoul”, “LA”]
+[“Pangyo”, “Seoul”, “NewYork”] 4회차
+
+[“Jeju”, “Pangyo”, “Seoul”, “NewYork”, “LA”, “Seoul”, “LA”]
+[“Seoul”, “NewYork”, “LA”] 5회차
+
+[“Jeju”, “Pangyo”, “Seoul”, “NewYork”, “LA”, “Seoul”, “LA”]
+[“NewYork”, “LA”, “Seoul”] 6회차
+
+[“Jeju”, “Pangyo”, “Seoul”, “NewYork”, “LA”, “Seoul”, “LA”]
+[“NewYork”, “Seoul”, “LA”] 7회차
+*/
 // 5. 트리와 그래프
+//5.1 트리
+//트리의 기본 형태
+//value, child - left, child-right
+// 아래 보이는 구조를 그 밑에서 구현할 것이다.
+/*     5
+     3   8
+    1 4  6 7*/
+const tree = {
+  root: {
+    value: 5,
+    left: {
+      value: 3,
+      left: {
+        value: 1,
+        left: null,
+        right: null,
+      },
+      right: {
+        value: 4,
+        left: null,
+        right: null,
+      },
+    },
+    right: {
+      value: 8,
+      left: {
+        value: 6,
+        left: null,
+        right: null,
+      },
+      right: {
+        value: 9,
+        left: null,
+        right: null,
+      },
+    },
+  },
+};
+console.log(tree.root.value); //5
+console.log(tree.root.left.value); //3
+
+// object로 linked list와 tree를 만들 수 있는데 굳이 class로 만드는 이유?
+// 1. 구조적인 확장 가능성  2. OOP철학에 맞음
+class Node {
+  constructor(data) {
+    this.data = data;
+    // this.child = []; // 2진트리가 아닌 트리가 됨
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class Tree {
+  constructor(data) {
+    let init = new Node(data);
+    this.root = init;
+    this.데이터수 = 0;
+  }
+
+  length() {
+    return this.데이터수;
+  }
+
+  insert(data) {
+    let 새로운노드 = new Node(data);
+    let 순회용현재노드 = this.root;
+
+    while (순회용현재노드) {
+      if (data === 순회용현재노드.data) {
+        // 중복된 값은 탈락!
+        return;
+      }
+      if (data < 순회용현재노드.data) {
+        // 들어온 데이터가 작으면 왼쪽에
+        // 비어있으면 데이터를 넣고, 비어있지 않으면 타고 또 내려가야합니다.
+        if (!순회용현재노드.left) {
+          순회용현재노드.left = 새로운노드;
+          return;
+        }
+        순회용현재노드 = 순회용현재노드.left;
+      }
+      if (data > 순회용현재노드.data) {
+        // 들어온 데이터가 크면 오른쪽에
+        // 비어있으면 데이터를 넣고, 비어있지 않으면 타고 또 내려가야합니다.
+        if (!순회용현재노드.right) {
+          순회용현재노드.right = 새로운노드;
+          return;
+        }
+        순회용현재노드 = 순회용현재노드.right;
+      }
+    }
+
+    this.데이터수 += 1;
+  }
+}
+
+let t = new Tree(5); // root노드는 처음에!!
+t.insert(3);
+t.insert(8);
+t.insert(1);
+t.insert(4);
+t.insert(6);
+t.insert(9);
+
 // 6. 트리의 순회
 
 // 목차(실전 코딩테스트 풀이)
 // 1. 18년도
+// https://programmers.co.kr/learn/courses/30/lessons/17681?language=javascript
+// 주제 : 2진법, 진법 연산, replace, or 연산
+//[9, 20, 28, 18, 11][(30, 1, 21, 17, 28)];
+let x = 9;
+x.toString();
+x.toString(2);
+x.toString(8);
+x.toString(16);
+
+let x = 9;
+let y = 30;
+
+x.toString(2);
+y.toString(2);
+
+("01001");
+("11110");
+("-----");
+("11111");
+
+("01001");
+("11110");
+("-----");
+("11111");
+
+let z = "11111";
+z.replace(/1/g, "#").replace(/0/g, " ");
+"#####"(9 | 30)
+  .toString(2)
+  .replace(/1/g, "#")
+  .replace(/0/g, " ");
+(9 & 30).toString(2).replace(/1/g, "#").replace(/0/g, " ");
+(5 | 3).toString(2).replace(/1/g, "#").replace(/0/g, " ");
+(31 | 14).toString(2).replace(/1/g, "#").replace(/0/g, " ");
+
+("00101");
+("00011");
+("-----");
+("  ###");
+
+// || - or
+// && - and
+// ! - not
+
+/////////////////////
+
+100000 - 1 == 11111;
+
+(9 | 30).toString(2).replace(/1/g, "#").replace(/0/g, " ");
+
+////////////////////
+
+let n = 5;
+let arr1 = [9, 20, 28, 18, 11];
+let arr2 = [30, 1, 21, 17, 28];
+
+function solution(n, arr1, arr2) {
+  let result = [];
+  for (let i = 0; i < n; i++) {
+    result.push(
+      (arr1[i] | arr2[i]).toString(2).replace(/1/g, "#").replace(/0/g, " ")
+    );
+  }
+  return result;
+}
+
+console.log(solution(n, arr1, arr2));
+
+////////////////////
+
+// 유틸리티 모듈
+
+const zip = (a, b) => a.map((value, index) => [value, b[index]]);
+
+const fillZero = (n, arr) => {
+  return "0".repeat(n - arr.length) + arr;
+};
+
+////
+
+let n = 5;
+let arr1 = [9, 20, 28, 18, 11];
+let arr2 = [30, 1, 21, 17, 28];
+
+function solution(n, arr1, arr2) {
+  let result = [];
+  // const zip = (a, b) => a.map((value, index)=>[value, b[index]]);
+  const fillSpace = (n, arr) => {
+    return " ".repeat(n - arr.length) + arr;
+  };
+  for (let i = 0; i < n; i++) {
+    result.push(
+      fillSpace(
+        n,
+        (arr1[i] | arr2[i]).toString(2).replace(/1/g, "#").replace(/0/g, " ")
+      )
+    );
+  }
+  return result;
+}
+
+console.log(solution(n, arr1, arr2));
+
+////
+
+let n = 5;
+let arr1 = [9, 20, 28, 18, 11];
+let arr2 = [30, 1, 21, 17, 28];
+
+function solution(n, arr1, arr2) {
+  let result = [];
+  const zip = (a, b) => a.map((value, index) => [value, b[index]]);
+  const fillSpace = (n, arr) => {
+    return " ".repeat(n - arr.length) + arr;
+  };
+  for (let [i, j] of zip(arr1, arr2)) {
+    result.push(
+      fillSpace(n, (i | j).toString(2).replace(/1/g, "#").replace(/0/g, " "))
+    );
+  }
+  return result;
+}
+
+console.log(solution(n, arr1, arr2));
+
+////
+
 // 2. 19년도
 // 3. 20년도
 // 4. 21년도
