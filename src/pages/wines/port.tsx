@@ -11,7 +11,7 @@ const PortPage: NextPage = () => {
   if (!data) return <Loading />;
   return (
     <div>
-      <h1>port</h1>
+      <h1>Wine</h1>
       <main>
         {data.map((wineData: Wine) => {
           return (
@@ -26,13 +26,4 @@ const PortPage: NextPage = () => {
   );
 };
 
-// Next.js에서 SSR을 위해서 데이터를 미리 불러오는 함수
-// export async function getServerSideProps(context) {
-//   const { data, error } = useSWR(
-//     "https://api.sampleapis.com/wines/port",
-//     fetcher
-//   );
-
-//   return { props: { data, error } };
-// }
 export default PortPage;
