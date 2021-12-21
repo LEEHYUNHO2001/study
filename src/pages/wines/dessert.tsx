@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
 import { Wine } from "../../types/wine";
-import { useWineData } from "../../hooks/useWindData";
+import { useWineData } from "../../hooks/useWineData";
 import { Error, Loading, WineCard } from "../../conponents";
 
 const DessertPage: NextPage = () => {
