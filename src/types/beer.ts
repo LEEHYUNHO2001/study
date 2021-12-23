@@ -1,10 +1,9 @@
+import { Rating } from "./Rating";
+
 export interface Beer {
   price: string;
   name: string;
-  rating: {
-    average: number;
-    reviews: number;
-  };
+  rating: Rating;
   image: string;
   id: number;
 }

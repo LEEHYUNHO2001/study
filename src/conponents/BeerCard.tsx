@@ -1,4 +1,4 @@
-import { Beer } from "../types/beer";
+import { Beer } from "../types/Beer";
 
 interface BeerProps {
   beerData: Beer;

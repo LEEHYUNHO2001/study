@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import { Beer } from "../../types/beer";
+import { Beer } from "../../types/Beer";
 import { useBeerData } from "../../hooks/useBeerData";
 import { Error, Loading, BeerCard } from "../../conponents";
 

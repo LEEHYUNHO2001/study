@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 
-import { Wine } from "../../types/wine";
+import { Wine } from "../../types/Wine";
 import { useWineData } from "../../hooks/useWineData";
 import { Error, Loading, WineCard } from "../../conponents";
 
 const DessertPage: NextPage = () => {
-  const name = "dessert";
+  const name = "port";
   const { data, error } = useWineData(name);
   if (error) return <Error />;
   if (!data) return <Loading />;

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import { Wine } from "../../types/wine";
+import { Wine } from "../../types/Wine";
 import { useWineData } from "../../hooks/useWineData";
 import { Error, Loading, WineCard } from "../../conponents";
 
