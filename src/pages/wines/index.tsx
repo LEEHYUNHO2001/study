@@ -1,20 +1,11 @@
 import type { NextPage } from "next";
 import styled from "styled-components";
-
-const A = styled.a`
-  display: block;
-`;
+import { IndexList } from "../../conponents";
 
 const WinesPage: NextPage = () => {
   return (
     <div>
-      <h1>Wines</h1>
-      <A href="wines/dessert">dessert</A>
-      <A href="wines/port">port</A>
-      <A href="wines/reds">reds</A>
-      <A href="wines/rose">rose</A>
-      <A href="wines/sparkling">sparkling</A>
-      <A href="wines/whites">whites</A>
+      <IndexList eng="Wines" kor="와인" />
     </div>
   );
 };

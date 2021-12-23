@@ -5,13 +5,18 @@ interface WineProps {
   wineData: Wine;
 }
 
+const handleImgError = (e: any) => {
+  e.target.src =
+    "https://ittalk.co.kr/wp-content/uploads/2021/01/%EC%A0%80%EC%9E%91%EA%B6%8C-%EC%97%86%EB%8A%94-%EC%9D%B4%EB%AF%B8%EC%A7%80.png";
+};
+
 export const WineCard = ({ wineData }: WineProps) => {
   const { wine, winery, image, location, rating } = wineData;
   console.log(image);
 
   return (
     <Container>
-      <img src={image} alt="와인" />
+      <CustomImg src={image} onError={handleImgError} alt="와인" />
       <h2>
         {wine}
         <Average>{rating.average}</Average>
@@ -41,4 +46,8 @@ const Average = styled.span`
   color: white;
   background-color: #2ac1bc;
   border-radius: 3px;
+`;
+const CustomImg = styled.img`
+  width: 150px;
+  height: 400px;
 `;
