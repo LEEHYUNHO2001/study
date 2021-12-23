@@ -16,7 +16,7 @@ export const Navigation = () => {
         <ul>
           {ROUTES.map((routeObject: ROUTE) => {
             return (
-              <li>
+              <li key={`${routeObject.LABEL}-${routeObject.ID}`}>
                 <Link href={routeObject.PATH}>
                   <a>{routeObject.LABEL}</a>
                 </Link>
@@ -24,7 +24,9 @@ export const Navigation = () => {
                   {routeObject.SUBS &&
                     routeObject.SUBS.map((subRouteObject: ROUTE) => {
                       return (
-                        <li>
+                        <li
+                          key={`${subRouteObject.LABEL}-list-${subRouteObject.ID}`}
+                        >
                           <Link
                             href={`${routeObject.PATH}${subRouteObject.PATH}`}
                           >
