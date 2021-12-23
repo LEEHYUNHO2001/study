@@ -10,7 +10,7 @@ export const WineCard = ({ wineData }: WineProps) => {
 
   return (
     <Container>
-      <img src={image} alt="" />
+      <img src={image} alt="와인" />
       <h2>
         {wine}
         <Average>{rating.average}</Average>
