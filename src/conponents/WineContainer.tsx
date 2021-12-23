@@ -14,6 +14,7 @@ export const WineContainer = ({ name }: WineContainerProps) => {
 
   return (
     <main>
+      <h1>{name} wine</h1>
       {data.map((wineData: Wine) => {
         return (
           <WineCard
