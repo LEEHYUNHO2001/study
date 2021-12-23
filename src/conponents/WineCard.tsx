@@ -7,6 +7,7 @@ interface WineProps {
 
 export const WineCard = ({ wineData }: WineProps) => {
   const { wine, winery, image, location, rating } = wineData;
+  console.log(image);
 
   return (
     <Container>
