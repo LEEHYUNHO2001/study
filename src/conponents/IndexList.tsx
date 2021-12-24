@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ROUTES } from "../constants";
 import { ROUTE } from "../types/Route";
+import { SUBS } from "../types/SUBS";
 import Link from "next/link";
 
 interface PageName {
@@ -15,7 +16,7 @@ export const IndexList = ({ name, path }: PageName) => {
       <Container>
         {ROUTES.filter(
           (routeObject: ROUTE) => routeObject.LABEL === name
-        )[0]?.SUBS.map((subRouteObject: ROUTE) => {
+        )[0]?.SUBS.map((subRouteObject: SUBS) => {
           return (
             <Item key={`${subRouteObject.LABEL}-list-${subRouteObject.ID}`}>
               <Link href={`${path}${subRouteObject.PATH}`}>
