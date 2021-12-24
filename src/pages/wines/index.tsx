@@ -4,9 +4,10 @@ import { IndexList } from "../../conponents";
 
 const WinesPage: NextPage = () => {
   const name = "Wines";
+  const path = "wines";
   return (
     <div>
-      <IndexList name={name} />
+      <IndexList path={path} name={name} />
     </div>
   );
 };

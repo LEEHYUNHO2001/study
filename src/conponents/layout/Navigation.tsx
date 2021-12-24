@@ -5,25 +5,25 @@ import { ROUTE } from "../../types/Route";
 
 export const Navigation = () => {
   return (
-    <Header>
-      <H1>
+    <header>
+      <h1>
         <Link href="/">
           <a>Beers and Wine</a>
         </Link>
-      </H1>
+      </h1>
       <nav>
-        <MainUl>
+        <ul>
           {ROUTES.map((routeObject: ROUTE) => {
             return (
-              <Li key={`${routeObject.LABEL}-${routeObject.ID}`}>
+              <li key={`${routeObject.LABEL}-${routeObject.ID}`}>
                 <Link href={routeObject.PATH}>
-                  <A>{routeObject.LABEL}</A>
+                  <a>{routeObject.LABEL}</a>
                 </Link>
                 <ul>
                   {routeObject.SUBS &&
                     routeObject.SUBS.map((subRouteObject: ROUTE) => {
                       return (
-                        <Detail
+                        <li
                           key={`${subRouteObject.LABEL}-list-${subRouteObject.ID}`}
                         >
                           <Link
@@ -31,51 +31,51 @@ export const Navigation = () => {
                           >
                             <a>{subRouteObject.LABEL}</a>
                           </Link>
-                        </Detail>
+                        </li>
                       );
                     })}
                 </ul>
-              </Li>
+              </li>
             );
           })}
-        </MainUl>
+        </ul>
       </nav>
-    </Header>
+    </header>
   );
 };
 
-const Header = styled.header`
-  display: flex;
-  justify-content: space-around;
-  background-color: #000;
-  color: #fff;
-`;
-const H1 = styled.h1`
-  margin-top: 3em;
-  color: deeppink;
-`;
-const MainUl = styled.ul`
-  display: flex;
-  justify-content: space-between;
-`;
-const A = styled.a`
-  color: #f24405;
-  font-weight: bold;
-  font-size: 2em;
-  cursor: pointer;
-`;
-const Li = styled.li`
-  display: flex;
-  margin-right: 10em;
-  font-size: 1.5em;
-`;
-const Detail = styled.li`
-  font-size: 0.8em;
-  list-style: none;
-  background-color: #590202;
-  color: #f2c5bb;
-  margin-bottom: 10px;
-  padding: 5px 10px;
-  text-align: center;
-  border-radius: 10px;
-`;
+// const Header = styled.header`
+//   display: flex;
+//   justify-content: space-around;
+//   background-color: #000;
+//   color: #fff;
+// `;
+// const H1 = styled.h1`
+//   margin-top: 3em;
+//   color: deeppink;
+// `;
+// const MainUl = styled.ul`
+//   display: flex;
+//   justify-content: space-between;
+// `;
+// const A = styled.a`
+//   color: #f24405;
+//   font-weight: bold;
+//   font-size: 2em;
+//   cursor: pointer;
+// `;
+// const Li = styled.li`
+//   display: flex;
+//   margin-right: 10em;
+//   font-size: 1.5em;
+// `;
+// const Detail = styled.li`
+//   font-size: 0.8em;
+//   list-style: none;
+//   background-color: #590202;
+//   color: #f2c5bb;
+//   margin-bottom: 10px;
+//   padding: 5px 10px;
+//   text-align: center;
+//   border-radius: 10px;
+// `;

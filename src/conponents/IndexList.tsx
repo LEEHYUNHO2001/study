@@ -5,9 +5,10 @@ import Link from "next/link";
 
 interface PageName {
   name: string;
+  path: string;
 }
 
-export const IndexList = ({ name }: PageName) => {
+export const IndexList = ({ name, path }: PageName) => {
   return (
     <div>
       <h1>{name}</h1>
@@ -17,7 +18,7 @@ export const IndexList = ({ name }: PageName) => {
         )[0]?.SUBS.map((subRouteObject: ROUTE) => {
           return (
             <Item key={`${subRouteObject.LABEL}-list-${subRouteObject.ID}`}>
-              <Link href={`${name}${subRouteObject.PATH}`}>
+              <Link href={`${path}${subRouteObject.PATH}`}>
                 <a>{subRouteObject.LABEL}</a>
               </Link>
               {/* <Img src={subRouteObject.SRC} alt="" /> */}
