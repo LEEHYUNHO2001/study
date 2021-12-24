@@ -1,5 +1,16 @@
-import { Beer } from "../types/Beer";
+// import { Beer } from "../types/Beer";
 import styled from "styled-components";
+
+interface Beer {
+  price: string;
+  name: string;
+  rating: {
+    average: number;
+    reviews: number;
+  };
+  image: string;
+  id: number;
+}
 
 interface BeerProps {
   beerData: Beer;
