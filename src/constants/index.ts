@@ -12,18 +12,18 @@ export const ROUTES = [
   {
     ID: 0,
     PATH: "/beers",
-    LABEL: "맥주",
+    LABEL: "Beers",
     SUBS: [
       {
         ID: 0,
         PATH: "/ale",
-        LABEL: "에일",
+        LABEL: "Ale",
         ORDER: 0,
       },
       {
         ID: 1,
         PATH: "/stouts",
-        LABEL: "스타우트",
+        LABEL: "Stouts",
         ORDER: 1,
       },
     ],
@@ -31,42 +31,42 @@ export const ROUTES = [
   {
     ID: 1,
     PATH: "/wines",
-    LABEL: "와인",
+    LABEL: "Wines",
     SUBS: [
       {
         ID: 0,
         PATH: "/dessert",
-        LABEL: "디저트 와인",
+        LABEL: "Dessert",
         ORDER: 0,
       },
       {
         ID: 1,
         PATH: "/port",
-        LABEL: "포트 와인",
+        LABEL: "Port",
         ORDER: 1,
       },
       {
         ID: 2,
         PATH: "/reds",
-        LABEL: "레드 와인",
+        LABEL: "Reds",
         ORDER: 2,
       },
       {
         ID: 3,
         PATH: "/rose",
-        LABEL: "로즈 와인",
+        LABEL: "Rose",
         ORDER: 3,
       },
       {
         ID: 4,
         PATH: "/sparkling",
-        LABEL: "스파클링 와인",
+        LABEL: "Sparkling",
         ORDER: 4,
       },
       {
         ID: 5,
         PATH: "/whites",
-        LABEL: "화이트 와인",
+        LABEL: "Whites",
         ORDER: 5,
       },
     ],

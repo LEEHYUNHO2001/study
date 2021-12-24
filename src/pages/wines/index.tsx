@@ -3,9 +3,10 @@ import styled from "styled-components";
 import { IndexList } from "../../conponents";
 
 const WinesPage: NextPage = () => {
+  const name = "Wines";
   return (
     <div>
-      <IndexList eng="Wines" kor="와인" />
+      <IndexList name={name} />
     </div>
   );
 };

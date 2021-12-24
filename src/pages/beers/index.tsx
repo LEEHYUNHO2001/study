@@ -2,9 +2,10 @@ import { NextPage } from "next";
 import { IndexList } from "../../conponents";
 
 const BeersPage: NextPage = () => {
+  const name = "Beers";
   return (
     <div>
-      <IndexList eng="Beers" kor="맥주" />
+      <IndexList name={name} />
     </div>
   );
 };

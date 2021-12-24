@@ -1,20 +1,18 @@
-import type { NextPage } from "next";
 import styled from "styled-components";
 import { ROUTES } from "../constants";
 import { ROUTE } from "../types/Route";
 import Link from "next/link";
 
-interface lang {
-  eng: string;
-  kor: string;
+interface PageName {
+  name: string;
 }
 
-export const IndexList = ({ eng, kor }: lang) => {
+export const IndexList = ({ name }: PageName) => {
   return (
     <div>
-      <h1>{eng}</h1>
+      <h1>{name}</h1>
       {ROUTES.filter(
-        (routeObject: ROUTE) => routeObject.LABEL === kor
+        (routeObject: ROUTE) => routeObject.LABEL === name
       )[0]?.SUBS.map((subRouteObject: ROUTE) => {
         return (
           <ul key={`${subRouteObject.LABEL}-list-${subRouteObject.ID}`}>
