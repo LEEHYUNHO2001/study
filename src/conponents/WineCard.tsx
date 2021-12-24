@@ -7,7 +7,7 @@ interface WineProps {
 
 const handleImgError = (e: any) => {
   e.target.src =
-    "https://ittalk.co.kr/wp-content/uploads/2021/01/%EC%A0%80%EC%9E%91%EA%B6%8C-%EC%97%86%EB%8A%94-%EC%9D%B4%EB%AF%B8%EC%A7%80.png";
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
 };
 
 export const WineCard = ({ wineData }: WineProps) => {
@@ -24,7 +24,7 @@ export const WineCard = ({ wineData }: WineProps) => {
       <p>
         {winery} - {location}
       </p>
-      <p>별점 : {rating.reviews.replace("ratings", "")}</p>
+      <p>리뷰 갯수 : {rating.reviews.replace("ratings", "")}</p>
     </Container>
   );
 };
