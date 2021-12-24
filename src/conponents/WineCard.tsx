@@ -1,17 +1,17 @@
-import { Wine } from "../types";
+// import { Wine } from "../types/Wine";
 import styled from "styled-components";
 
-// interface Wine {
-//   winery: string;
-//   wine: string;
-//   rating: {
-//     average: string;
-//     reviews: string;
-//   };
-//   location: string;
-//   image: string;
-//   id: number;
-// }
+interface Wine {
+  winery: string;
+  wine: string;
+  rating: {
+    average: string;
+    reviews: string;
+  };
+  location: string;
+  image: string;
+  id: number;
+}
 
 interface WineProps {
   wineData: Wine;
@@ -26,39 +26,39 @@ export const WineCard = ({ wineData }: WineProps) => {
   const { wine, winery, image, location, rating } = wineData;
 
   return (
-    <div key={`${wine}-${winery}`}>
-      <img src={image} onError={handleImgError} alt="와인" />
+    <Container key={`${wine}-${winery}`}>
+      <CustomImg src={image} onError={handleImgError} alt="와인" />
       <h2>
         {wine}
-        <span>{rating.average}</span>
+        <Average>{rating.average}</Average>
       </h2>
       <p>
         {winery} - {location}
       </p>
       <p>리뷰 갯수 : {rating.reviews.replace("ratings", "")}</p>
-    </div>
+    </Container>
   );
 };
 
-// const Container = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: flex-end;
-//   padding: 1em;
-//   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
-//   border-radius: 1em;
-// `;
-// const Average = styled.span`
-//   display: inline-block;
-//   padding: 0.3em;
-//   font-size: 16px;
-//   margin-left: 0.5em;
-//   color: white;
-//   background-color: #2ac1bc;
-//   border-radius: 3px;
-// `;
-// const CustomImg = styled.img`
-//   width: 150px;
-//   height: 400px;
-// `;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1em;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 1em;
+`;
+const Average = styled.span`
+  display: inline-block;
+  padding: 0.3em;
+  font-size: 16px;
+  margin-left: 0.5em;
+  color: white;
+  background-color: #2ac1bc;
+  border-radius: 3px;
+`;
+const CustomImg = styled.img`
+  width: 150px;
+  height: 400px;
+`;
