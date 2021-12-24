@@ -12,10 +12,9 @@ const handleImgError = (e: any) => {
 
 export const BeerCard = ({ beerData }: BeerProps) => {
   const { name, price, rating, image } = beerData;
-  console.log(image);
 
   return (
-    <Container>
+    <Container key={`${name}-${price}`}>
       <CustomImg src={image} onError={handleImgError} alt="맥주" />
       <h1>{name}</h1>
       <Average>{Math.floor(rating.average)}</Average>

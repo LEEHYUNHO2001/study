@@ -17,10 +17,10 @@ export const IndexList = ({ name }: PageName) => {
         )[0]?.SUBS.map((subRouteObject: ROUTE) => {
           return (
             <Item key={`${subRouteObject.LABEL}-list-${subRouteObject.ID}`}>
-              <Link href={`${name}/${subRouteObject.PATH}`}>
+              <Link href={`${name}${subRouteObject.PATH}`}>
                 <a>{subRouteObject.LABEL}</a>
               </Link>
-              <Img src={subRouteObject.SRC} alt="" />
+              {/* <Img src={subRouteObject.SRC} alt="" /> */}
             </Item>
           );
         })}

@@ -12,10 +12,9 @@ const handleImgError = (e: any) => {
 
 export const WineCard = ({ wineData }: WineProps) => {
   const { wine, winery, image, location, rating } = wineData;
-  console.log(image);
 
   return (
-    <Container>
+    <Container key={`${wine}-${winery}`}>
       <CustomImg src={image} onError={handleImgError} alt="와인" />
       <h2>
         {wine}

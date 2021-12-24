@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import styled from "styled-components";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
@@ -12,20 +13,24 @@ const Home: NextPage = () => {
       </Head>
       <Main>
         <div>
-          <a href="/beers">
-            <Img
-              src="https://cdn.pixabay.com/photo/2017/06/24/23/41/beer-2439237_1280.jpg"
-              alt="맥주"
-            />
-          </a>
+          <Link href="/beers">
+            <a>
+              <Img
+                src="https://cdn.pixabay.com/photo/2017/06/24/23/41/beer-2439237_1280.jpg"
+                alt="맥주"
+              />
+            </a>
+          </Link>
         </div>
         <div>
-          <a href="/wines">
-            <Img
-              src="https://cdn.pixabay.com/photo/2021/11/17/06/33/wine-6802684_1280.jpg"
-              alt="와인"
-            />
-          </a>
+          <Link href="/wines">
+            <a>
+              <Img
+                src="https://cdn.pixabay.com/photo/2021/11/17/06/33/wine-6802684_1280.jpg"
+                alt="와인"
+              />
+            </a>
+          </Link>
         </div>
       </Main>
 
