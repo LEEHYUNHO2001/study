@@ -5,17 +5,17 @@ interface BeerProps {
   beerData: Beer;
 }
 
-// const handleImgError = (e: any) => {
-//   e.target.src =
-//     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
-// };
+const handleImgError = (e: any) => {
+  e.target.src =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
+};
 
 export const BeerCard = ({ beerData }: BeerProps) => {
   const { name, price, rating, image } = beerData;
 
   return (
     <Container key={`${name}-${price}`}>
-      <CustomImg src={image} alt="맥주" />
+      <CustomImg src={image} onError={handleImgError} alt="맥주" />
       <h1>{name}</h1>
       <Average>{Math.floor(rating.average)}</Average>
       <p>{price}</p>

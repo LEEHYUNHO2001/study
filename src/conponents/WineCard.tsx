@@ -5,17 +5,17 @@ interface WineProps {
   wineData: Wine;
 }
 
-// const handleImgError = (e: any) => {
-//   e.target.src =
-//     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
-// };
+const handleImgError = (e: any) => {
+  e.target.src =
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png";
+};
 
 export const WineCard = ({ wineData }: WineProps) => {
   const { wine, winery, image, location, rating } = wineData;
 
   return (
     <Container key={`${wine}-${winery}`}>
-      <CustomImg src={image} alt="와인" />
+      <CustomImg src={image} onError={handleImgError} alt="와인" />
       <h2>
         {wine}
         <Average>{rating.average}</Average>
