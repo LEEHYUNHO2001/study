@@ -47,12 +47,13 @@ export const Navigation = () => {
 
 const Header = styled.header`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 20px 100px;
   background-color: #000;
   color: #fff;
 `;
 const H1 = styled.h1`
-  margin-top: 1.2em;
+  margin-top: 1em;
   color: deeppink;
 `;
 const MainUl = styled.ul`
@@ -62,7 +63,7 @@ const MainUl = styled.ul`
 const A = styled.a`
   color: #f24405;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.5em;
   cursor: pointer;
 `;
 const Li = styled.li`
