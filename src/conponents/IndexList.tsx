@@ -21,7 +21,7 @@ export const IndexList = ({ name, path }: PageName) => {
               <Link href={`${path}${subRouteObject.PATH}`}>
                 <a>{subRouteObject.LABEL}</a>
               </Link>
-              {/* <Img src={subRouteObject.SRC} alt="" /> */}
+              <Img src={subRouteObject.SRC} alt="" />
             </Item>
           );
         })}

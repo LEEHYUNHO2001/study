@@ -49,8 +49,8 @@ const Container = styled.main`
 `;
 
 const Img = styled.img`
-  width: 35em;
-  height: 30em;
+  width: 600px;
+  height: 600px;
   border-radius: 5em;
   margin-right: 100px;
 `;
