@@ -1,12 +1,23 @@
 import { Error, Loading, WineCard } from ".";
 import { useWineData } from "../hooks/useWineData";
-import { Wine } from "../types/Wine";
+// import { Wine } from "../types/Wine";
 import styled from "styled-components";
 
 // import { MEDIA_QUERY_END_POINT } from "../constants/index";
 
 interface WineContainerProps {
   name: string;
+}
+interface Wine {
+  winery: string;
+  wine: string;
+  rating: {
+    average: string;
+    reviews: string;
+  };
+  location: string;
+  image: string;
+  id: number;
 }
 
 export const WineContainer = ({ name }: WineContainerProps) => {
