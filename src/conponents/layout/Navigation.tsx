@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ROUTES } from "../../constants";
 import styled from "styled-components";
 import { ROUTE } from "../../types/Route";
+import { SUBS } from "../../types/SUBS";
 
 export const Navigation = () => {
   return (
@@ -19,9 +20,9 @@ export const Navigation = () => {
                 <Link href={routeObject.PATH}>
                   <A>{routeObject.LABEL}</A>
                 </Link>
-                <ul>
+                <Grid>
                   {routeObject.SUBS &&
-                    routeObject.SUBS.map((subRouteObject: ROUTE) => {
+                    routeObject.SUBS.map((subRouteObject: SUBS) => {
                       return (
                         <Detail
                           key={`${subRouteObject.LABEL}-list-${subRouteObject.ID}`}
@@ -34,7 +35,7 @@ export const Navigation = () => {
                         </Detail>
                       );
                     })}
-                </ul>
+                </Grid>
               </Li>
             );
           })}
@@ -51,7 +52,7 @@ const Header = styled.header`
   color: #fff;
 `;
 const H1 = styled.h1`
-  margin-top: 3em;
+  margin-top: 1.2em;
   color: deeppink;
 `;
 const MainUl = styled.ul`
@@ -69,13 +70,17 @@ const Li = styled.li`
   margin-right: 10em;
   font-size: 1.5em;
 `;
+const Grid = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+`;
 const Detail = styled.li`
-  font-size: 0.8em;
   list-style: none;
   background-color: #590202;
   color: #f2c5bb;
-  margin-bottom: 10px;
   padding: 5px 10px;
   text-align: center;
   border-radius: 10px;
+  height: 50px;
 `;
