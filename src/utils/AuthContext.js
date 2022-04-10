@@ -21,7 +21,7 @@ const AuthContextProvider = ({ children }) => {
       }
       const data = res.data;
 
-      if (data.isAuthenticated) {
+      if (data.authenticated) {
         setIsAuth(true);
       } else {
         setIsAuth(false);
@@ -31,7 +31,7 @@ const AuthContextProvider = ({ children }) => {
 
   const signOut = () => {
     setIsAuth(false);
-    localStorage.removeItems("accessToken");
+    localStorage.removeItem("accessToken");
     navigate("/login");
   };
 

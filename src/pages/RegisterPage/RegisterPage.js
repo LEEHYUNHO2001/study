@@ -23,7 +23,6 @@ const RegisterPage = () => {
         console.error(err.code);
         return;
       }
-      const data = res.data;
       navigate("/login");
     });
   };
