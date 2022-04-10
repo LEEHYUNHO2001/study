@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import clayful from "clayful/client-js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -52,7 +52,9 @@ const RegisterPage = () => {
           value={password}
         />
         <LoginSubmit type="submit">회원가입</LoginSubmit>
-        <Link to="login">이미 Apple ID가 있다면 바로 로그인 하세요.</Link>
+        <Login>
+          <Link to="/login">이미 Apple ID가 있다면 바로 로그인 하세요.</Link>
+        </Login>
       </LoginForm>
     </Container>
   );
@@ -63,6 +65,8 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 7rem 3rem 3rem 3rem;
+  max-width: 1000px;
 `;
 const Title = styled.h2`
   font-weight: 700;
@@ -94,11 +98,13 @@ const LoginSubmit = styled.button`
   border-radius: 12px;
   margin-bottom: 10px;
 `;
-const Link = styled.a`
-  color: gray;
-  text-decoration: none;
-  margin-top: 10px;
-  color: #06c;
+const Login = styled.p`
+  a {
+    color: gray;
+    text-decoration: none;
+    margin-top: 10px;
+    color: #06c;
+  }
 `;
 
 export default RegisterPage;

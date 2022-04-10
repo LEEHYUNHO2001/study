@@ -1,4 +1,5 @@
 import clayful from "clayful/client-js";
+import styled from "styled-components";
 
 const LandingPage = () => {
   const Product = clayful.Product;
@@ -17,7 +18,13 @@ const LandingPage = () => {
 
     // console.log(res.data);
   });
-  return <div>LandingPage</div>;
+  return <Conteiner>LandingPage</Conteiner>;
 };
+
+const Conteiner = styled.section`
+  padding: 7rem 3rem 3rem 3rem;
+  max-width: 1000px;
+  margin: auto;
+`;
 
 export default LandingPage;

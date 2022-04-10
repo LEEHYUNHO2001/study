@@ -20,7 +20,7 @@ export const Header = () => {
         <Navbar className="w-100" collapseOnSelect expand="lg" variant="dark">
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Brand href="/">
-            <Logo src={logo} alt="logo" />
+            <img src={logo} alt="logo" />
           </Navbar.Brand>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="nav-justified w-100 nav-fill">
@@ -56,7 +56,4 @@ const HeaderContainer = styled.header`
     padding: 4px 0;
     border-bottom: 1px solid #4b4b4b;
   }
-`;
-const Logo = styled.img`
-  /* margin-left: 30px; */
 `;

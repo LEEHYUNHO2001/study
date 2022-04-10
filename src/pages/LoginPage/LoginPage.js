@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import clayful from "clayful/client-js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../utils/AuthContext";
 
 const LoginPage = () => {
@@ -62,7 +62,9 @@ const LoginPage = () => {
           주소입니다.
         </p>
         <LoginSubmit type="submit">로그인</LoginSubmit>
-        <Link to="register">Apple ID가 없다면 지금 생성하세요.</Link>
+        <Regist>
+          <Link to="/register">Apple ID가 없다면 지금 생성하세요.</Link>
+        </Regist>
       </LoginForm>
     </Container>
   );
@@ -73,6 +75,8 @@ const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 7rem 3rem 3rem 3rem;
+  max-width: 1000px;
 `;
 const Title = styled.h2`
   font-weight: 700;
@@ -104,11 +108,13 @@ const LoginSubmit = styled.button`
   border-radius: 12px;
   margin-bottom: 10px;
 `;
-const Link = styled.a`
-  color: gray;
-  text-decoration: none;
-  margin-top: 10px;
-  color: #06c;
+const Regist = styled.p`
+  a {
+    color: gray;
+    text-decoration: none;
+    margin-top: 10px;
+    color: #06c;
+  }
 `;
 
 export default LoginPage;
