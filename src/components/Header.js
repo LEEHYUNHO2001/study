@@ -24,7 +24,7 @@ export const Header = () => {
           </Navbar.Brand>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="nav-justified w-100 nav-fill">
-              <Nav.Link href="/">iphone</Nav.Link>
+              <Nav.Link href="/">Products</Nav.Link>
               {isAuth ? (
                 <Nav.Link onClick={signOut}>Logout</Nav.Link>
               ) : (
