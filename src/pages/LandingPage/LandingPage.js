@@ -19,7 +19,6 @@ const LandingPage = () => {
         console.error(err);
         return;
       }
-      console.log(res.data);
       setItems(res.data);
     });
   }, []);
