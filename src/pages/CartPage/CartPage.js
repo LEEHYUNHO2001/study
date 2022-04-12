@@ -22,7 +22,7 @@ export const CartPage = () => {
     });
   }, []);
 
-  const items = cartItem.item;
+  const items = cartItem.items;
 
   return (
     <Container>

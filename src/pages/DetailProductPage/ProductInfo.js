@@ -41,6 +41,7 @@ export const ProductInfo = ({ detail }) => {
         console.log(err);
         return;
       }
+
       if (type === "cart") {
         setShow(true);
         setTimeout(() => {
