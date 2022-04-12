@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import clayful from "clayful/client-js";
+import { AuthContext } from "../../utils/AuthContext";
+import { Alert } from "react-bootstrap";
 
 export const ProductInfo = ({ detail }) => {
   const [count, setCount] = useState(1);
-  const { name, summary, price } = detail;
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
+  const { isAuth } = useContext(AuthContext);
+  const { _id, variants, name, shipping, summary, price } = detail;
 
   const handleQuantity = (type) => {
     if (type === "plus") {
@@ -14,8 +21,47 @@ export const ProductInfo = ({ detail }) => {
     }
   };
 
+  const handleAction = (type) => {
+    if (!isAuth) {
+      alert("먼저 로그인을 해주세요.");
+      navigate("/login");
+    }
+    const Cart = clayful.Cart;
+    const payload = {
+      product: _id,
+      variant: variants[0]._id,
+      quantity: count,
+      shippingMethod: shipping.methods[0]._id,
+    };
+    const options = {
+      customer: localStorage.getItem("accessToken"),
+    };
+    Cart.addItemForMe(payload, options, (err, res) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      if (type === "cart") {
+        setShow(true);
+        setTimeout(() => {
+          setShow(false);
+        }, 3000);
+      } else {
+        setTimeout(() => {
+          navigate("/user/cart");
+        }, 1000);
+      }
+    });
+  };
+
   return (
     <div>
+      {show && (
+        <Alert variant="info">
+          <Alert.Heading>상품이 장바구니에 담겼습니다.</Alert.Heading>
+          <p>장바구니에서 확인해주세요.</p>
+        </Alert>
+      )}
       <New>New</New>
       <Title>{name} 구입하기</Title>
       <ItemPrice>
@@ -42,8 +88,8 @@ export const ProductInfo = ({ detail }) => {
         </Button>
       </BtnContainer>
       <Price>총 삼품 금액 : {price?.original.raw * count}원</Price>
-      <Action>장바구니에 담기</Action>
-      <Action>바로 구매</Action>
+      <Action onClick={() => handleAction("cart")}>장바구니에 담기</Action>
+      <Action onClick={() => handleAction("buy")}>바로 구매</Action>
     </div>
   );
 };
