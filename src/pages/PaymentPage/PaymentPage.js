@@ -4,8 +4,8 @@ import styled from "styled-components";
 
 export const PaymentPage = () => {
   const [cartItem, setCartItem] = useState({});
-  const [paumentMethods, setPaymentMethods] = useState([]);
-  const [paumentMethod, setPaymentMethod] = useState("");
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const [recvUserInfo, setRecvUserInfo] = useState({
     mobile: "",
@@ -150,10 +150,21 @@ export const PaymentPage = () => {
           <Input type="text" readOnly placeholder="우편번호" />
 
           <h3>결제</h3>
-          <select>
-            <option>옵션</option>
+          <select
+            value={paymentMethod}
+            onChange={(e) => setPaymentMethod(e.target.value)}
+          >
+            <option>결제 수단 선택</option>
+            {paymentMethods.map((method) => (
+              <option key={method.slug} value={method.slug}>
+                {method.name}
+              </option>
+            ))}
           </select>
           <Button>주문</Button>
+          {paymentMethod === "bank-transfer" && (
+            <p>계좌번호 : 1234-5678 은행</p>
+          )}
         </div>
       </Inputcontainer>
     </Container>
