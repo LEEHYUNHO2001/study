@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-export const CartItem = ({ item, buttonHandler, i }) => {
-  const { product, price, quantity } = item;
+export const CartItem = ({ item, buttonHandler, i, deleteItemHandler }) => {
+  const { _id, product, price, quantity } = item;
   if (!product) return null;
 
   return (
@@ -30,7 +30,10 @@ export const CartItem = ({ item, buttonHandler, i }) => {
           -
         </Button>
         <Price>
-          총 삼품 금액 : {price?.original.raw}원<Button>X</Button>
+          총 삼품 금액 : {price?.original.raw}원
+          <Button onClick={() => deleteItemHandler(_id, price.original.raw)}>
+            X
+          </Button>
         </Price>
       </div>
     </Container>

@@ -22,6 +22,28 @@ export const CartPage = () => {
     });
   }, []);
 
+  const deleteItemHandler = (itemId, price) => {
+    const Cart = clayful.Cart;
+    const options = {
+      customer: localStorage.getItem("accessToken"),
+    };
+    Cart.deleteItemForMe(itemId, options, (err, res) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      removeItemFromState(itemId, price);
+    });
+  };
+
+  const removeItemFromState = (itemId, price) => {
+    const newCart = { ...cartItem };
+    const filteredItems = newCart.items.filter((item) => item._id !== itemId);
+    newCart.items = filteredItems;
+    newCart.total.amount.raw = newCart.total.amount.raw - price;
+    setCartItem(newCart);
+  };
+
   const updateItemData = (itemId, quantity) => {
     const Cart = clayful.Cart;
     const options = {
@@ -73,6 +95,9 @@ export const CartPage = () => {
                   item={item}
                   i={i}
                   buttonHandler={(type, i) => buttonHandler(type, i)}
+                  deleteItemHandler={(itemId, price) =>
+                    deleteItemHandler(itemId, price)
+                  }
                 />
               );
             })
