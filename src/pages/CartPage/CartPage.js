@@ -22,6 +22,25 @@ export const CartPage = () => {
     });
   }, []);
 
+  const buttonHandler = (type, i) => {
+    const newCart = { ...cartItem };
+    if (type === "plus") {
+      newCart.items[i].price.original.raw +=
+        cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
+      newCart.total.amount.raw +=
+        cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
+      newCart.items[i].quantity.raw += 1;
+    } else {
+      if (newCart.items[i].quantity.raw === 1) return;
+      newCart.items[i].price.original.raw -=
+        cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
+      newCart.total.amount.raw -=
+        cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
+      newCart.items[i].quantity.raw -= 1;
+    }
+    setCartItem(newCart);
+  };
+
   const items = cartItem.items;
 
   return (
@@ -31,7 +50,14 @@ export const CartPage = () => {
         <CartBody>
           {items && items.length > 0 ? (
             items.map((item, i) => {
-              return <CartItem key={item._id} item={item} i={i} />;
+              return (
+                <CartItem
+                  key={item._id}
+                  item={item}
+                  i={i}
+                  buttonHandler={(type, i) => buttonHandler(type, i)}
+                />
+              );
             })
           ) : (
             <NoItem>장바구니에 상품이 없습니다.</NoItem>
