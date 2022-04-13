@@ -7,12 +7,12 @@ import { CartItem } from "./Sections/CartItem";
 export const CartPage = () => {
   const [cartItem, setCartItem] = useState({});
   const navigate = useNavigate();
-
   useEffect(() => {
     const Cart = clayful.Cart;
     const options = {
       customer: localStorage.getItem("accessToken"),
     };
+
     Cart.getForMe({}, options, (err, res) => {
       if (err) {
         console.log(err);
@@ -22,22 +22,39 @@ export const CartPage = () => {
     });
   }, []);
 
+  const updateItemData = (itemId, quantity) => {
+    const Cart = clayful.Cart;
+    const options = {
+      customer: localStorage.getItem("accessToken"),
+    };
+
+    const payload = {
+      quantity,
+    };
+    Cart.updateItemForMe(itemId, payload, options, (err, res) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+    });
+  };
+
   const buttonHandler = (type, i) => {
     const newCart = { ...cartItem };
+    const price =
+      cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
     if (type === "plus") {
-      newCart.items[i].price.original.raw +=
-        cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
-      newCart.total.amount.raw +=
-        cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
+      newCart.items[i].price.original.raw += price;
+
+      newCart.total.amount.raw += price;
       newCart.items[i].quantity.raw += 1;
     } else {
       if (newCart.items[i].quantity.raw === 1) return;
-      newCart.items[i].price.original.raw -=
-        cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
-      newCart.total.amount.raw -=
-        cartItem.items[i].price.original.raw / cartItem.items[i].quantity.raw;
+      newCart.items[i].price.original.raw -= price;
+      newCart.total.amount.raw -= price;
       newCart.items[i].quantity.raw -= 1;
     }
+    updateItemData(newCart.items[i]._id, newCart.items[i].quantity.raw);
     setCartItem(newCart);
   };
 
