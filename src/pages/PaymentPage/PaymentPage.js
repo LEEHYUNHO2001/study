@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import clayful from "clayful/client-js";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { PostCodeModal } from "../../components/PostCodeModal";
 
 export const PaymentPage = () => {
   const [cartItem, setCartItem] = useState({});
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   const [recvUserInfo, setRecvUserInfo] = useState({
@@ -60,12 +62,44 @@ export const PaymentPage = () => {
     });
   };
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleCompletePostCode = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+
+    handleClose();
+    setAddress((prev) => ({
+      ...prev,
+      postCode: data.zonecode,
+      state: data.side,
+      city: data.sigungu,
+      address1: fullAddress,
+    }));
+  };
+
+  const handleAddress2 = (e) => {
+    setAddress((prev) => ({ ...prev, address2: e.target.value }));
+  };
+
   const handlePayment = () => {
     const Cart = clayful.Cart;
     const Customer = clayful.Customer;
     const body = {
       name: { full: sendUserInfo.full },
-      mobile: sendUserInfo.mpbile,
+      mobile: sendUserInfo.mobile,
     };
     const options = {
       customer: localStorage.getItem("accessToken"),
@@ -77,7 +111,7 @@ export const PaymentPage = () => {
       }
 
       let items = [];
-      cartItem.item.map((item) => {
+      cartItem.items.map((item) => {
         let itemVariable = {};
         itemVariable.bundleItems = item.bundleItems;
         itemVariable.product = item.product._id;
@@ -90,7 +124,7 @@ export const PaymentPage = () => {
 
       const payload = {
         items,
-        curreny: cartItem.curreny.payment.code,
+        currency: cartItem.currency.payment.code,
         paymentMethod,
         address: {
           shipping: {
@@ -98,7 +132,7 @@ export const PaymentPage = () => {
               full: recvUserInfo.full,
             },
             mobile: recvUserInfo.mobile,
-            phone: recvUserInfo.phone,
+            phone: recvUserInfo.mobile,
             postcode: address.postCode,
             state: address.state,
             city: address.city,
@@ -111,7 +145,7 @@ export const PaymentPage = () => {
               full: recvUserInfo.full,
             },
             mobile: recvUserInfo.mobile,
-            phone: recvUserInfo.phone,
+            phone: recvUserInfo.mobile,
             postcode: address.postCode,
             state: address.state,
             city: address.city,
@@ -126,7 +160,7 @@ export const PaymentPage = () => {
           console.log(err);
           return;
         }
-
+        const Cart = clayful.Cart;
         Cart.emptyForMe(options, (err, res) => {
           if (err) {
             console.log(err);
@@ -225,9 +259,26 @@ export const PaymentPage = () => {
           />
 
           <h3>배송 정보</h3>
-          <Input type="text" readOnly placeholder="주소" />
-          <Input type="text" name="address2" placeholder="상세 주소" />
-          <Input type="text" readOnly placeholder="우편번호" />
+          <Input
+            type="text"
+            readOnly
+            placeholder="주소"
+            onClick={() => setShow(true)}
+            value={address.address1}
+          />
+          <Input
+            type="text"
+            name="address2"
+            placeholder="상세 주소"
+            value={address.address2}
+            onChange={handleAddress2}
+          />
+          <Input
+            type="text"
+            readOnly
+            placeholder="우편번호"
+            value={address.postCode}
+          />
 
           <h3>결제</h3>
           <select
@@ -247,6 +298,11 @@ export const PaymentPage = () => {
           )}
         </div>
       </Inputcontainer>
+      <PostCodeModal
+        show={show}
+        handleClose={handleClose}
+        handleCompletePostCode={handleCompletePostCode}
+      />
     </Container>
   );
 };
