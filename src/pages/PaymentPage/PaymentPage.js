@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import clayful from "clayful/client-js";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 export const PaymentPage = () => {
   const [cartItem, setCartItem] = useState({});
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("");
+  const navigate = useNavigate();
 
   const [recvUserInfo, setRecvUserInfo] = useState({
     mobile: "",
@@ -55,6 +57,84 @@ export const PaymentPage = () => {
         return;
       }
       setCartItem(res.data.cart);
+    });
+  };
+
+  const handlePayment = () => {
+    const Cart = clayful.Cart;
+    const Customer = clayful.Customer;
+    const body = {
+      name: { full: sendUserInfo.full },
+      mobile: sendUserInfo.mpbile,
+    };
+    const options = {
+      customer: localStorage.getItem("accessToken"),
+    };
+    Customer.updateMe(body, options, (err, res) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      let items = [];
+      cartItem.item.map((item) => {
+        let itemVariable = {};
+        itemVariable.bundleItems = item.bundleItems;
+        itemVariable.product = item.product._id;
+        itemVariable.quantity = item.quantity.raw;
+        itemVariable.shippingMethod = item.shippingMethod._id;
+        itemVariable.variant = item.variant._id;
+        itemVariable._id = item._id;
+        return items.push(itemVariable);
+      });
+
+      const payload = {
+        items,
+        curreny: cartItem.curreny.payment.code,
+        paymentMethod,
+        address: {
+          shipping: {
+            name: {
+              full: recvUserInfo.full,
+            },
+            mobile: recvUserInfo.mobile,
+            phone: recvUserInfo.phone,
+            postcode: address.postCode,
+            state: address.state,
+            city: address.city,
+            address1: address.address1,
+            address2: address.address2,
+            country: "KR",
+          },
+          billing: {
+            name: {
+              full: recvUserInfo.full,
+            },
+            mobile: recvUserInfo.mobile,
+            phone: recvUserInfo.phone,
+            postcode: address.postCode,
+            state: address.state,
+            city: address.city,
+            address1: address.address1,
+            address2: address.address2,
+            country: "KR",
+          },
+        },
+      };
+      Cart.checkoutForMe("order", payload, options, (err, res) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+
+        Cart.emptyForMe(options, (err, res) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          navigate("/history");
+        });
+      });
     });
   };
 
@@ -161,7 +241,7 @@ export const PaymentPage = () => {
               </option>
             ))}
           </select>
-          <Button>주문</Button>
+          <Button onClick={handlePayment}>주문</Button>
           {paymentMethod === "bank-transfer" && (
             <p>계좌번호 : 1234-5678 은행</p>
           )}
