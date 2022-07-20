@@ -4,14 +4,30 @@ let tweets = [
   {
     id: "1",
     text: "1 hello",
+    userId: "2",
   },
   {
     id: "2",
     text: "2 hello",
+    userId: "2",
   },
   {
     id: "3",
     text: "3 hello",
+    userId: "1",
+  },
+];
+
+let users = [
+  {
+    id: "1",
+    firstname: "lee",
+    lastname: "hyunho",
+  },
+  {
+    id: "2",
+    firstname: "2lee",
+    lastname: "2hyunho",
   },
 ];
 
@@ -19,9 +35,9 @@ let tweets = [
 const typeDefs = gql`
   type User {
     id: ID!
-    username: String!
     firstname: String!
-    lastname: String
+    lastname: String!
+    fullname: String!
   }
   type Tweet {
     id: ID!
@@ -29,6 +45,7 @@ const typeDefs = gql`
     author: User!
   }
   type Query {
+    allUsers: [User!]!
     allTweets: [Tweet!]!
     tweet(id: ID!): Tweet
   }
@@ -40,6 +57,9 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
+    allUsers() {
+      return users;
+    },
     allTweets() {
       return tweets;
     },
@@ -61,6 +81,16 @@ const resolvers = {
       if (!tweet) return false;
       tweets = tweets.filter((tweet) => tweet.id !== id);
       return true;
+    },
+  },
+  User: {
+    fullname({ firstname, lastname }) {
+      return `${firstname}-${lastname}`;
+    },
+  },
+  Tweet: {
+    author({ userId }) {
+      return users.find((user) => user.id === userId);
     },
   },
 };
