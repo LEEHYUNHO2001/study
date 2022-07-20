@@ -1,5 +1,21 @@
 import { ApolloServer, gql } from "apollo-server";
 
+let tweets = [
+  {
+    id: "1",
+    text: "1 hello",
+  },
+  {
+    id: "2",
+    text: "2 hello",
+  },
+  {
+    id: "3",
+    text: "3 hello",
+  },
+];
+
+// 스키마 정의
 const typeDefs = gql`
   type User {
     id: ID!
@@ -22,7 +38,34 @@ const typeDefs = gql`
   }
 `;
 
-const server = new ApolloServer({ typeDefs });
+const resolvers = {
+  Query: {
+    allTweets() {
+      return tweets;
+    },
+    tweet(root, { id }) {
+      return tweets.find((tweet) => tweet.id === id);
+    },
+  },
+  Mutation: {
+    postTweet(root, { text, userId }) {
+      const newTweet = {
+        id: tweets.length + 1,
+        text,
+      };
+      tweets.push(newTweet);
+      return newTweet;
+    },
+    deleteTweet(_, { id }) {
+      const tweet = tweets.find((tweet) => tweet.id === id);
+      if (!tweet) return false;
+      tweets = tweets.filter((tweet) => tweet.id !== id);
+      return true;
+    },
+  },
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
 
 server.listen().then(({ url }) => {
   console.log(`Running on ${url}`);
