@@ -31,7 +31,6 @@ let users = [
   },
 ];
 
-// 스키마 정의
 const typeDefs = gql`
   type User {
     id: ID!
@@ -50,7 +49,13 @@ const typeDefs = gql`
     tweet(id: ID!): Tweet
   }
   type Mutation {
+    """
+    Tweet 생성
+    """
     postTweet(text: String!, userId: ID!): Tweet!
+    """
+    Tweet 삭제
+    """
     deleteTweet(id: ID!): Boolean!
   }
 `;
