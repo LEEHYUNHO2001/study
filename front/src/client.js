@@ -5,17 +5,4 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-client
-  .query({
-    query: gql`
-      {
-        allTweets {
-          id
-          text
-        }
-      }
-    `,
-  })
-  .then((data) => console.log(data));
-
 export default client;
