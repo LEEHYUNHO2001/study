@@ -7,6 +7,7 @@ const GET_TWEET = gql`
     tweet(id: $tweetId) {
       id
       text
+      isLiked @client
     }
   }
 `;
@@ -14,9 +15,28 @@ const GET_TWEET = gql`
 const Movie = () => {
   const { id } = useParams();
 
-  const { data, loading, error } = useQuery(GET_TWEET, {
+  const onClick = () => {
+    cache.writeFragment({
+      id: `Tweet:${id}`,
+      fragment: gql`
+        fragment TweetFragment on Tweet {
+          isLiked
+        }
+      `,
+      data: {
+        isLiked: !data.tweet.isLiked,
+      },
+    });
+  };
+
+  const {
+    data,
+    loading,
+    error,
+    client: { cache },
+  } = useQuery(GET_TWEET, {
     variables: {
-      tweetId: 1,
+      tweetId: id,
     },
   });
 
@@ -24,7 +44,14 @@ const Movie = () => {
 
   if (error) return <div>Error...</div>;
 
-  return <div>Tweet : {data.tweet.text}</div>;
+  return (
+    <div>
+      <p>Tweet : {data.tweet.text}</p>
+      <button onClick={onClick}>
+        {data.tweet.isLiked ? "Unlike" : "like"}
+      </button>
+    </div>
+  );
 };
 
 export default Movie;
