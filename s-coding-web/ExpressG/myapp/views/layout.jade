@@ -1,0 +1,16 @@
+doctype html
+link(rel="icon", href="data:,")
+
+html
+  head
+  include partials/head
+    title= title
+    
+  include partials/loginstatus
+  
+  nav(class="navbar-warning bg-warning mb-2")
+    include partials/search
+    a(href="https://github.com/LEEHYUNHO2001/web1/tree/master" target="_blank" title="github 주소") GitHub
+    p
+      body
+        block content

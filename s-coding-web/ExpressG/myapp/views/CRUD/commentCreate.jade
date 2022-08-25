@@ -1,0 +1,12 @@
+commentCreate
+  
+  form(action="/topic/comment/create_process/" + topicRe.id method="post")
+      p
+        input(type="hidden" name="topicRe_id" value="#{topicRe.id}")
+        p(style="font-size:15pt;") 댓글
+        textarea(name="description" placeholder="내용 입력" style="height:200px;width:400px;")
+        p
+          if authIsOwner
+            input(type="submit" value="작성")
+          else
+            text(style="font-size:15pt;color:red") 로그인 후에 작성 가능합니다.
