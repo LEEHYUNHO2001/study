@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex-4</title>
+    <style>
+        .container-color{
+            background-color: burlywood;
+            border: 3px solid black;
+            border-radius: 10px;
+            /* flex는 보통 height안쓴다.. */
+            height: 300px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .item-color{
+            background-color: cadetblue;
+            border: 3px solid black;
+            border-radius: 10px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .container1{
+            display: flex;
+            flex-direction: row;
+            /* flex-direction: column; */
+        }
+
+        .item:nth-child(1){
+            flex-basis: 500px;
+            /* shrink는 줄어드는 최소한의 길이 */
+            /* flex-shrink: 0; */
+            flex-shrink: 1;
+        }
+        .item:nth-child(2){
+            flex-basis: 500px;
+            /* 화면 크기 줄이면, shrink 1 보다 더 많은 비율로 줄어듬 */
+            flex-shrink: 2;
+        }
+    </style>
+</head>
+<body>
+    flex-basis, flex-shrink
+    <div class="container-color container1">
+        <div class="item-color item">Lorem1</div>
+        <div class="item-color item">Lorem22</div>
+        <div class="item-color item">Lorem333</div>
+        <div class="item-color item">Lorem44444</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="../reset.css">
+    <title>layout</title>
+    <style>
+        /* reset */
+        *{
+            box-sizing: border-box;
+        }
+
+        /* util */
+        .sr-only {
+          position: absolute;
+          clip: rect(0 0 0 0);
+          top: auto;
+          width: 1px;
+          height: 1px;
+          margin: -1px;
+          overflow: hidden;
+        }
+        body{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* style */
+
+        /* header */
+        header{
+            width: 100%;
+        }
+
+        .nav-menu {
+            background-color: #262626;
+            padding: 0 15px;
+            box-shadow: 0 1px 10px 0 rgb(0 0 0 / 20%);
+        }
+
+        .menu a {
+            color: #A68549;
+            text-decoration: none;
+        }
+
+        .menu .logo {
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        .menu .item {
+            padding: 10px;
+        }
+
+        .menu a:hover {
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .menu li a {
+            display: block;
+            padding: 10px;
+        }
+
+        .menu li.subitem a {
+            padding-left: 20px;
+        }
+
+        .submenu .subitem {
+            /* 개발하실 때에는 block */
+            display: block;
+            /* display: none; */
+        }
+
+        .menu .icon {
+            /* 모바일에서 보여지게 바꿔야 합니다. */
+            display: none;
+        }
+
+        @media screen and (max-width: 800px) {
+            .menu .icon {
+                /* 
+                    oder를 준 이유는 아이콘 위치가 하단에 있는 것을 
+                    위로 끌어올리기 위해 
+                */
+                display: block;
+                order: 1;
+                line-height: 35px;
+                font-size: 25px;
+            }
+
+            .menu .item {
+                order: 2;
+                width: 100%;
+                text-align: center;
+            }
+
+            .submenu .subitem {
+                /* 서브 메뉴 보이게, 안보이게 */
+                display: none;
+            }
+        }
+
+        /* section */
+        section{
+            width: 70%;
+            background-color: #D9D9D9;
+        }
+
+        @media screen and (max-width: 800px){
+            section {
+                width: 100%;
+            }
+
+            aside {
+                width: 100%;
+            }
+        }
+
+        /* aside */
+        aside{
+            width: 30%;
+            background-color: #8C4F2B;
+        }
+
+        /* footer */
+        footer{
+            width: 100%;
+            color: #D9D9D9;
+            background-color: #0D0D0D;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="sr-only">메뉴바</h1>
+        <nav class="nav-menu">
+            <ul class="menu">
+                <li class="logo">
+                    <a href="#">LOGO</a>
+                </li>
+                <li class="item">
+                    <a href="#">ABOUT ME</a>
+                </li>
+                <li class="item">
+                    <a href="#">SKILLS</a>
+                    <ul class="submenu">
+                        <li class="subitem">
+                            <a href="#">HTML</a>
+                        </li>
+                        <li class="subitem">
+                            <a href="#">CSS</a>
+                        </li>
+                        <li class="subitem">
+                            <a href="#">JAVASCRIPT</a>
+                        </li>
+                        <li class="subitem">
+                            <a href="#">INFRA</a>
+                        </li>
+                        <li class="subitem">
+                            <a href="#">NODE</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item has-submenu">
+                    <a href="#">PROJECTS</a>
+                </li>
+                <li class="item">
+                    <a href="#">CONTACT</a>
+                </li>
+                <li class="icon">
+                    <a href="#"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <h2 class="sr-only">section</h2>
+        <article>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quam sapiente vel voluptatum voluptatem quos nostrum adipisci aut dolor eius tempora ab, molestiae voluptatibus iure similique, quasi neque vero repellat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quam sapiente vel voluptatum voluptatem quos nostrum adipisci aut dolor eius tempora ab, molestiae voluptatibus iure similique, quasi neque vero repellat?
+        </article>
+    </section>
+    <aside>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe possimus dolorum voluptas culpa eos quo repudiandae tempora assumenda, recusandae tenetur, necessitatibus non corporis ipsam! Voluptatibus velit magnam neque iusto consectetur?
+    </aside>
+    <footer>
+        footer
+    </footer>
+
+</body>
+</html>

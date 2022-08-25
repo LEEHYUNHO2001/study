@@ -1,0 +1,10 @@
+//Scss
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: green;
+  transition: all 0.3s;
+  &:hover {
+    background-color: red;
+  }
+}

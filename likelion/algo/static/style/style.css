@@ -1,0 +1,107 @@
+
+
+.resume {
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 300;
+    word-wrap: break-word;
+    word-break: keep-all;
+    line-height: 1.8;
+}
+
+.blue {
+    color: #818181;
+}
+
+.gray {
+    color: gray;
+}
+
+.white {
+    color: #f5f5f5;
+}
+
+.profile-img {
+    max-height: 320px;
+}
+
+.footer-cover {
+    background-color: #f5f5f52d;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 50px;
+    height: 80px;
+}
+
+.footer {
+    padding-top: 10px;
+}
+
+.bla-2 img {
+    width: 13rem;
+    height: inherit;
+    max-width: 450px;
+    margin-top: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.include-youtube {
+    position: relative;
+}
+
+.include-youtube img {
+    opacity: 1;
+    display: inline-block;
+    transition: 0.5s ease;
+}
+
+.include-youtube img:hover {
+    opacity: 0.3;
+}
+
+.include-youtube .play-btn {
+    font-size: 30px;
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translate(-50%, -50%);
+}
+
+.highlight {
+    background: #fddf7e;
+    font-weight: 500;
+}
+
+a.theme-btn {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 300;
+}
+
+
+
+@media (prefers-color-scheme: light) {
+    
+    a {
+        color: rgb(78, 78, 78);
+    }
+    .highlight {
+        background: #c4aaa54b;
+    }
+
+
+} 
+
+@media (prefers-color-scheme: dark) {
+    
+    .blue {
+        color: #b1cfbe;
+    }
+    a {
+        color: white;
+    }
+    .highlight {
+        background: #f77e694b;
+    } 
+
+}

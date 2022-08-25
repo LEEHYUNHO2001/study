@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex-2</title>
+    <style>
+        .container-color{
+            background-color: burlywood;
+            border: 3px solid black;
+            border-radius: 10px;
+            /* flex는 보통 height안쓴다.. */
+            height: 300px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .item-color{
+            background-color: cadetblue;
+            border: 3px solid black;
+            border-radius: 10px;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .container1{
+            display: flex;
+            /* flex-direction: row; */
+            flex-direction: column;
+        }
+
+        .item:nth-child(2){
+            /* width를 조절하는 경우 UI가 깨짐 */
+            /* width: 400px; */
+
+            /* height가 300이므로 최대한 채워버림 */
+            /* flex colunm일때 상하로 400px의 공간만큼 차지하는것 */
+            flex-basis: 400px;
+        }
+    </style>
+</head>
+<body>
+    flex-direction
+    <div class="container-color container1">
+        <div class="item-color item">Lorem1</div>
+        <div class="item-color item">Lorem22</div>
+        <div class="item-color item">Lorem333</div>
+        <div class="item-color item">Lorem44444</div>
+    </div>
+</body>
+</html>

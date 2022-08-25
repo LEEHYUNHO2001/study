@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        div{
+            width: 300px;
+            height: 300px;
+        }
+        .red{
+            background-color: red;
+        }
+        .blue{
+            background-color: blue;
+        }
+        .green{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <input type="radio" name="color" id="btn-red" autocomplete="off">
+    <label  for="btn-red">red</label>
+    <input type="radio" name="color" id="btn-blue" autocomplete="off">
+    <label  for="btn-blue">blue</label>
+    <input type="radio" name="color" id="btn-green" autocomplete="off">
+    <label  for="btn-green">green</label>
+
+    <script>
+        // 이벤트의 타입에는 click, mouseover, mouseout, wheel 등 다양한 이벤트를 감지합니다.
+        // listener 함수의 인수에는 이벤트에 대한 정보가 담겨있습니다.
+
+        const btn_red = document.getElementById('btn-red');
+        const btn_blue = document.getElementById('btn-blue');
+        const btn_green = document.getElementById('btn-green');
+        const div = document.querySelector('div');
+
+        let btnArr = [btn_red, btn_blue, btn_green]
+        btnArr.forEach((item) => {
+            item.addEventListener('click',  () => {
+                div.classList.remove('red', 'blue', 'green')
+                if(item.id === 'btn-red') div.classList.add('red');
+                else if(item.id === 'btn-blue') div.classList.add('blue');
+                else div.classList.add('green'); 
+            })
+        })
+    </script>
+</body>
+</html>

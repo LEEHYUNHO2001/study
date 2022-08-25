@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>card-front-back</title>
+    <style>
+        html, body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .scene {
+            position: relative;
+            color: white;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 50px;
+            width: 200px;
+            height: 50px;
+            border-radius: 15px;
+            transition: all 2s;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .item {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            backface-visibility: hidden;
+            transition: 1s;
+        }
+        .item_front {
+            background: red;
+            transform: rotateY( 180deg );
+        }
+
+        .item_back {
+            background: black;
+            transform: rotateY( 0 );
+        }
+
+        .scene:hover .item_front{
+            transform: rotateY(720deg) scale(2);
+        }
+
+        .scene:hover .item_back{
+            transform: rotateY(540deg) scale(1.5);
+        }
+
+        .item_front::before{
+            content: 'Hello World';
+            position: absolute;
+            color:white;
+            background-color: tomato;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-100%);
+            transition: all .5s;
+        }
+
+        .scene:active .item_front:active::before{
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="card">
+          <div class="item item_front"></div>
+          <div class="item item_back"></div>
+        </div>
+      </div>
+</body>
+</html>

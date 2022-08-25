@@ -1,0 +1,199 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+.sr-only {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  top: auto;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+}
+
+.login-secton {
+  font-family: Spoqa Han Sans Neo;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.tit-header {
+  position: relative;
+}
+.tit-header .tit-h1 {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+.tit-header .tit-h1::after {
+  display: block;
+  content: "";
+  margin: 18px 0px 26px 0px;
+  border: 1px solid #c4c4c4;
+}
+.tit-header .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: 24px;
+  width: 16px;
+  height: 16px;
+}
+.tit-header .close::after,
+.tit-header .close::before {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 22px;
+  top: 8px;
+  left: -4px;
+  border: 1px solid #767676;
+}
+.tit-header .close::after {
+  transform: rotate(-45deg);
+}
+.tit-header .close::before {
+  transform: rotate(-135deg);
+}
+
+.login-form,
+.other-login-article {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 24px 0px 24px;
+}
+.login-form .tit-h2 {
+  text-align: start;
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+.login-form .login-session-label {
+  text-align: start;
+  font-size: 16px;
+  color: #767676;
+}
+.login-form .login-session-label > input {
+  margin-right: 8px;
+  font-size: 16px;
+  color: #767676;
+}
+.login-form .id-input,
+.login-form .password-input {
+  margin-bottom: 10px;
+  min-width: 472px;
+  height: 50px;
+  background-color: #fff;
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 20px;
+  text-indent: 16px;
+  color: #767676;
+}
+.login-form .password-input {
+  margin-bottom: 16px;
+}
+
+.login-form .login-session-label {
+  margin-bottom: 21px;
+}
+
+.login-form .login-btn {
+  margin-bottom: 20px;
+  min-width: 472px;
+  height: 50px;
+  background-color: #2f80ed;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  color: #fff;
+  line-height: 22px;
+  font-weight: bold;
+}
+
+.login-form .search-div {
+  color: #767676;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 30px;
+}
+.login-form .search-div .register {
+  width: 52px;
+  height: 18px;
+  padding-right: 12px;
+  margin-right: 12px;
+  border-right: 1px solid #767676;
+}
+
+.login-form .or-span {
+  position: relative;
+  font-size: 14px;
+  color: #767676;
+  margin-bottom: 20px;
+}
+.login-form .or-span::before,
+.login-form .or-span::after {
+  display: block;
+  content: "";
+  position: absolute;
+  width: 47%;
+  border: 1px solid #c4c4c4;
+}
+.login-form .or-span::before {
+  left: 0;
+  top: 7px;
+}
+.login-form .or-span::after {
+  right: 0;
+  bottom: 5px;
+}
+
+.other-login-article > a {
+  margin-bottom: 10px;
+  position: relative;
+  min-width: 472px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #767676;
+  line-height: 50px;
+  background-color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  color: #767676;
+}
+.other-login-article .google::before,
+.other-login-article .facebook::before,
+.other-login-article .naver::before,
+.other-login-article .kakao::before {
+  display: block;
+  content: "";
+  position: absolute;
+}
+.other-login-article .google::before {
+  top: 25%;
+  left: 12px;
+  width: 28px;
+  height: 28px;
+  background-image: url("img/login/google.png");
+}
+.other-login-article .facebook::before {
+  top: 25%;
+  left: 19px;
+  width: 12px;
+  height: 23px;
+  background-image: url("img/login/facebook.png");
+}
+.other-login-article .naver::before {
+  top: 25%;
+  left: 15px;
+  width: 22px;
+  height: 22px;
+  background-image: url("img/login/naver.png");
+}
+.other-login-article .kakao::before {
+  top: 25%;
+  left: 15px;
+  width: 21px;
+  height: 21px;
+  background-image: url("img/login/kakao.png");
+}

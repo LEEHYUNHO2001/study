@@ -1,0 +1,99 @@
+h1 {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+p,
+section {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.first_p {
+  font-weight: bold;
+}
+
+.about_us {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.about_icon {
+  font-size: 50px;
+}
+
+.about_us_span {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.company {
+  display: flex;
+  justify-content: center;
+}
+
+.company_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 50px;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 25px;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: rgb(224, 224, 224);
+}
+
+.footer_contents {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+}
+
+.footer_contents_name {
+  display: flex;
+}
+
+.footer_icon_list {
+  display: flex;
+}
+
+.footer_icon {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 15px;
+  color: aquamarine;
+}
+
+.footer_item {
+  font-weight: bold;
+}
+
+.footer_informaton {
+  display: flex;
+  justify-content: space-between;
+}
+
+dl {
+  display: flex;
+}
+
+.footer_company {
+  font-weight: bold;
+}
