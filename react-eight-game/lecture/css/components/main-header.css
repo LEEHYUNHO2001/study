@@ -1,0 +1,13 @@
+.main-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0px;
+  background-color: rgb(243, 194, 194);
+}
+.main-header span {
+  margin: 0px 20px;
+}
+.main-header__title {
+  font-size: 18px;
+}
